@@ -6,7 +6,7 @@ export const profile = {
   githubUrl: "https://github.com/tantyastorm",
   upworkUrl: "https://www.upwork.com/freelancers/~01d00e59c6273dc9cf?mp_source=share",
   linkedinUrl: "https://www.linkedin.com/in/tatiana-furtuna/",
-  canonicalUrl: "https://tantyastorm.github.io/tantyastorm/",
+  canonicalUrl: "https://tantyastorm.dev/",
 };
 
 export const contactLinks = [

@@ -21,7 +21,7 @@ This repository includes `.github/workflows/deploy.yml` for GitHub Pages.
 3. Set **Source** to **GitHub Actions**.
 4. Push again or run the **Deploy to GitHub Pages** workflow manually.
 
-Vite automatically uses `/tantyastorm/` as the production base path inside GitHub Actions, so assets work at `https://tantyastorm.github.io/tantyastorm/`.
+Vite uses `/` as the production base path for the custom domain, so assets work at `https://tantyastorm.dev/`.
 
 ## Project Data
 
