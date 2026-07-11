@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Footer } from "./components/Footer";
 import { Navigation } from "./components/Navigation";
+import { useI18n } from "./i18n";
 import { HomePage } from "./pages/HomePage";
 import { ProjectDetailPage } from "./pages/ProjectDetailPage";
 
@@ -19,6 +20,7 @@ function getRoutePath() {
 }
 
 export default function App() {
+  const { t } = useI18n();
   const routePath = getRoutePath();
   const projectMatch = routePath.match(/^projects\/([^/]+)\/?$/);
 
@@ -56,7 +58,7 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#main">
-        Skip to content
+        {t.common.skipToContent}
       </a>
       <Navigation />
       {projectMatch ? (

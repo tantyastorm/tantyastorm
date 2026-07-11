@@ -1,9 +1,11 @@
 import { externalUrls } from "../data/config";
 import { contactLinks, profile } from "../data/profile";
+import { useI18n } from "../i18n";
 import { assetPath } from "../utils/assets";
 import { ExternalLink } from "./ExternalLink";
 
 export function Footer() {
+  const { t } = useI18n();
   const year = new Date().getFullYear();
   const profileLinks = contactLinks.filter((link) => link.isExternal);
 
@@ -14,24 +16,19 @@ export function Footer() {
           <a
             className="footer-brand"
             href={assetPath("#top")}
-            aria-label="Back to top"
+            aria-label={t.common.backToTop}
           >
             <img src={assetPath("assets/brand/logo-color.png")} alt="" />
             <span>{profile.brandName}</span>
           </a>
           <div>
-            <p className="eyebrow">Available for freelance projects</p>
-            <h2 id="footer-title">
-              Python tools for workflows that should not still be manual.
-            </h2>
-            <p>
-              Automation, data extraction, desktop utilities, and practical MVPs
-              built around real operating constraints.
-            </p>
+            <p className="eyebrow">{t.footer.availability}</p>
+            <h2 id="footer-title">{t.footer.title}</h2>
+            <p>{t.footer.description}</p>
           </div>
         </div>
 
-        <div className="footer-actions" aria-label="Footer actions">
+        <div className="footer-actions" aria-label={t.common.footerActions}>
           <a className="footer-link" href={`mailto:${profile.email}`}>
             {profile.email}
           </a>
@@ -44,25 +41,31 @@ export function Footer() {
               rel="noopener noreferrer"
               aria-label={link.ariaLabel}
             >
-              {link.label}
+              {link.label === "GitHub"
+                ? t.contactLinks.github
+                : link.label === "Upwork"
+                  ? t.contactLinks.upwork
+                  : link.label === "LinkedIn"
+                    ? t.contactLinks.linkedin
+                    : t.contactLinks.fiverr}
             </a>
           ))}
           <ExternalLink
             className="footer-link footer-link--call footer-link--external"
             href={externalUrls.calendly}
-            ariaLabel="Book a call on Calendly"
+            ariaLabel={t.contact.calendlyLabel}
           >
-            Book a call
+            {t.common.bookCall}
           </ExternalLink>
           <a className="footer-link" href={assetPath("#top")}>
-            Back to top
+            {t.common.backToTop}
           </a>
         </div>
 
         <div className="footer-bottom">
           <span>{profile.name}</span>
           <span>{profile.role}</span>
-          <span>Remote collaboration</span>
+          <span>{t.footer.remote}</span>
           <span>&copy; {year}</span>
         </div>
       </div>

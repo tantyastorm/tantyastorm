@@ -6,14 +6,13 @@ import { Projects } from "../components/Projects";
 import { SEO } from "../components/SEO";
 import { Services } from "../components/Services";
 import { Skills } from "../components/Skills";
+import { useI18n } from "../i18n";
 
 export function HomePage() {
+  const { t } = useI18n();
   return (
     <main id="main">
-      <SEO
-        title="Tatiana Furtuna | Python Developer & Automation Specialist"
-        description="Portfolio of Tatiana Furtuna, a Python developer specializing in automation, web scraping, desktop applications, data processing, and backend integrations."
-      />
+      <SEO title={t.seo.homeTitle} description={t.seo.homeDescription} />
       <Hero />
       <ProofStrip />
       <Projects />

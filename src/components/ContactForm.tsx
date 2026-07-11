@@ -1,5 +1,6 @@
 import { FormEvent, useId, useMemo, useState } from "react";
 import { externalUrls } from "../data/config";
+import { useI18n } from "../i18n";
 
 type FormValues = {
   name: string;
@@ -21,28 +22,37 @@ const initialValues: FormValues = {
   website: "",
 };
 
-function validate(values: FormValues): FormErrors {
+function validate(
+  values: FormValues,
+  messages: {
+    name: string;
+    email: string;
+    invalidEmail: string;
+    message: string;
+  },
+): FormErrors {
   const errors: FormErrors = {};
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!values.name.trim()) {
-    errors.name = "Please enter your name.";
+    errors.name = messages.name;
   }
 
   if (!values.email.trim()) {
-    errors.email = "Please enter your email.";
+    errors.email = messages.email;
   } else if (!emailPattern.test(values.email)) {
-    errors.email = "Please enter a valid email address.";
+    errors.email = messages.invalidEmail;
   }
 
   if (!values.message.trim()) {
-    errors.message = "Please tell me a little about the project.";
+    errors.message = messages.message;
   }
 
   return errors;
 }
 
 export function ContactForm() {
+  const { t } = useI18n();
   const id = useId();
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -54,21 +64,21 @@ export function ContactForm() {
   const isDevelopment = import.meta.env.DEV;
   const statusMessage = useMemo(() => {
     if (status === "success") {
-      return "Thanks. Your message was sent successfully.";
+      return t.contact.form.status.success;
     }
 
     if (status === "error") {
-      return "The message could not be sent. Your details are still here, so you can try again.";
+      return t.contact.form.status.error;
     }
 
     if (status === "not-configured") {
       return isDevelopment
-        ? "Contact form endpoint is not configured. Add VITE_CONTACT_FORM_ENDPOINT to enable submissions."
-        : "The contact form is not available right now. Please use email or a profile link instead.";
+        ? t.contact.form.status.notConfiguredDev
+        : t.contact.form.status.notConfigured;
     }
 
     return "";
-  }, [isDevelopment, status]);
+  }, [isDevelopment, status, t]);
 
   const updateValue = (name: keyof FormValues, value: string) => {
     setValues((current) => ({ ...current, [name]: value }));
@@ -80,7 +90,7 @@ export function ContactForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const nextErrors = validate(values);
+    const nextErrors = validate(values, t.contact.form.errors);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
@@ -133,7 +143,7 @@ export function ContactForm() {
   return (
     <form className="contact-form" onSubmit={handleSubmit} noValidate>
       <div className="form-field">
-        <label htmlFor={`${id}-name`}>Name</label>
+        <label htmlFor={`${id}-name`}>{t.contact.form.name}</label>
         <input
           id={`${id}-name`}
           name="name"
@@ -153,7 +163,7 @@ export function ContactForm() {
       </div>
 
       <div className="form-field">
-        <label htmlFor={`${id}-email`}>Email</label>
+        <label htmlFor={`${id}-email`}>{t.contact.form.email}</label>
         <input
           id={`${id}-email`}
           name="email"
@@ -173,40 +183,39 @@ export function ContactForm() {
       </div>
 
       <div className="form-field">
-        <label htmlFor={`${id}-project-type`}>Project type</label>
+        <label htmlFor={`${id}-project-type`}>
+          {t.contact.form.projectType}
+        </label>
         <select
           id={`${id}-project-type`}
           name="projectType"
           value={values.projectType}
           onChange={(event) => updateValue("projectType", event.target.value)}
         >
-          <option value="">Select a project type</option>
-          <option>Python automation</option>
-          <option>Web scraping</option>
-          <option>Desktop application</option>
-          <option>Data processing</option>
-          <option>Backend or API integration</option>
+          <option value="">{t.contact.form.selectProjectType}</option>
+          {t.contact.form.projectTypes.map((type) => (
+            <option key={type}>{type}</option>
+          ))}
         </select>
       </div>
 
       <div className="form-field">
-        <label htmlFor={`${id}-budget`}>Estimated budget</label>
+        <label htmlFor={`${id}-budget`}>{t.contact.form.budget}</label>
         <select
           id={`${id}-budget`}
           name="budget"
           value={values.budget}
           onChange={(event) => updateValue("budget", event.target.value)}
         >
-          <option value="">Select a range</option>
-          <option>Under $500</option>
-          <option>$500 - $1,500</option>
-          <option>$1,500 - $5,000</option>
-          <option>$5,000+</option>
+          <option value="">{t.contact.form.selectBudget}</option>
+          {t.contact.form.budgetOptions.map((option) => (
+            <option key={option}>{option}</option>
+          ))}
         </select>
       </div>
 
       <div className="form-field form-field--wide">
-        <label htmlFor={`${id}-message`}>Message</label>
+        <label htmlFor={`${id}-message`}>{t.contact.form.message}</label>
         <textarea
           id={`${id}-message`}
           name="message"
@@ -226,7 +235,7 @@ export function ContactForm() {
       </div>
 
       <div className="honeypot" aria-hidden="true">
-        <label htmlFor={`${id}-website`}>Website</label>
+        <label htmlFor={`${id}-website`}>{t.contact.form.website}</label>
         <input
           id={`${id}-website`}
           name="website"
@@ -244,7 +253,7 @@ export function ContactForm() {
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Sending..." : "Send Message"}
+          {isSubmitting ? t.contact.form.sending : t.contact.form.submit}
         </button>
         {statusMessage ? (
           <p

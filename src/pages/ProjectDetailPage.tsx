@@ -6,7 +6,7 @@ import type {
   ProjectDecision,
   ProjectFeature,
 } from "../data/projects";
-import { projects } from "../data/projects";
+import { useI18n } from "../i18n";
 import { assetPath } from "../utils/assets";
 
 type ProjectDetailPageProps = {
@@ -69,14 +69,20 @@ function FeatureGrid({
   );
 }
 
-function ArchitectureGrid({ items }: { items?: ArchitectureItem[] }) {
+function ArchitectureGrid({
+  title,
+  items,
+}: {
+  title: string;
+  items?: ArchitectureItem[];
+}) {
   if (!items?.length) {
     return null;
   }
 
   return (
     <section className="detail-section">
-      <h2>Architecture</h2>
+      <h2>{title}</h2>
       <div className="detail-card-grid">
         {items.map((item) => (
           <article className="detail-mini-card" key={item.title}>
@@ -89,25 +95,35 @@ function ArchitectureGrid({ items }: { items?: ArchitectureItem[] }) {
   );
 }
 
-function ChallengeList({ items }: { items?: ProjectChallenge[] }) {
+function ChallengeList({
+  title,
+  challengeLabel,
+  resolutionLabel,
+  items,
+}: {
+  title: string;
+  challengeLabel: string;
+  resolutionLabel: string;
+  items?: ProjectChallenge[];
+}) {
   if (!items?.length) {
     return null;
   }
 
   return (
     <section className="detail-section">
-      <h2>Challenges and Resolutions</h2>
+      <h2>{title}</h2>
       <div className="challenge-list">
         {items.map((item) => (
           <article className="challenge-card" key={item.title}>
             <h3>{item.title}</h3>
             <dl>
               <div>
-                <dt>Challenge</dt>
+                <dt>{challengeLabel}</dt>
                 <dd>{item.challenge}</dd>
               </div>
               <div>
-                <dt>Resolution</dt>
+                <dt>{resolutionLabel}</dt>
                 <dd>{item.resolution}</dd>
               </div>
             </dl>
@@ -118,14 +134,20 @@ function ChallengeList({ items }: { items?: ProjectChallenge[] }) {
   );
 }
 
-function DecisionList({ items }: { items?: ProjectDecision[] }) {
+function DecisionList({
+  title,
+  items,
+}: {
+  title: string;
+  items?: ProjectDecision[];
+}) {
   if (!items?.length) {
     return null;
   }
 
   return (
     <section className="detail-section">
-      <h2>Engineering Decisions</h2>
+      <h2>{title}</h2>
       <div className="detail-card-grid">
         {items.map((item) => (
           <article className="detail-mini-card" key={item.title}>
@@ -139,10 +161,12 @@ function DecisionList({ items }: { items?: ProjectDecision[] }) {
 }
 
 function ScreenshotSection({
+  title,
   src,
   alt,
   caption,
 }: {
+  title: string;
   src?: string;
   alt: string;
   caption?: string;
@@ -153,7 +177,7 @@ function ScreenshotSection({
 
   return (
     <section className="detail-section detail-section--media">
-      <h2>Screenshot</h2>
+      <h2>{title}</h2>
       <figure className="case-study-figure">
         <img
           src={assetPath(src)}
@@ -169,6 +193,7 @@ function ScreenshotSection({
 }
 
 export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
+  const { projects, t } = useI18n();
   const projectIndex = projects.findIndex((item) => item.slug === slug);
   const project = projects[projectIndex];
 
@@ -176,16 +201,16 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
     return (
       <main id="main" className="project-detail-main">
         <SEO
-          title="Project Not Found | Tantyastorm"
-          description="The requested project case study could not be found."
+          title={t.seo.notFoundTitle}
+          description={t.seo.notFoundDescription}
           path="404"
         />
         <section className="section">
           <div className="container detail-empty">
-            <p className="eyebrow">Not Found</p>
-            <h1>Project not found.</h1>
+            <p className="eyebrow">{t.detail.notFoundEyebrow}</p>
+            <h1>{t.detail.notFoundHeading}</h1>
             <a className="button button--primary" href={assetPath("#projects")}>
-              Back to projects
+              {t.detail.backToProjects}
             </a>
           </div>
         </section>
@@ -201,7 +226,7 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
   return (
     <main id="main" className="project-detail-main">
       <SEO
-        title={`${project.title} Case Study | Tantyastorm`}
+        title={`${project.title} ${t.seo.caseStudySuffix}`}
         description={project.summary}
         path={projectPath}
         image={project.image}
@@ -212,7 +237,7 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
           <div className="container detail-hero__inner">
             <div>
               <a className="back-link" href={assetPath("#projects")}>
-                Back to projects
+                {t.detail.backToProjects}
               </a>
               <p className="eyebrow">{project.category}</p>
               <h1>{project.title}</h1>
@@ -226,19 +251,19 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                   className="button button--secondary"
                   href={project.repositoryUrl}
                 >
-                  Repository
+                  {t.detail.repository}
                 </ExternalLink>
                 <ExternalLink
                   className="button button--secondary"
                   href={project.liveDemoUrl}
                 >
-                  Live Demo
+                  {t.detail.liveDemo}
                 </ExternalLink>
                 <ExternalLink
                   className="button button--secondary"
                   href={project.videoUrl}
                 >
-                  Demo Video
+                  {t.detail.demoVideo}
                 </ExternalLink>
               </div>
               {project.confidentialityNote ? (
@@ -275,67 +300,82 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
         <div className="container detail-grid">
           <div className="detail-content">
             <TextSection
-              title="Case Study Overview"
+              title={t.detail.overview}
               content={project.detailedDescription}
             />
-            <SectionList title="Goals" items={project.goals} />
-            <TextSection title="Problem" content={project.problem} />
+            <SectionList title={t.detail.goals} items={project.goals} />
+            <TextSection title={t.detail.problem} content={project.problem} />
             <TextSection
-              title="Solution"
+              title={t.detail.solution}
               content={project.solution ?? project.detailedDescription}
             />
-            <SectionList title="Workflow" items={project.workflow} />
-            <FeatureGrid title="Main Features" items={project.features} />
+            <SectionList title={t.detail.workflow} items={project.workflow} />
+            <FeatureGrid title={t.detail.features} items={project.features} />
             <SectionList
-              title="Technical Approach"
+              title={t.detail.technicalApproach}
               items={project.technicalApproach}
             />
-            <ArchitectureGrid items={project.architecture} />
+            <ArchitectureGrid
+              title={t.detail.architecture}
+              items={project.architecture}
+            />
             <SectionList
-              title="Quality Safeguards"
+              title={t.detail.quality}
               items={project.qualityNotes}
             />
-            <DecisionList items={project.decisions} />
-            <ChallengeList items={project.challenges} />
-            <SectionList title="Results" items={project.results} />
-            <SectionList title="Lessons" items={project.lessons} />
+            <DecisionList
+              title={t.detail.decisions}
+              items={project.decisions}
+            />
+            <ChallengeList
+              title={t.detail.challenges}
+              challengeLabel={t.detail.challenge}
+              resolutionLabel={t.detail.resolution}
+              items={project.challenges}
+            />
+            <SectionList title={t.detail.results} items={project.results} />
+            <SectionList title={t.detail.lessons} items={project.lessons} />
             <ScreenshotSection
+              title={t.detail.screenshot}
               src={project.image}
               alt={project.imageAlt}
               caption={project.screenshotCaption}
             />
-            <TextSection title="Limitations" content={project.limitations} />
             <TextSection
-              title="Privacy or NDA Notice"
+              title={t.detail.limitations}
+              content={project.limitations}
+            />
+            <TextSection
+              title={t.detail.privacy}
               content={project.confidentialityNote}
             />
           </div>
 
           <aside
             className="detail-sidebar"
-            aria-label={`${project.title} project details`}
+            aria-label={t.detail.detailsLabel(project.title)}
           >
             <section>
-              <h2>Project Snapshot</h2>
+              <h2>{t.detail.snapshot}</h2>
               <dl className="detail-facts">
                 <div>
-                  <dt>Status</dt>
+                  <dt>{t.detail.status}</dt>
                   <dd>{project.status}</dd>
                 </div>
                 {project.role ? (
                   <div>
-                    <dt>Role</dt>
+                    <dt>{t.detail.role}</dt>
                     <dd>{project.role}</dd>
                   </div>
                 ) : null}
                 <div>
-                  <dt>Category</dt>
+                  <dt>{t.detail.category}</dt>
                   <dd>{project.category}</dd>
                 </div>
               </dl>
             </section>
             <section>
-              <h2>Technology Stack</h2>
+              <h2>{t.detail.technologyStack}</h2>
               <ul className="tag-list tag-list--loose">
                 {project.technologies.map((technology) => (
                   <li key={technology}>{technology}</li>
@@ -343,38 +383,43 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
               </ul>
             </section>
             <section>
-              <h2>Project Links</h2>
+              <h2>{t.detail.projectLinks}</h2>
               <div className="detail-link-list">
                 <ExternalLink href={project.repositoryUrl}>
-                  GitHub repository
+                  {t.detail.repositoryLink}
                 </ExternalLink>
                 <ExternalLink href={project.liveDemoUrl}>
-                  Live demo
+                  {t.detail.liveDemoLink}
                 </ExternalLink>
-                <ExternalLink href={project.videoUrl}>Demo video</ExternalLink>
+                <ExternalLink href={project.videoUrl}>
+                  {t.detail.demoVideoLink}
+                </ExternalLink>
                 {!project.repositoryUrl && (
-                  <p>Source code available on request or private project.</p>
+                  <p>{t.common.unavailableProjectLinks}</p>
                 )}
               </div>
             </section>
           </aside>
         </div>
 
-        <nav className="container detail-nav" aria-label="Project navigation">
+        <nav
+          className="container detail-nav"
+          aria-label={t.detail.navigationLabel}
+        >
           <a
             className="button button--secondary"
             href={assetPath(`projects/${previousProject.slug}/`)}
           >
-            Previous: {previousProject.shortTitle}
+            {t.detail.previous}: {previousProject.shortTitle}
           </a>
           <a className="button button--primary" href={assetPath("#projects")}>
-            Back to projects
+            {t.detail.backToProjects}
           </a>
           <a
             className="button button--secondary"
             href={assetPath(`projects/${nextProject.slug}/`)}
           >
-            Next: {nextProject.shortTitle}
+            {t.detail.next}: {nextProject.shortTitle}
           </a>
         </nav>
       </article>

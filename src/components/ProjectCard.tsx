@@ -1,4 +1,5 @@
 import type { Project } from "../data/projects";
+import { useI18n } from "../i18n";
 import { assetPath } from "../utils/assets";
 
 type ProjectCardProps = {
@@ -7,6 +8,7 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
+  const { t } = useI18n();
   const projectRoute = assetPath(`projects/${project.slug}/`);
   const stack = project.technologies.slice(0, 5).join(" / ");
 
@@ -54,14 +56,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         <h3>{project.title}</h3>
         <p>{project.summary}</p>
         <p className="project-card__stack">
-          <span>Stack</span>
+          <span>{t.common.stack}</span>
           {stack}
         </p>
         {project.confidentialityNote ? (
           <p className="project-card__note">{project.confidentialityNote}</p>
         ) : null}
         <span className="project-card__cta" aria-hidden="true">
-          View case study <span>-&gt;</span>
+          {t.common.viewCaseStudy} <span>-&gt;</span>
         </span>
       </div>
     </a>

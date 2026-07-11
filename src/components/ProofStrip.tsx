@@ -1,15 +1,16 @@
-import { proofItems } from "../data/site";
+import { useI18n } from "../i18n";
 
 export function ProofStrip() {
+  const { t } = useI18n();
   return (
     <section className="proof-section" id="proof" aria-labelledby="proof-title">
       <div className="container proof-section__inner reveal">
         <div>
-          <p className="eyebrow">Proof, not adjectives</p>
-          <h2 id="proof-title">Evidence from the work already here.</h2>
+          <p className="eyebrow">{t.proof.eyebrow}</p>
+          <h2 id="proof-title">{t.proof.title}</h2>
         </div>
         <dl className="proof-grid">
-          {proofItems.map((item) => (
+          {t.proof.items.map((item) => (
             <div className="proof-item reveal" key={item.label}>
               <dt>{item.label}</dt>
               <dd>{item.description}</dd>

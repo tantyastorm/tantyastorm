@@ -1,9 +1,20 @@
-import { useEffect, useState } from "react";
-import { navItems } from "../data/site";
+import { useEffect, useMemo, useState } from "react";
+import { useI18n } from "../i18n";
 import { assetPath } from "../utils/assets";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Navigation() {
+  const { t } = useI18n();
+  const navItems = useMemo(
+    () => [
+      { label: t.nav.proof, href: "#proof" },
+      { label: t.nav.projects, href: "#projects" },
+      { label: t.nav.services, href: "#services" },
+      { label: t.nav.skills, href: "#skills" },
+    ],
+    [t],
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState(navItems[0]?.href);
@@ -13,7 +24,7 @@ export function Navigation() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [navItems]);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", isOpen);
@@ -55,11 +66,11 @@ export function Navigation() {
     <header
       className={`site-header ${hasScrolled ? "site-header--scrolled" : ""}`}
     >
-      <nav className="nav container" aria-label="Primary navigation">
+      <nav className="nav container" aria-label={t.common.primaryNavigation}>
         <a
           className="brand"
           href={assetPath("#top")}
-          aria-label="Tantyastorm home"
+          aria-label={t.common.tantyastormHome}
           onClick={closeMenu}
         >
           <img
@@ -73,7 +84,7 @@ export function Navigation() {
         <button
           className="nav-toggle"
           type="button"
-          aria-label="Toggle navigation menu"
+          aria-label={t.common.toggleNavigation}
           aria-expanded={isOpen}
           aria-controls="primary-menu"
           onClick={() => setIsOpen((current) => !current)}
@@ -97,13 +108,14 @@ export function Navigation() {
               {item.label}
             </a>
           ))}
+          <LanguageSwitcher />
           <ThemeToggle />
           <a
             className="button button--small button--primary"
             href={assetPath("#contact")}
             onClick={closeMenu}
           >
-            Contact
+            {t.common.contact}
           </a>
         </div>
       </nav>

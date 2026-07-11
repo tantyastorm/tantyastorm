@@ -1,6 +1,7 @@
-import { skillGroups } from "../data/skills";
+import { useI18n } from "../i18n";
 
 export function Skills() {
+  const { t } = useI18n();
   return (
     <section
       className="section section--compact"
@@ -9,18 +10,12 @@ export function Skills() {
     >
       <div className="container">
         <div className="section-heading reveal">
-          <p className="eyebrow">Technical strengths</p>
-          <h2 id="skills-title">
-            A Python-centered toolkit for practical delivery.
-          </h2>
-          <p>
-            The stack is intentionally direct: automation libraries, parsers,
-            desktop UI tools, data formats, tests, and the web basics needed to
-            ship usable software.
-          </p>
+          <p className="eyebrow">{t.skillsSection.eyebrow}</p>
+          <h2 id="skills-title">{t.skillsSection.title}</h2>
+          <p>{t.skillsSection.description}</p>
         </div>
         <div className="skills-grid">
-          {skillGroups.map((group) => (
+          {t.skillsSection.groups.map((group) => (
             <section
               className="skill-group reveal"
               key={group.title}

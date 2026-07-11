@@ -56,7 +56,7 @@ export type Project = {
   screenshotCaption?: string;
   limitations?: string;
   featured: boolean;
-  status: ProjectStatus;
+  status: string;
   confidentialityNote?: string;
 };
 

@@ -1,8 +1,9 @@
 import type { PointerEvent } from "react";
-import { heroMeta } from "../data/site";
+import { useI18n } from "../i18n";
 import { assetPath } from "../utils/assets";
 
 export function Hero() {
+  const { t } = useI18n();
   const updateSignal = (event: PointerEvent<HTMLDivElement>) => {
     const panel = event.currentTarget;
     const rect = panel.getBoundingClientRect();
@@ -22,59 +23,54 @@ export function Hero() {
       <div className="hero__rule" aria-hidden="true" />
       <div className="container hero__inner">
         <div className="hero__content reveal">
-          <p className="eyebrow">
-            Python developer / automation and data tools
-          </p>
-          <h1 id="hero-title">
-            I turn repetitive workflows into reliable Python tools.
+          <p className="eyebrow">{t.hero.eyebrow}</p>
+          <h1 id="hero-title" className="hero-title">
+            {t.hero.titleLines.map((line) => (
+              <span className="hero-title__line" key={line}>
+                {line}
+              </span>
+            ))}
           </h1>
-          <p className="hero__lead">
-            I build automation, scraping, file-processing, and desktop utilities
-            for teams and operators who need structured outputs, safer review
-            steps, and less copy-paste work.
-          </p>
-          <div className="hero__actions" aria-label="Primary actions">
+          <p className="hero__lead">{t.hero.lead}</p>
+          <div className="hero__actions" aria-label={t.common.primaryActions}>
             <a className="button button--primary" href={assetPath("#projects")}>
-              View selected work
+              {t.common.viewSelectedWork}
             </a>
             <a
               className="button button--secondary"
               href={assetPath("#contact")}
             >
-              Book a call
+              {t.common.bookCall}
             </a>
           </div>
-          <ul className="hero-meta" aria-label="Professional status">
-            {heroMeta.map((item) => (
+          <ul className="hero-meta" aria-label={t.common.professionalStatus}>
+            {t.hero.meta.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </div>
 
-        <div className="hero__aside reveal" aria-label="Tantyastorm profile">
+        <div className="hero__aside reveal" aria-label={t.common.profilePanel}>
           <div className="hero-panel" onPointerMove={updateSignal}>
-            <div className="hero-panel__label">Tantyastorm</div>
+            <div className="hero-panel__label">{t.hero.panelLabel}</div>
             <span className="hero-panel__signal" aria-hidden="true" />
             <img
               src={assetPath("assets/brand/app-icon.png")}
               alt="Tantyastorm logo"
             />
-            <p>
-              Automation, extraction, transformation, and local-first tools
-              shaped around the workflow before the code.
-            </p>
+            <p>{t.hero.panelText}</p>
             <dl>
               <div>
-                <dt>Focus</dt>
-                <dd>Python delivery</dd>
+                <dt>{t.hero.focusLabel}</dt>
+                <dd>{t.hero.focusValue}</dd>
               </div>
               <div>
-                <dt>Outputs</dt>
+                <dt>{t.hero.outputsLabel}</dt>
                 <dd>CSV / JSON / TXT / Excel</dd>
               </div>
             </dl>
             <span className="hero-panel__coordinates" aria-hidden="true">
-              TS-47.01 / WORKFLOW SIGNAL
+              {t.hero.signal}
             </span>
           </div>
         </div>
