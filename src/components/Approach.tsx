@@ -5,9 +5,9 @@ export function Approach() {
     <section className="section" id="approach" aria-labelledby="approach-title">
       <div className="container">
         <div className="section-heading reveal">
-          <p className="eyebrow">Working Approach</p>
+          <p className="eyebrow">How I work</p>
           <h2 id="approach-title">
-            Calm structure from first conversation to delivery.
+            Clear checkpoints before anything becomes automatic.
           </h2>
         </div>
         <div className="approach-grid">

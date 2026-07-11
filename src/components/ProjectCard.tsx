@@ -3,23 +3,29 @@ import { assetPath } from "../utils/assets";
 
 type ProjectCardProps = {
   project: Project;
+  index: number;
 };
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, index }: ProjectCardProps) {
   const projectRoute = assetPath(`projects/${project.slug}/`);
+  const stack = project.technologies.slice(0, 5).join(" / ");
 
   return (
     <a
-      className={`project-card reveal ${project.featured ? "project-card--featured" : ""}`}
+      className={`project-card reveal ${index === 0 ? "project-card--featured" : ""}`}
+      data-project={project.slug}
       href={projectRoute}
       aria-label={`View ${project.title} case study`}
     >
+      <div className="project-card__index" aria-hidden="true">
+        {String(index + 1).padStart(2, "0")}
+      </div>
       <div className="project-card__media">
         {project.image ? (
           <img
             src={assetPath(project.image)}
             alt={project.imageAlt}
-            loading="lazy"
+            loading={index === 0 ? "eager" : "lazy"}
             width="960"
             height="540"
             onError={(event) => {
@@ -47,11 +53,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
         <h3>{project.title}</h3>
         <p>{project.summary}</p>
-        <ul className="tag-list" aria-label={`${project.title} technologies`}>
-          {project.technologies.map((technology) => (
-            <li key={technology}>{technology}</li>
-          ))}
-        </ul>
+        <p className="project-card__stack">
+          <span>Stack</span>
+          {stack}
+        </p>
         {project.confidentialityNote ? (
           <p className="project-card__note">{project.confidentialityNote}</p>
         ) : null}

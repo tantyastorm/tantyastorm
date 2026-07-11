@@ -1,10 +1,10 @@
-import { About } from "../components/About";
 import { Approach } from "../components/Approach";
 import { Contact } from "../components/Contact";
-import { Expertise } from "../components/Expertise";
 import { Hero } from "../components/Hero";
+import { ProofStrip } from "../components/ProofStrip";
 import { Projects } from "../components/Projects";
 import { SEO } from "../components/SEO";
+import { Services } from "../components/Services";
 import { Skills } from "../components/Skills";
 
 export function HomePage() {
@@ -15,9 +15,9 @@ export function HomePage() {
         description="Portfolio of Tatiana Furtuna, a Python developer specializing in automation, web scraping, desktop applications, data processing, and backend integrations."
       />
       <Hero />
-      <About />
-      <Expertise />
+      <ProofStrip />
       <Projects />
+      <Services />
       <Skills />
       <Approach />
       <Contact />

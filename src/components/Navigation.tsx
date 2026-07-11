@@ -6,6 +6,7 @@ import { ThemeToggle } from "./ThemeToggle";
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState(navItems[0]?.href);
 
   useEffect(() => {
     const onScroll = () => setHasScrolled(window.scrollY > 18);
@@ -18,6 +19,35 @@ export function Navigation() {
     document.body.classList.toggle("menu-open", isOpen);
     return () => document.body.classList.remove("menu-open");
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const sections = navItems
+      .map((item) => document.getElementById(item.href.replace("#", "")))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry) {
+          setActiveSection(`#${visibleEntry.target.id}`);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -55% 0px",
+        threshold: [0.2, 0.45, 0.7],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   const closeMenu = () => setIsOpen(false);
 
@@ -58,7 +88,12 @@ export function Navigation() {
           id="primary-menu"
         >
           {navItems.map((item) => (
-            <a key={item.href} href={assetPath(item.href)} onClick={closeMenu}>
+            <a
+              key={item.href}
+              className={activeSection === item.href ? "is-active" : ""}
+              href={assetPath(item.href)}
+              onClick={closeMenu}
+            >
               {item.label}
             </a>
           ))}
