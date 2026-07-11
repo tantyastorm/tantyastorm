@@ -13,7 +13,16 @@ export const skillGroups = [
   },
   {
     title: "Data",
-    skills: ["Pandas", "NumPy", "openpyxl", "CSV", "JSON", "PostgreSQL", "MySQL", "SQLite"],
+    skills: [
+      "Pandas",
+      "NumPy",
+      "openpyxl",
+      "CSV",
+      "JSON",
+      "PostgreSQL",
+      "MySQL",
+      "SQLite",
+    ],
   },
   {
     title: "Desktop and Tools",

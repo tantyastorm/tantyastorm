@@ -2,11 +2,17 @@ import { expertise } from "../data/site";
 
 export function Expertise() {
   return (
-    <section className="section" id="expertise" aria-labelledby="expertise-title">
+    <section
+      className="section"
+      id="expertise"
+      aria-labelledby="expertise-title"
+    >
       <div className="container">
         <div className="section-heading reveal">
           <p className="eyebrow">Expertise</p>
-          <h2 id="expertise-title">Software that fits the workflow around it.</h2>
+          <h2 id="expertise-title">
+            Software that fits the workflow around it.
+          </h2>
         </div>
         <div className="card-grid card-grid--three">
           {expertise.map((item) => (

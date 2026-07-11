@@ -6,7 +6,9 @@ export function Approach() {
       <div className="container">
         <div className="section-heading reveal">
           <p className="eyebrow">Working Approach</p>
-          <h2 id="approach-title">Calm structure from first conversation to delivery.</h2>
+          <h2 id="approach-title">
+            Calm structure from first conversation to delivery.
+          </h2>
         </div>
         <div className="approach-grid">
           {approach.map((step, index) => (

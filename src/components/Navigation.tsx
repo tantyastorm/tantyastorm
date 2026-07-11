@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { navItems } from "../data/site";
 import { assetPath } from "../utils/assets";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +22,21 @@ export function Navigation() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className={`site-header ${hasScrolled ? "site-header--scrolled" : ""}`}>
+    <header
+      className={`site-header ${hasScrolled ? "site-header--scrolled" : ""}`}
+    >
       <nav className="nav container" aria-label="Primary navigation">
-        <a className="brand" href="#top" aria-label="Tantyastorm home" onClick={closeMenu}>
-          <img src={assetPath("assets/brand/navbar-logo.png")} alt="" className="brand__wordmark" />
+        <a
+          className="brand"
+          href={assetPath("#top")}
+          aria-label="Tantyastorm home"
+          onClick={closeMenu}
+        >
+          <img
+            src={assetPath("assets/brand/navbar-logo.png")}
+            alt=""
+            className="brand__wordmark"
+          />
           <span className="brand__text">Tantyastorm</span>
         </a>
 
@@ -41,13 +53,21 @@ export function Navigation() {
           <span />
         </button>
 
-        <div className={`nav-menu ${isOpen ? "nav-menu--open" : ""}`} id="primary-menu">
+        <div
+          className={`nav-menu ${isOpen ? "nav-menu--open" : ""}`}
+          id="primary-menu"
+        >
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} onClick={closeMenu}>
+            <a key={item.href} href={assetPath(item.href)} onClick={closeMenu}>
               {item.label}
             </a>
           ))}
-          <a className="button button--small button--primary" href="#contact" onClick={closeMenu}>
+          <ThemeToggle />
+          <a
+            className="button button--small button--primary"
+            href={assetPath("#contact")}
+            onClick={closeMenu}
+          >
             Contact
           </a>
         </div>

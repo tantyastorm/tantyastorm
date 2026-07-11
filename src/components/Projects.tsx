@@ -7,10 +7,12 @@ export function Projects() {
       <div className="container">
         <div className="section-heading reveal">
           <p className="eyebrow">Featured Projects</p>
-          <h2 id="projects-title">A portfolio of automation, extraction, and data tools.</h2>
+          <h2 id="projects-title">
+            A portfolio of automation, extraction, and data tools.
+          </h2>
           <p>
-            Each project is managed from a typed data file, so new case studies can be added without
-            changing the layout.
+            Each project is managed from a typed data file, so new case studies
+            can be added without changing the layout.
           </p>
         </div>
         <div className="projects-grid">

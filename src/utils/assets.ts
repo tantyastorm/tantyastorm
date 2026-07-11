@@ -1,3 +1,5 @@
+import { sitePath } from "../data/config";
+
 export function assetPath(path: string) {
-  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+  return sitePath(path);
 }

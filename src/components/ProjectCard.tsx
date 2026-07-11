@@ -6,14 +6,14 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const links = [
-    { label: "Repository", href: project.repositoryUrl },
-    { label: "Live Demo", href: project.liveDemoUrl },
-    { label: "Case Study", href: project.caseStudyUrl },
-  ].filter((link): link is { label: string; href: string } => Boolean(link.href));
+  const projectRoute = assetPath(`projects/${project.slug}/`);
 
   return (
-    <article className={`project-card reveal ${project.featured ? "project-card--featured" : ""}`}>
+    <a
+      className={`project-card reveal ${project.featured ? "project-card--featured" : ""}`}
+      href={projectRoute}
+      aria-label={`View ${project.title} case study`}
+    >
       <div className="project-card__media">
         {project.image ? (
           <img
@@ -29,7 +29,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
           />
         ) : null}
         <div className="project-card__fallback" hidden={Boolean(project.image)}>
-          <img src={assetPath("assets/brand/app-icon-64.png")} alt="" loading="lazy" width="64" height="64" />
+          <img
+            src={assetPath("assets/brand/app-icon-64.png")}
+            alt=""
+            loading="lazy"
+            width="64"
+            height="64"
+          />
           <span>{project.shortTitle}</span>
           <small>{project.category}</small>
         </div>
@@ -49,16 +55,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {project.confidentialityNote ? (
           <p className="project-card__note">{project.confidentialityNote}</p>
         ) : null}
-        {links.length > 0 ? (
-          <div className="project-card__links">
-            {links.map((link) => (
-              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">
-                {link.label}
-              </a>
-            ))}
-          </div>
-        ) : null}
+        <span className="project-card__cta" aria-hidden="true">
+          View case study <span>-&gt;</span>
+        </span>
       </div>
-    </article>
+    </a>
   );
 }

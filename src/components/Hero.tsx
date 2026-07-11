@@ -8,16 +8,22 @@ export function Hero() {
       <div className="container hero__inner">
         <div className="hero__content reveal">
           <p className="eyebrow">PYTHON DEVELOPER · AUTOMATION · DATA</p>
-          <h1 id="hero-title">I build reliable software for real-world workflows.</h1>
+          <h1 id="hero-title">
+            I build reliable software for real-world workflows.
+          </h1>
           <p className="hero__lead">
-            Python applications, automation systems, web scrapers, data pipelines, desktop tools, and
-            API integrations designed to solve practical business problems.
+            Python applications, automation systems, web scrapers, data
+            pipelines, desktop tools, and API integrations designed to solve
+            practical business problems.
           </p>
           <div className="hero__actions" aria-label="Primary actions">
-            <a className="button button--primary" href="#projects">
+            <a className="button button--primary" href={assetPath("#projects")}>
               View Projects
             </a>
-            <a className="button button--secondary" href="#contact">
+            <a
+              className="button button--secondary"
+              href={assetPath("#contact")}
+            >
               Contact Me
             </a>
           </div>
@@ -30,7 +36,10 @@ export function Hero() {
 
         <div className="hero__brand reveal" aria-label="Tantyastorm brand mark">
           <div className="brand-card">
-            <img src={assetPath("assets/brand/app-icon.png")} alt="Tantyastorm logo" />
+            <img
+              src={assetPath("assets/brand/app-icon.png")}
+              alt="Tantyastorm logo"
+            />
             <div>
               <span>Tatiana Furtuna</span>
               <strong>Python Developer</strong>

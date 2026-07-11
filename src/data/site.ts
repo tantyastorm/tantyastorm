@@ -47,19 +47,23 @@ export const expertise = [
 export const approach = [
   {
     title: "Understand",
-    description: "Clarify the real workflow, constraints, data sources, and expected result.",
+    description:
+      "Clarify the real workflow, constraints, data sources, and expected result.",
   },
   {
     title: "Design",
-    description: "Choose a maintainable architecture and define a practical delivery scope.",
+    description:
+      "Choose a maintainable architecture and define a practical delivery scope.",
   },
   {
     title: "Build",
-    description: "Implement the solution with validation, error handling, and clear progress.",
+    description:
+      "Implement the solution with validation, error handling, and clear progress.",
   },
   {
     title: "Verify",
-    description: "Test the important workflows, document usage, and prepare the project for delivery.",
+    description:
+      "Test the important workflows, document usage, and prepare the project for delivery.",
   },
 ];
 

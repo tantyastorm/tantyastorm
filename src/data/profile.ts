@@ -1,12 +1,15 @@
+import { externalUrls, publicContact } from "./config";
+
 export const profile = {
   name: "Tatiana Furtuna",
   brandName: "Tantyastorm",
   role: "Python Developer",
-  email: "tatiana.furtuna29@gmail.com",
-  githubUrl: "https://github.com/tantyastorm",
-  upworkUrl: "https://www.upwork.com/freelancers/~01d00e59c6273dc9cf?mp_source=share",
-  linkedinUrl: "https://www.linkedin.com/in/tatiana-furtuna/",
-  canonicalUrl: "https://tantyastorm.dev/",
+  email: publicContact.email,
+  githubUrl: externalUrls.github,
+  upworkUrl: externalUrls.upwork,
+  linkedinUrl: externalUrls.linkedin,
+  fiverrUrl: externalUrls.fiverr,
+  canonicalUrl: externalUrls.portfolio,
 };
 
 export const contactLinks = [
@@ -42,4 +45,16 @@ export const contactLinks = [
     ariaLabel: `${profile.name} on LinkedIn`,
     isExternal: true,
   },
+  ...(profile.fiverrUrl
+    ? [
+        {
+          label: "Fiverr",
+          detail: "Freelancer Profile",
+          icon: "FI",
+          href: profile.fiverrUrl,
+          ariaLabel: `${profile.name} on Fiverr`,
+          isExternal: true,
+        },
+      ]
+    : []),
 ];

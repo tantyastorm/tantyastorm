@@ -2,7 +2,11 @@ import { skillGroups } from "../data/skills";
 
 export function Skills() {
   return (
-    <section className="section section--compact" id="skills" aria-labelledby="skills-title">
+    <section
+      className="section section--compact"
+      id="skills"
+      aria-labelledby="skills-title"
+    >
       <div className="container">
         <div className="section-heading reveal">
           <p className="eyebrow">Technical Skills</p>
@@ -10,7 +14,11 @@ export function Skills() {
         </div>
         <div className="skills-grid">
           {skillGroups.map((group) => (
-            <section className="skill-group reveal" key={group.title} aria-labelledby={`skill-${group.title}`}>
+            <section
+              className="skill-group reveal"
+              key={group.title}
+              aria-labelledby={`skill-${group.title}`}
+            >
               <h3 id={`skill-${group.title}`}>{group.title}</h3>
               <ul className="tag-list tag-list--loose">
                 {group.skills.map((skill) => (

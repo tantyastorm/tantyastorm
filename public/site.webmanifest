@@ -1,0 +1,21 @@
+{
+  "name": "Tatiana Furtuna Portfolio",
+  "short_name": "Tantyastorm",
+  "description": "Python developer portfolio for automation, data extraction, desktop tools, and backend integration.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#030611",
+  "theme_color": "#030611",
+  "icons": [
+    {
+      "src": "assets/brand/pwa-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/brand/pwa-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

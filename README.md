@@ -44,6 +44,6 @@ Supplied Tantyastorm assets are stored in `public/assets/brand/` and used for na
 
 ## Notes
 
-- No backend or environment variables are required.
-- No contact form is included because there is no backend.
+- The contact form is configured for a static Formspree endpoint through `VITE_CONTACT_FORM_ENDPOINT`.
+- No custom backend is required.
 - Project links are optional and render only when URLs exist in the project data.
