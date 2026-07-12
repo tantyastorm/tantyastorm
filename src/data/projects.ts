@@ -27,6 +27,12 @@ export type ArchitectureItem = {
   description: string;
 };
 
+export type ProjectGalleryItem = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
 export type Project = {
   slug: keyof typeof projectUrls;
   title: string;
@@ -37,7 +43,7 @@ export type Project = {
   technologies: string[];
   features: ProjectFeature[];
   image?: string;
-  imageAlt: string;
+  imageAlt?: string;
   repositoryUrl?: string;
   liveDemoUrl?: string;
   videoUrl?: string;
@@ -53,7 +59,8 @@ export type Project = {
   decisions?: ProjectDecision[];
   results?: string[];
   lessons?: string[];
-  screenshotCaption?: string;
+  videoCaption?: string;
+  gallery?: ProjectGalleryItem[];
   limitations?: string;
   featured: boolean;
   status: string;
@@ -65,263 +72,323 @@ export const projects: Project[] = [
     slug: "kreacher",
     title: "Kreacher",
     shortTitle: "Kreacher",
-    category: "Protected Website Data Extraction",
+    category: "HTML Processing and Data Normalization",
     summary:
-      "A desktop-assisted extraction tool for websites where limited human participation is required before structured data can be collected.",
+      "A local Python tool for converting saved HTML into normalized, deduplicated, filterable records through a pluggable parser architecture.",
     detailedDescription:
-      "Kreacher supports a human-assisted access step, then keeps collection work organized with preview, filtering, and export-ready structured data. It is designed to reduce repetitive manual collection without claiming automatic security bypass.",
+      "Kreacher processes local saved HTML files with parser adapters that define supported HTML structures. The public repository includes a synthetic example adapter and synthetic fixtures, separates extraction, normalization, validation, deduplication, filtering, review, and export layers, and supports both GUI and CLI workflows for deterministic structured JSON export. Local source paths are omitted by default. It does not claim universal HTML parsing, bypass authentication or access controls, solve CAPTCHAs, or evade anti-bot systems.",
     technologies: [
       "Python",
-      "Desktop GUI",
+      "PySide6",
+      "Beautiful Soup",
       "HTML parsing",
-      "Structured export",
+      "JSON export",
+      "CLI",
     ],
     features: [
       {
-        title: "Human-assisted access workflow",
+        title: "Parser adapter architecture",
         description:
-          "Keeps the required manual participation explicit before collection work begins.",
+          "Keeps supported HTML structures explicit through pluggable adapters.",
       },
       {
-        title: "Protected or difficult website parsing",
+        title: "Saved HTML loading",
         description:
-          "Organizes extraction around pages that are not appropriate for fully automatic access claims.",
+          "Processes local saved HTML files instead of reaching into authenticated sessions.",
       },
       {
-        title: "Preview and filtering",
+        title: "Normalized record schema",
         description:
-          "Lets collected data be inspected and narrowed before it is prepared for export.",
+          "Converts compatible HTML into predictable structured records.",
       },
       {
-        title: "Export-ready data",
+        title: "Validation and deduplication",
         description:
-          "Structures extracted information so it can move into downstream review or processing.",
+          "Separates validation and duplicate handling from extraction.",
       },
       {
-        title: "Desktop interface",
+        title: "Keyword and numeric filtering",
         description:
-          "Wraps the workflow in a local interface suitable for guided operator use.",
+          "Lets records be narrowed before review and export.",
+      },
+      {
+        title: "GUI and CLI workflows",
+        description:
+          "Supports local review in a desktop interface and repeatable command-line use.",
+      },
+      {
+        title: "Deterministic JSON export",
+        description:
+          "Writes normalized records and analysis data in a stable export format.",
+      },
+      {
+        title: "Synthetic public fixtures",
+        description:
+          "Documents the public parser with neutral example HTML and data.",
       },
     ],
     image: "assets/projects/kreacher.png",
-    imageAlt: "Kreacher protected website extraction workflow interface",
+    imageAlt: "Kreacher project thumbnail",
     repositoryUrl: projectUrls.kreacher.repository,
     liveDemoUrl: projectUrls.kreacher.demo,
     videoUrl: projectUrls.kreacher.video,
     role: "Python developer",
     problem:
-      "Some collection workflows need a human access step before data can be organized into a reusable structure.",
+      "Saved HTML can be difficult to review and reuse when parsing, validation, duplicate handling, and export are mixed together.",
     solution:
-      "A desktop-assisted workflow keeps the human step explicit, then supports preview, filtering, and structured export.",
+      "A local parser-adapter workflow converts supported saved HTML into normalized records, validates and deduplicates them, supports filtering and review, and exports deterministic JSON.",
     goals: [
-      "Reduce repetitive manual collection after the access step is complete.",
-      "Keep operator review visible before structured data is reused.",
-      "Present the project in a portfolio-safe way without overstating access automation.",
+      "Process local saved HTML files through explicitly supported parser adapters.",
+      "Keep extraction, normalization, validation, deduplication, filtering, review, and export separate.",
+      "Publish a sanitized public version with synthetic fixtures and a synthetic example adapter.",
     ],
     technicalApproach: [
-      "Use Python desktop GUI patterns to guide the operator through the collection workflow.",
-      "Parse available HTML content after the human-assisted step has completed.",
-      "Prepare structured exports from reviewed and filtered data rather than treating raw collection as final.",
+      "Load local saved HTML and route compatible files through parser adapters.",
+      "Normalize extracted values into a stable record schema before validation.",
+      "Deduplicate and filter records before review and JSON export.",
+      "Omit local source paths from exported output by default.",
     ],
     workflow: [
-      "Start with an explicit human-assisted access step.",
-      "Collect and parse available page content after access is complete.",
-      "Preview, filter, and prepare structured data for export.",
+      "Load one or more saved HTML files.",
+      "Select or detect a compatible parser adapter.",
+      "Extract and normalize records.",
+      "Validate and deduplicate records.",
+      "Filter and review results.",
+      "Export normalized JSON and analysis data.",
     ],
     architecture: [
       {
-        title: "Operator-guided desktop layer",
-        description:
-          "Provides the local workflow surface for access, preview, filtering, and export preparation.",
+        title: "HTML loading layer",
+        description: "Reads local saved HTML files into the processing workflow.",
       },
       {
-        title: "Parsing layer",
+        title: "Parser adapter layer",
         description:
-          "Focuses on extracting structured values from available page content.",
+          "Defines which HTML structures are supported and how records are extracted.",
       },
       {
-        title: "Export preparation layer",
+        title: "Normalization and validation layer",
         description:
-          "Keeps data organized for downstream use after the operator has reviewed it.",
+          "Converts raw extracted values into validated structured records.",
+      },
+      {
+        title: "Deduplication layer",
+        description: "Removes repeated records before review and export.",
+      },
+      {
+        title: "Filtering layer",
+        description: "Supports keyword and numeric filtering for review.",
+      },
+      {
+        title: "GUI and CLI presentation layer",
+        description: "Provides both desktop and command-line workflows.",
+      },
+      {
+        title: "Export layer",
+        description: "Writes deterministic structured JSON output.",
       },
     ],
     qualityNotes: [
-      "Keeps manual review visible in the workflow.",
-      "Avoids presenting protected access as automatic bypass behavior.",
-      "Uses preview and filtering before exported data is reused.",
+      "Adapters define supported structures instead of claiming universal HTML parsing.",
+      "Public examples use synthetic fixtures.",
+      "Local source paths are omitted by default.",
+      "Does not bypass authentication, access controls, CAPTCHAs, or anti-bot systems.",
     ],
     challenges: [
       {
-        title: "Portfolio-safe positioning",
+        title: "Sanitized public fixtures",
         challenge:
-          "The project involves difficult or protected websites, which can be easy to describe in a misleading way.",
+          "The public version needed to demonstrate parser behavior without bundling real platform data.",
         resolution:
-          "The case study names the human-assisted step clearly and avoids claiming automatic security bypass.",
+          "The repository includes a synthetic example adapter and synthetic HTML fixtures.",
       },
       {
-        title: "Review before export",
+        title: "Clear parser scope",
         challenge:
-          "Raw collected data may need inspection before it is useful as structured output.",
+          "HTML tools can be mistaken for universal parsers if adapter support is not explicit.",
         resolution:
-          "Preview and filtering are treated as core workflow steps, not optional polish.",
+          "The project describes adapters as compatibility boundaries for supported structures.",
       },
     ],
     decisions: [
       {
-        title: "Desktop-first workflow",
+        title: "Adapter-based parsing",
         explanation:
-          "A local GUI matches the need for controlled operator participation and visible review.",
+          "Adapters keep structure-specific extraction code isolated from validation, filtering, and export.",
       },
       {
-        title: "Private project links",
+        title: "Synthetic public data",
         explanation:
-          "Public repository and demo links are omitted until a portfolio-safe version is available.",
+          "Neutral fixtures make the repository public without exposing source-specific samples.",
       },
     ],
     results: [
-      "Reduced repetitive collection steps while keeping human review in the loop.",
-      "Created a clearer workflow for moving from manual access to structured export.",
+      "Separated extraction, normalization, validation, deduplication, filtering, and export.",
+      "Added neutral parser adapters.",
+      "Replaced real platform fixtures with synthetic HTML.",
+      "Added GUI and CLI workflows.",
+      "Published a sanitized MIT-licensed public repository.",
     ],
     lessons: [
-      "Automation can still be valuable when a workflow intentionally includes human checkpoints.",
-      "Private extraction tools need careful public wording around access, review, and limitations.",
+      "Parser compatibility is clearer when adapters own source-specific assumptions.",
+      "Synthetic fixtures make public documentation safer and easier to test.",
     ],
-    screenshotCaption:
-      "Desktop-assisted extraction workflow with preview-oriented organization.",
-    limitations:
-      "Public implementation details are limited because this is a private project.",
+    gallery: [
+      {
+        src: "assets/projects/kreacher/kreacher_screen.png",
+        alt: "Kreacher local HTML processing, filtering, and normalized record export interface",
+        caption:
+          "Local saved-HTML processing workflow with filtering, deduplication, and structured export.",
+      },
+    ],
     featured: true,
-    status: "Private Project",
-    confidentialityNote:
-      "Public links are omitted until a portfolio-safe version is available.",
+    status: "Portfolio Project",
   },
   {
     slug: "dobby",
     title: "Dobby",
     shortTitle: "Dobby",
-    category: "Job Discovery Automation",
+    category: "Browser Workflow Utility",
     summary:
-      "A Python desktop workflow for collecting, organizing, and preparing relevant job listings for later review and analysis.",
+      "A manual Manifest V3 browser extension for importing URL queues, navigating pages, and saving user-initiated HTML snapshots locally.",
     detailedDescription:
-      "Dobby collects job listings from selected sources, keeps records in a structured JSON workflow, and prepares filtered results for safe human review.",
-    technologies: ["Python", "Browser automation", "JSON", "Desktop GUI"],
+      "Dobby is a manual Manifest V3 browser extension for importing a generic JSON queue, opening pages one at a time, and saving local HTML snapshots only after explicit user action. Queue records can include fields such as id, title, url, status, selected, and source, with id and url required. Invalid, duplicate, unsupported, or unselected records are skipped. Navigation is user-controlled with previous and next queue movement, generated filenames are filesystem-safe, queue data is stored locally, and the extension uses minimal browser permissions without broad host permissions. It does not crawl pages automatically, automate login, submit forms, extract cookies, access authentication headers, bypass CAPTCHAs, or evade anti-bot systems.",
+    technologies: [
+      "Chrome Extension",
+      "Manifest V3",
+      "JavaScript",
+      "JSON",
+      "Local HTML snapshots",
+    ],
     features: [
       {
-        title: "Keyword and source-based collection",
+        title: "Generic JSON queue import",
         description:
-          "Supports a focused collection workflow based on selected search inputs and sources.",
+          "Accepts structured records with required id and url fields plus optional metadata.",
       },
       {
-        title: "Structured JSON workflow",
+        title: "Manual page navigation",
         description:
-          "Stores collected listing records in a format that can be filtered and reviewed later.",
+          "Opens selected pages one at a time and keeps movement under user control.",
       },
       {
-        title: "Deduplication-ready architecture",
+        title: "User-initiated snapshots",
         description:
-          "Keeps records structured so duplicate handling can be added or refined cleanly.",
+          "Saves HTML snapshots locally only after explicit user action.",
       },
       {
-        title: "Filtering and export",
+        title: "Safe filename generation",
         description:
-          "Prepares collected records for focused review instead of leaving them as unorganized results.",
+          "Creates filesystem-safe names for local snapshot files.",
       },
       {
-        title: "Human review support",
+        title: "Local queue state",
         description:
-          "Treats collected listings as candidates for review, not automatically final decisions.",
+          "Stores imported queue state locally in the browser extension workflow.",
+      },
+      {
+        title: "Minimal browser permissions",
+        description:
+          "Avoids broad host permissions and keeps the extension scope narrow.",
       },
     ],
     image: "assets/projects/dobby.png",
-    imageAlt: "Dobby job discovery automation workflow interface",
+    imageAlt: "Dobby manual browser page queue and snapshot workflow",
     repositoryUrl: projectUrls.dobby.repository,
     liveDemoUrl: projectUrls.dobby.demo,
-    videoUrl: projectUrls.dobby.video,
-    role: "Python developer",
+    videoUrl:
+      projectUrls.dobby.video ?? "assets/projects/dobby/dobby-demo.mp4",
+    role: "JavaScript developer",
     problem:
-      "Relevant job listings can be time-consuming to collect, deduplicate, and prepare for review.",
+      "Manual page review can become hard to track when a user needs to move through a structured list of URLs and save local page snapshots consistently.",
     solution:
-      "A Python desktop workflow collects selected listings, stores records in JSON, and prepares filtered results for human review.",
+      "A Manifest V3 extension imports a structured URL queue, skips invalid or unsupported records, lets the user navigate previous and next pages manually, and saves snapshots only on explicit command.",
     goals: [
-      "Make listing collection repeatable instead of fully manual.",
-      "Keep records structured for filtering, review, and future deduplication work.",
-      "Support human judgment as the final review step.",
+      "Import generic JSON queues with clear validation.",
+      "Keep page navigation and snapshot saving user-controlled.",
+      "Store queue state locally with minimal browser permissions.",
     ],
     technicalApproach: [
-      "Use browser automation for source collection where a browser-driven flow is appropriate.",
-      "Persist listing data as structured JSON records.",
-      "Use a desktop interface to keep the workflow accessible and review-oriented.",
+      "Validate imported records and skip invalid, duplicate, unsupported, or unselected entries.",
+      "Use Manifest V3 extension APIs for a narrow browser workflow.",
+      "Generate filesystem-safe snapshot filenames before local saving.",
+      "Avoid broad host permissions and automated crawling behavior.",
     ],
     workflow: [
-      "Collect listings from selected sources and keywords.",
-      "Store records in a structured JSON workflow.",
-      "Filter and prepare listings for later human review.",
+      "Import a structured JSON queue.",
+      "Open a selected page through the extension.",
+      "Navigate between queue records manually.",
+      "Save the current page as a local HTML snapshot after explicit user action.",
     ],
     architecture: [
       {
-        title: "Collection layer",
+        title: "Queue import and validation layer",
         description:
-          "Handles source and keyword-driven listing gathering through browser automation.",
+          "Checks required fields and filters invalid, duplicate, unsupported, or unselected records.",
       },
       {
-        title: "Record layer",
+        title: "Local queue state layer",
         description:
-          "Keeps collected listings in JSON so the data remains portable and inspectable.",
+          "Stores imported queue records locally for navigation and progress.",
       },
       {
-        title: "Review preparation layer",
+        title: "User-controlled navigation layer",
         description:
-          "Filters and organizes results before a person evaluates relevance.",
+          "Supports previous and next movement through queue records without automatic crawling.",
+      },
+      {
+        title: "Snapshot and safe-filename layer",
+        description:
+          "Saves local HTML snapshots on explicit action with filesystem-safe filenames.",
       },
     ],
     qualityNotes: [
-      "Keeps review as part of the workflow rather than treating collected listings as final.",
-      "Uses structured records so later filtering and deduplication remain practical.",
-      "Limits public details for private project safety.",
+      "Requires explicit user action before saving snapshots.",
+      "Uses minimal browser permissions and no broad host permissions.",
+      "Does not automate login, submit forms, extract cookies, access authentication headers, bypass CAPTCHAs, or evade anti-bot systems.",
     ],
     challenges: [
       {
-        title: "Balancing automation and judgment",
+        title: "Sanitizing a source-specific helper",
         challenge:
-          "Collected listings still need human review to determine whether they are actually relevant.",
+          "The public version needed to remove platform-specific assumptions while keeping the useful queue workflow.",
         resolution:
-          "The tool prepares and filters records for review rather than presenting automation as a replacement for judgment.",
+          "The extension now accepts generic JSON records and documents its manual boundaries.",
       },
       {
-        title: "Keeping records reusable",
+        title: "Avoiding broad browser access",
         challenge:
-          "Listings can become hard to compare if they are collected as unstructured text.",
+          "A browser extension can easily ask for more permissions than a manual workflow needs.",
         resolution:
-          "The workflow stores data in structured JSON so records can be filtered and revisited.",
+          "The public version removes broad host permissions and keeps actions user-initiated.",
       },
     ],
     decisions: [
       {
-        title: "JSON as the workflow format",
+        title: "Generic JSON queue format",
         explanation:
-          "JSON keeps collected records portable without requiring a backend service.",
+          "A neutral queue schema keeps the extension useful without binding it to a specific source.",
       },
       {
-        title: "Private links",
+        title: "Manual snapshot command",
         explanation:
-          "Repository and demo links are intentionally withheld for this private project.",
+          "Saving snapshots only after explicit action keeps the workflow review-oriented.",
       },
     ],
     results: [
-      "Created a structured, repeatable discovery workflow for later analysis.",
-      "Separated collection, filtering, and review into clearer steps.",
+      "Converted a platform-specific helper into a neutral browser workflow utility.",
+      "Removed broad host permissions.",
+      "Added tests for import validation, storage, filenames, and service-worker behavior.",
+      "Published the sanitized implementation under the MIT License.",
     ],
     lessons: [
-      "Automation is strongest here when it prepares better review input rather than trying to make final decisions.",
-      "Structured intermediate data makes later workflow changes easier.",
+      "Manual browser utilities need clear boundaries around navigation, saving, and permissions.",
+      "A small queue schema can make repetitive page review easier without turning it into crawling.",
     ],
-    screenshotCaption:
-      "Job discovery workflow interface for collecting and preparing structured listing data.",
-    limitations: "Repository and demo links are intentionally withheld.",
+    videoCaption:
+      "Local demo video of the Dobby queue navigation and snapshot workflow.",
     featured: true,
-    status: "Private Project",
-    confidentialityNote:
-      "Repository and demo links are intentionally not shown.",
+    status: "Portfolio Project",
   },
   {
     slug: "email-archive-utility",
@@ -363,7 +430,11 @@ export const projects: Project[] = [
     imageAlt: "Email Archive Utility desktop processing interface",
     repositoryUrl: projectUrls["email-archive-utility"].repository,
     liveDemoUrl: projectUrls["email-archive-utility"].demo,
-    videoUrl: projectUrls["email-archive-utility"].video,
+    videoUrl:
+      projectUrls["email-archive-utility"].video ??
+      "assets/projects/email-archive-utility-demo/email-archive-utility-demo.mp4",
+    videoCaption:
+      "Local demo video of the email archive renaming, preview, and processing workflow.",
     role: "Python developer",
     problem:
       "Exported EML and MSG files are difficult to search and organize when filenames and metadata are inconsistent.",
@@ -442,8 +513,6 @@ export const projects: Project[] = [
       "File automation needs preview and collision handling as first-class features.",
       "Local tools are a good fit when data may be sensitive or private.",
     ],
-    screenshotCaption:
-      "Local processing interface for email archive organization and text conversion.",
     featured: false,
     status: "Portfolio Project",
   },
@@ -485,10 +554,8 @@ export const projects: Project[] = [
       },
     ],
     image: "assets/projects/excel-to-json-cli.png",
-    imageAlt: "Excel to JSON command-line converter workflow",
+    imageAlt: "Excel to JSON CLI project thumbnail",
     repositoryUrl: projectUrls["excel-to-json-cli"].repository,
-    liveDemoUrl: projectUrls["excel-to-json-cli"].demo,
-    videoUrl: projectUrls["excel-to-json-cli"].video,
     role: "Python developer",
     problem:
       "Selected Excel worksheet columns often need to be converted into predictable JSON without manual cleanup.",
@@ -568,8 +635,6 @@ export const projects: Project[] = [
       "Small data tools benefit from the same validation discipline as larger applications.",
       "Test coverage pays off quickly when a CLI has multiple input edge cases.",
     ],
-    screenshotCaption:
-      "Command-line conversion workflow for selected Excel columns and JSON output.",
     featured: false,
     status: "Portfolio Project",
   },
@@ -579,10 +644,10 @@ export const projects: Project[] = [
     shortTitle: "Books Scraper",
     category: "Web Scraping and Export",
     summary:
-      "A tested Python scraper that collects structured book data, applies filters, and exports results into reusable formats.",
+      "A compact Python scraper that extracts book data into structured JSON and CSV outputs, with basic validation and automated tests.",
     detailedDescription:
-      "The project uses a clean parser structure, validates collected records, supports filtered exports, and keeps scraping logic testable.",
-    technologies: ["Python", "HTTP requests", "BeautifulSoup", "pytest"],
+      "The project uses a focused parser structure, validates collected records, writes JSON and CSV outputs, and keeps the scraping logic covered by automated tests.",
+    technologies: ["Python", "requests", "lxml", "JSON", "CSV", "pytest"],
     features: [
       {
         title: "Structured parser architecture",
@@ -608,10 +673,8 @@ export const projects: Project[] = [
       },
     ],
     image: "assets/projects/books-data-scraper.png",
-    imageAlt: "Books Data Scraper export workflow",
+    imageAlt: "Books Data Scraper project thumbnail",
     repositoryUrl: projectUrls["books-data-scraper"].repository,
-    liveDemoUrl: projectUrls["books-data-scraper"].demo,
-    videoUrl: projectUrls["books-data-scraper"].video,
     role: "Python developer",
     problem:
       "Book data needs to be collected in a structured format that can be filtered and reused.",
@@ -623,10 +686,10 @@ export const projects: Project[] = [
       "Export data in formats that can be reused outside the scraper.",
     ],
     technicalApproach: [
-      "Use HTTP requests to retrieve source pages.",
-      "Use BeautifulSoup to parse structured book information from page content.",
+      "Use requests to retrieve source pages.",
+      "Use lxml to parse structured book information from page content.",
       "Validate collected records before export.",
-      "Support CSV or JSON output for reusable data workflows.",
+      "Support CSV and JSON output for reusable data workflows.",
     ],
     workflow: [
       "Request book listing pages from the selected source.",
@@ -670,9 +733,9 @@ export const projects: Project[] = [
     ],
     decisions: [
       {
-        title: "HTTP and BeautifulSoup",
+        title: "HTTP and lxml",
         explanation:
-          "The existing project description supports a lightweight HTTP-based scraper rather than a browser-driven workflow.",
+          "The project stays intentionally lightweight with HTTP requests and direct HTML parsing rather than browser automation.",
       },
       {
         title: "Tests around scraper logic",
@@ -688,8 +751,6 @@ export const projects: Project[] = [
       "Scrapers are easier to maintain when fetch, parse, validate, and export steps stay separate.",
       "Validation protects downstream workflows from malformed collected records.",
     ],
-    screenshotCaption:
-      "Scraping and export workflow for structured book data collection.",
     featured: false,
     status: "Portfolio Project",
   },
@@ -731,7 +792,7 @@ export const projects: Project[] = [
       },
     ],
     image: "assets/projects/desktop-data-extraction-tool.png",
-    imageAlt: "Desktop data extraction and export tool interface",
+    imageAlt: "Desktop Data Extraction Tool project thumbnail",
     repositoryUrl: projectUrls["desktop-data-extraction-tool"].repository,
     liveDemoUrl: projectUrls["desktop-data-extraction-tool"].demo,
     videoUrl: projectUrls["desktop-data-extraction-tool"].video,
@@ -812,8 +873,23 @@ export const projects: Project[] = [
       "Desktop automation tools are stronger when they expose configuration and progress clearly.",
       "Portfolio examples can demonstrate architecture without revealing private datasets.",
     ],
-    screenshotCaption:
-      "Desktop extraction interface for configuring collection and export workflows.",
+    gallery: [
+      {
+        src: "assets/projects/bnbscraper/main.png",
+        alt: "Desktop data extraction tool main interface",
+        caption: "Main desktop interface for configuring and running extraction tasks.",
+      },
+      {
+        src: "assets/projects/bnbscraper/output_xlsx.png",
+        alt: "Spreadsheet output generated by the desktop data extraction tool",
+        caption: "Spreadsheet output generated from collected records.",
+      },
+      {
+        src: "assets/projects/bnbscraper/progress.png",
+        alt: "Desktop data extraction tool running progress view",
+        caption: "Progress view for a running extraction session.",
+      },
+    ],
     featured: false,
     status: "Portfolio Project",
   },

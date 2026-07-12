@@ -51,12 +51,16 @@ export const publicContact = {
 
 export const projectUrls = {
   kreacher: {
-    repository: optionalUrl(env.VITE_PROJECT_KREACHER_REPOSITORY_URL),
+    repository:
+      optionalUrl(env.VITE_PROJECT_KREACHER_REPOSITORY_URL) ??
+      "https://github.com/tantyastorm/kreacher_public",
     demo: optionalUrl(env.VITE_PROJECT_KREACHER_DEMO_URL),
     video: optionalUrl(env.VITE_PROJECT_KREACHER_VIDEO_URL),
   },
   dobby: {
-    repository: optionalUrl(env.VITE_PROJECT_DOBBY_REPOSITORY_URL),
+    repository:
+      optionalUrl(env.VITE_PROJECT_DOBBY_REPOSITORY_URL) ??
+      "https://github.com/tantyastorm/Dobby_public",
     demo: optionalUrl(env.VITE_PROJECT_DOBBY_DEMO_URL),
     video: optionalUrl(env.VITE_PROJECT_DOBBY_VIDEO_URL),
   },
@@ -68,19 +72,24 @@ export const projectUrls = {
     video: optionalUrl(env.VITE_PROJECT_EMAIL_ARCHIVE_UTILITY_VIDEO_URL),
   },
   "excel-to-json-cli": {
-    repository: optionalUrl(env.VITE_PROJECT_EXCEL_TO_JSON_CLI_REPOSITORY_URL),
+    repository:
+      optionalUrl(env.VITE_PROJECT_EXCEL_TO_JSON_CLI_REPOSITORY_URL) ??
+      "https://github.com/tantyastorm/excel_to_json",
     demo: optionalUrl(env.VITE_PROJECT_EXCEL_TO_JSON_CLI_DEMO_URL),
     video: optionalUrl(env.VITE_PROJECT_EXCEL_TO_JSON_CLI_VIDEO_URL),
   },
   "books-data-scraper": {
-    repository: optionalUrl(env.VITE_PROJECT_BOOKS_DATA_SCRAPER_REPOSITORY_URL),
+    repository:
+      optionalUrl(env.VITE_PROJECT_BOOKS_DATA_SCRAPER_REPOSITORY_URL) ??
+      "https://github.com/tantyastorm/books_scraper",
     demo: optionalUrl(env.VITE_PROJECT_BOOKS_DATA_SCRAPER_DEMO_URL),
     video: optionalUrl(env.VITE_PROJECT_BOOKS_DATA_SCRAPER_VIDEO_URL),
   },
   "desktop-data-extraction-tool": {
-    repository: optionalUrl(
-      env.VITE_PROJECT_DESKTOP_DATA_EXTRACTION_TOOL_REPOSITORY_URL,
-    ),
+    repository:
+      optionalUrl(
+        env.VITE_PROJECT_DESKTOP_DATA_EXTRACTION_TOOL_REPOSITORY_URL,
+      ) ?? "https://github.com/tantyastorm/BnBscraper",
     demo: optionalUrl(env.VITE_PROJECT_DESKTOP_DATA_EXTRACTION_TOOL_DEMO_URL),
     video: optionalUrl(env.VITE_PROJECT_DESKTOP_DATA_EXTRACTION_TOOL_VIDEO_URL),
   },

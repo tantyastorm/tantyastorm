@@ -65,18 +65,20 @@ function localizeProjects(language: Language): Project[] {
       return {
         ...project,
         ...localized,
-        features: localized.features ?? [],
-        goals: localized.goals,
-        technicalApproach: localized.technicalApproach,
-        workflow: localized.workflow,
-        architecture: localized.architecture,
-        qualityNotes: localized.qualityNotes,
-        challenges: localized.challenges,
-        decisions: localized.decisions,
-        results: localized.results,
-        lessons: localized.lessons,
-        screenshotCaption: localized.screenshotCaption,
-        limitations: localized.limitations,
+        features: localized.features ?? project.features,
+        goals: localized.goals ?? project.goals,
+        technicalApproach:
+          localized.technicalApproach ?? project.technicalApproach,
+        workflow: localized.workflow ?? project.workflow,
+        architecture: localized.architecture ?? project.architecture,
+        qualityNotes: localized.qualityNotes ?? project.qualityNotes,
+        challenges: localized.challenges ?? project.challenges,
+        decisions: localized.decisions ?? project.decisions,
+        results: localized.results ?? project.results,
+        lessons: localized.lessons ?? project.lessons,
+        videoCaption: localized.videoCaption ?? project.videoCaption,
+        limitations: localized.limitations ?? project.limitations,
+        gallery: localized.gallery ?? project.gallery,
       };
     });
   }

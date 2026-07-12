@@ -55,6 +55,26 @@ export default function App() {
     };
   }, [routePath]);
 
+  useEffect(() => {
+    if (!window.location.hash) {
+      return;
+    }
+
+    const target = document.getElementById(
+      decodeURIComponent(window.location.hash.slice(1)),
+    );
+
+    if (!target) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      target.scrollIntoView({ block: "start" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [routePath]);
+
   return (
     <>
       <a className="skip-link" href="#main">

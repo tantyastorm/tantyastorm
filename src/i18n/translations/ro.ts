@@ -246,6 +246,7 @@ export const ro: Translation = {
     resolution: "Rezolvare",
     decisions: "Decizii tehnice",
     screenshot: "Captură",
+    gallery: "Capturi ecran",
     notFoundEyebrow: "Negăsit",
     notFoundHeading: "Proiectul nu a fost găsit.",
     backToProjects: "Înapoi la proiecte",
@@ -298,36 +299,35 @@ export const ro: Translation = {
   },
   projects: {
     kreacher: {
-      category: "Extracție de date din website-uri protejate",
+      category: "Procesare HTML si normalizare de date",
       summary:
-        "Tool desktop asistat pentru website-uri unde este necesară participare umană limitată înainte de colectarea datelor structurate.",
+        "Tool Python local care transforma HTML salvat in inregistrari normalizate, deduplicate si filtrabile printr-o arhitectura cu adaptoare de parser.",
       detailedDescription:
-        "Kreacher susține un pas de acces asistat de om, apoi organizează colectarea cu preview, filtrare și date structurate pregătite pentru export.",
-      imageAlt: "Interfața Kreacher pentru flux de extracție asistată",
+        "Kreacher proceseaza fisiere HTML salvate local prin adaptoare care definesc structurile acceptate, separand extractia, normalizarea, validarea, deduplicarea, filtrarea, revizuirea si exportul JSON determinist. Repository-ul public include doar un adaptor exemplu si fixture-uri sintetice si ofera fluxuri GUI si CLI.",
+      imageAlt: "Miniatura proiectului Kreacher",
       role: "Dezvoltator Python",
       problem:
-        "Unele fluxuri de colectare au nevoie de un pas uman de acces înainte ca datele să fie structurate reutilizabil.",
+        "Fisierele HTML salvate sunt greu de revizuit si reutilizat cand parsarea, validarea, deduplicarea si exportul sunt amestecate.",
       solution:
-        "Un flux desktop asistat păstrează pasul uman explicit și permite preview, filtrare și export structurat.",
-      status: "Proiect privat",
-      confidentialityNote:
-        "Linkurile publice sunt omise până există o versiune potrivită pentru portofoliu.",
+        "Un flux local cu adaptoare de parser converteste HTML compatibil in inregistrari normalizate, le valideaza, le deduplica, le filtreaza si exporta JSON determinist.",
+      status: "Portfolio Project",
     },
     dobby: {
-      category: "Automatizare căutare joburi",
+      category: "Utilitar de workflow in browser",
       summary:
-        "Flux desktop Python pentru colectarea, organizarea și pregătirea anunțurilor relevante pentru verificare ulterioară.",
+        "Extensie browser Manifest V3 manuala pentru importul cozilor de URL-uri, navigarea paginilor si salvarea locala a snapshoturilor HTML initiate de utilizator.",
       detailedDescription:
-        "Dobby colectează anunțuri din surse selectate, păstrează înregistrări JSON structurate și pregătește rezultate filtrate pentru verificare umană.",
-      imageAlt: "Interfața Dobby pentru automatizarea căutării de joburi",
-      role: "Dezvoltator Python",
+        "Dobby importa o coada JSON generica, sare peste inregistrari invalide, duplicate, nesuportate sau neselectate, permite navigare previous/next controlata de utilizator si salveaza snapshoturi HTML locale doar dupa actiune explicita. Datele raman local, permisiunile sunt minime si extensia nu face crawling automat, login automat, submit de formulare, extragere de cookie-uri, acces la headere de autentificare, bypass CAPTCHA sau evitare anti-bot.",
+      imageAlt:
+        "Workflow Dobby pentru coada manuala de pagini in browser si snapshoturi",
+      role: "Dezvoltator JavaScript",
       problem:
-        "Anunțurile relevante pot consuma mult timp pentru colectare, deduplicare și pregătire pentru analiză.",
+        "Revizuirea manuala a paginilor devine greu de urmarit cand utilizatorul trebuie sa parcurga o lista structurata de URL-uri si sa salveze snapshoturi locale consecvent.",
       solution:
-        "Un flux desktop Python colectează anunțuri selectate, le stochează în JSON și pregătește rezultate filtrate.",
-      status: "Proiect privat",
-      confidentialityNote:
-        "Repository-ul și demo-ul nu sunt afișate intenționat.",
+        "O extensie Manifest V3 importa coada, valideaza inregistrarile, permite navigare manuala si salveaza snapshoturi doar la comanda explicita.",
+      videoCaption:
+        "Video demo local cu navigarea prin coada si workflow-ul de snapshot Dobby.",
+      status: "Portfolio Project",
     },
     "email-archive-utility": {
       title: "Utilitar arhivă email",
@@ -359,7 +359,7 @@ export const ro: Translation = {
         "Coloanele selectate din Excel trebuie deseori convertite în JSON predictibil fără curățare manuală.",
       solution:
         "Un utilitar CLI validează antetele selectate, tratează cazurile limită și scrie JSON curat.",
-      status: "Proiect de portofoliu",
+      status: "Portfolio Project",
     },
     "books-data-scraper": {
       title: "Scraper date cărți",
@@ -375,7 +375,7 @@ export const ro: Translation = {
         "Datele despre cărți trebuie colectate într-un format structurat care poate fi filtrat și reutilizat.",
       solution:
         "Un scraper testat colectează înregistrări structurate, aplică filtre, validează date și exportă rezultate reutilizabile.",
-      status: "Proiect de portofoliu",
+      status: "Portfolio Project",
     },
     "desktop-data-extraction-tool": {
       title: "Tool desktop de extracție date",
@@ -385,13 +385,13 @@ export const ro: Translation = {
         "Aplicație desktop Python reutilizabilă pentru extragerea datelor structurate de pe website-uri și export CSV/Excel.",
       detailedDescription:
         "Tool-ul oferă flux configurabil de extracție, validare, loguri și output demonstrativ potrivit pentru portofoliu.",
-      imageAlt: "Interfața tool-ului desktop de extracție și export date",
+      imageAlt: "Miniatura proiectului Desktop Data Extraction Tool",
       role: "Dezvoltator Python",
       problem:
         "Fluxurile reutilizabile de extracție web au nevoie de o interfață simplă și opțiuni fiabile de export.",
       solution:
         "O aplicație desktop Python oferă extracție configurabilă, validare, loguri și export CSV sau Excel.",
-      status: "Proiect de portofoliu",
+      status: "Portfolio Project",
     },
   },
 };

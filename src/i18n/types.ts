@@ -24,7 +24,8 @@ export type ProjectText = Partial<
     | "decisions"
     | "results"
     | "lessons"
-    | "screenshotCaption"
+    | "videoCaption"
+    | "gallery"
     | "limitations"
     | "confidentialityNote"
   >
@@ -152,6 +153,7 @@ export type Translation = {
     resolution: string;
     decisions: string;
     screenshot: string;
+    gallery: string;
     notFoundEyebrow: string;
     notFoundHeading: string;
     backToProjects: string;

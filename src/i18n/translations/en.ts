@@ -268,6 +268,7 @@ export const en: Translation = {
     resolution: "Resolution",
     decisions: "Engineering Decisions",
     screenshot: "Screenshot",
+    gallery: "Screenshots",
     notFoundEyebrow: "Not Found",
     notFoundHeading: "Project not found.",
     backToProjects: "Back to projects",

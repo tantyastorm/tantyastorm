@@ -8,6 +8,9 @@ export function Footer() {
   const { t } = useI18n();
   const year = new Date().getFullYear();
   const profileLinks = contactLinks.filter((link) => link.isExternal);
+  const primaryFooterLinks = profileLinks.filter((link) =>
+    ["GitHub", "Upwork", "LinkedIn"].includes(link.label),
+  );
 
   return (
     <footer className="site-footer" aria-labelledby="footer-title">
@@ -21,18 +24,14 @@ export function Footer() {
             <img src={assetPath("assets/brand/logo-color.png")} alt="" />
             <span>{profile.brandName}</span>
           </a>
-          <div>
-            <p className="eyebrow">{t.footer.availability}</p>
-            <h2 id="footer-title">{t.footer.title}</h2>
+          <div className="footer-summary">
+            <h2 id="footer-title">{profile.name}</h2>
             <p>{t.footer.description}</p>
           </div>
         </div>
 
         <div className="footer-actions" aria-label={t.common.footerActions}>
-          <a className="footer-link" href={`mailto:${profile.email}`}>
-            {profile.email}
-          </a>
-          {profileLinks.map((link) => (
+          {primaryFooterLinks.map((link) => (
             <a
               className="footer-link footer-link--external"
               href={link.href}
@@ -45,9 +44,7 @@ export function Footer() {
                 ? t.contactLinks.github
                 : link.label === "Upwork"
                   ? t.contactLinks.upwork
-                  : link.label === "LinkedIn"
-                    ? t.contactLinks.linkedin
-                    : t.contactLinks.fiverr}
+                  : t.contactLinks.linkedin}
             </a>
           ))}
           <ExternalLink
@@ -57,6 +54,9 @@ export function Footer() {
           >
             {t.common.bookCall}
           </ExternalLink>
+          <a className="footer-link" href={`mailto:${profile.email}`}>
+            {t.contactLinks.email}
+          </a>
           <a className="footer-link" href={assetPath("#top")}>
             {t.common.backToTop}
           </a>

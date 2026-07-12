@@ -22,8 +22,8 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       <div className="project-card__index" aria-hidden="true">
         {String(index + 1).padStart(2, "0")}
       </div>
-      <div className="project-card__media">
-        {project.image ? (
+      {project.image && project.imageAlt ? (
+        <div className="project-card__media">
           <img
             src={assetPath(project.image)}
             alt={project.imageAlt}
@@ -35,19 +35,8 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               event.currentTarget.nextElementSibling?.removeAttribute("hidden");
             }}
           />
-        ) : null}
-        <div className="project-card__fallback" hidden={Boolean(project.image)}>
-          <img
-            src={assetPath("assets/brand/app-icon-64.png")}
-            alt=""
-            loading="lazy"
-            width="64"
-            height="64"
-          />
-          <span>{project.shortTitle}</span>
-          <small>{project.category}</small>
         </div>
-      </div>
+      ) : null}
       <div className="project-card__body">
         <div className="project-card__meta">
           <span>{project.category}</span>

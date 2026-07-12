@@ -25,18 +25,24 @@ Vite uses `/` as the production base path for the custom domain, so assets work 
 
 ## Project Data
 
-Projects live in `src/data/projects.ts`. To add another project, add one object to the exported `projects` array and add a matching image under `public/assets/projects/`.
+Projects live in `src/data/projects.ts`. To add another project, add one object to the exported `projects` array. Images, videos, and galleries are optional and should only be assigned when real public media exists under `public/assets/projects/`.
 
-Current documented image filenames:
+Current documented media filenames:
 
 - `public/assets/projects/kreacher.png`
+- `public/assets/projects/kreacher/kreacher_screen.png`
 - `public/assets/projects/dobby.png`
+- `public/assets/projects/dobby/dobby-demo.mp4`
 - `public/assets/projects/email-archive-utility.png`
+- `public/assets/projects/email-archive-utility-demo/email-archive-utility-demo.mp4`
 - `public/assets/projects/excel-to-json-cli.png`
 - `public/assets/projects/books-data-scraper.png`
 - `public/assets/projects/desktop-data-extraction-tool.png`
+- `public/assets/projects/bnbscraper/main.png`
+- `public/assets/projects/bnbscraper/output_xlsx.png`
+- `public/assets/projects/bnbscraper/progress.png`
 
-If an image is missing, the site shows a polished branded fallback instead of a broken image.
+Projects without media render as text-focused cards and omit screenshot/media sections.
 
 ## Brand Assets
 

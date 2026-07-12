@@ -5,6 +5,7 @@ import type {
   ProjectChallenge,
   ProjectDecision,
   ProjectFeature,
+  ProjectGalleryItem,
 } from "../data/projects";
 import { useI18n } from "../i18n";
 import { assetPath } from "../utils/assets";
@@ -160,15 +161,17 @@ function DecisionList({
   );
 }
 
-function ScreenshotSection({
+function mediaPath(src: string) {
+  return /^https?:\/\//i.test(src) ? src : assetPath(src);
+}
+
+function VideoSection({
   title,
   src,
-  alt,
   caption,
 }: {
   title: string;
   src?: string;
-  alt: string;
   caption?: string;
 }) {
   if (!src) {
@@ -179,15 +182,50 @@ function ScreenshotSection({
     <section className="detail-section detail-section--media">
       <h2>{title}</h2>
       <figure className="case-study-figure">
-        <img
-          src={assetPath(src)}
-          alt={alt}
-          loading="lazy"
-          width="960"
-          height="540"
-        />
+        <video controls preload="metadata" width="960" height="540">
+          <source src={mediaPath(src)} type="video/mp4" />
+        </video>
         {caption ? <figcaption>{caption}</figcaption> : null}
       </figure>
+    </section>
+  );
+}
+
+function MediaCarousel({
+  title,
+  items,
+}: {
+  title: string;
+  items?: ProjectGalleryItem[];
+}) {
+  if (!items?.length) {
+    return null;
+  }
+
+  return (
+    <section className="detail-section detail-section--media">
+      <h2>{title}</h2>
+      <div
+        className="case-study-carousel"
+        aria-label={title}
+        tabIndex={0}
+      >
+        {items.map((item) => (
+          <figure
+            className="case-study-figure case-study-carousel__item"
+            key={item.src}
+          >
+            <img
+              src={assetPath(item.src)}
+              alt={item.alt}
+              loading="lazy"
+              width="960"
+              height="540"
+            />
+            {item.caption ? <figcaption>{item.caption}</figcaption> : null}
+          </figure>
+        ))}
+      </div>
     </section>
   );
 }
@@ -222,6 +260,7 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
     projects[(projectIndex - 1 + projects.length) % projects.length];
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const projectPath = `projects/${project.slug}/`;
+  const hasHeroMedia = Boolean(project.image && project.imageAlt);
 
   return (
     <main id="main" className="project-detail-main">
@@ -234,7 +273,11 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
       />
       <article className="project-detail">
         <header className="detail-hero section">
-          <div className="container detail-hero__inner">
+          <div
+            className={`container detail-hero__inner ${
+              hasHeroMedia ? "" : "detail-hero__inner--text-only"
+            }`}
+          >
             <div>
               <a className="back-link" href={assetPath("#projects")}>
                 {t.detail.backToProjects}
@@ -272,28 +315,16 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                 </p>
               ) : null}
             </div>
-            <div className="detail-media">
-              {project.image ? (
+            {hasHeroMedia ? (
+              <div className="detail-media">
                 <img
-                  src={assetPath(project.image)}
-                  alt={project.imageAlt}
+                  src={assetPath(project.image!)}
+                  alt={project.imageAlt!}
                   width="960"
                   height="540"
                 />
-              ) : (
-                <div className="project-card__fallback">
-                  <img
-                    src={assetPath("assets/brand/app-icon-64.png")}
-                    alt=""
-                    loading="lazy"
-                    width="64"
-                    height="64"
-                  />
-                  <span>{project.shortTitle}</span>
-                  <small>{project.category}</small>
-                </div>
-              )}
-            </div>
+              </div>
+            ) : null}
           </div>
         </header>
 
@@ -335,11 +366,14 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
             />
             <SectionList title={t.detail.results} items={project.results} />
             <SectionList title={t.detail.lessons} items={project.lessons} />
-            <ScreenshotSection
-              title={t.detail.screenshot}
-              src={project.image}
-              alt={project.imageAlt}
-              caption={project.screenshotCaption}
+            <VideoSection
+              title={t.detail.demoVideo}
+              src={project.videoUrl}
+              caption={project.videoCaption}
+            />
+            <MediaCarousel
+              title={t.detail.gallery}
+              items={project.gallery}
             />
             <TextSection
               title={t.detail.limitations}
