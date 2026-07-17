@@ -71,6 +71,17 @@ export const projectUrls = {
     demo: optionalUrl(env.VITE_PROJECT_EMAIL_ARCHIVE_UTILITY_DEMO_URL),
     video: optionalUrl(env.VITE_PROJECT_EMAIL_ARCHIVE_UTILITY_VIDEO_URL),
   },
+  "custom-translation-management-system": {
+    repository: optionalUrl(
+      env.VITE_PROJECT_CUSTOM_TRANSLATION_MANAGEMENT_SYSTEM_REPOSITORY_URL,
+    ),
+    demo: optionalUrl(
+      env.VITE_PROJECT_CUSTOM_TRANSLATION_MANAGEMENT_SYSTEM_DEMO_URL,
+    ),
+    video: optionalUrl(
+      env.VITE_PROJECT_CUSTOM_TRANSLATION_MANAGEMENT_SYSTEM_VIDEO_URL,
+    ),
+  },
   "excel-to-json-cli": {
     repository:
       optionalUrl(env.VITE_PROJECT_EXCEL_TO_JSON_CLI_REPOSITORY_URL) ??

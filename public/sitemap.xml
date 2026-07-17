@@ -21,6 +21,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tantyastorm.dev/projects/custom-translation-management-system/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://tantyastorm.dev/projects/excel-to-json-cli/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

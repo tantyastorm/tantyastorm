@@ -61,7 +61,7 @@ export const en: Translation = {
     title: "Evidence from the work already here.",
     items: [
       {
-        label: "6 case studies",
+        label: "7 case studies",
         description:
           "Automation, scraping, desktop utilities, file processing, and data transformation are documented as project pages.",
       },
@@ -96,7 +96,7 @@ export const en: Translation = {
     eyebrow: "Selected work",
     title: "Case studies from automation, extraction, and data workflows.",
     description:
-      "Six projects, each focused on turning messy inputs or repetitive steps into structured, reviewable output.",
+      "Seven projects, each focused on turning messy inputs or repetitive steps into structured, reviewable output.",
   },
   servicesSection: {
     eyebrow: "Ways to work together",
@@ -322,6 +322,7 @@ export const en: Translation = {
     kreacher: {},
     dobby: {},
     "email-archive-utility": {},
+    "custom-translation-management-system": {},
     "excel-to-json-cli": {},
     "books-data-scraper": {},
     "desktop-data-extraction-tool": {},
