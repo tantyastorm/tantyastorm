@@ -27,6 +27,10 @@ export type ProjectText = Partial<
     | "videoCaption"
     | "gallery"
     | "limitations"
+    | "caseStudyIntro"
+    | "caseStudySections"
+    | "caseStudyNotice"
+    | "sourceCodeNote"
     | "confidentialityNote"
   >
 > & { status?: string };
@@ -172,11 +176,13 @@ export type Translation = {
     lessons: string;
     limitations: string;
     privacy: string;
+    projectInformation: string;
     snapshot: string;
     status: string;
     role: string;
     category: string;
     technologyStack: string;
+    sourceCode: string;
     projectLinks: string;
     repositoryLink: string;
     liveDemoLink: string;

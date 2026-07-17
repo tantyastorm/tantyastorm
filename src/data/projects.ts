@@ -33,6 +33,13 @@ export type ProjectGalleryItem = {
   caption?: string;
 };
 
+export type ProjectCaseStudySection = {
+  title: string;
+  paragraphs?: string[];
+  list?: string[];
+  afterListParagraphs?: string[];
+};
+
 export type Project = {
   slug: keyof typeof projectUrls;
   title: string;
@@ -62,6 +69,10 @@ export type Project = {
   videoCaption?: string;
   gallery?: ProjectGalleryItem[];
   limitations?: string;
+  caseStudyIntro?: string[];
+  caseStudySections?: ProjectCaseStudySection[];
+  caseStudyNotice?: string;
+  sourceCodeNote?: string;
   featured: boolean;
   status: string;
   confidentialityNote?: string;
@@ -522,9 +533,9 @@ export const projects: Project[] = [
     shortTitle: "Translation System",
     category: "Desktop Application / Python",
     summary:
-      "Refactored and extended a private desktop Translation Management System based on the client's original concept. I inherited an existing V1, redesigned the application structure, and separated tightly coupled logic into maintainable modules.",
+      "Refactored and extended a private desktop Translation Management System based on the client’s original concept. I inherited an existing V1, redesigned the application structure, and separated tightly coupled logic into maintainable modules. I handled architecture, Python development, testing, debugging, workflow improvements, glossary consistency, and final delivery. The result was a cleaner, more stable, and easier-to-maintain application prepared for continued development. Project details are limited due to NDA.",
     detailedDescription:
-      "I refactored and extended a private desktop Translation Management System based on the client's original product concept and business requirements. The project already had a working V1 created by another developer. My role was to understand the existing codebase, identify its limitations, and transform it into a cleaner, more reliable, and maintainable application.",
+      "I refactored and extended a private desktop Translation Management System based on the client’s original product concept and business requirements.",
     technologies: [
       "Python",
       "Software Architecture",
@@ -534,128 +545,73 @@ export const projects: Project[] = [
       "Testing and Debugging",
       "Modular Architecture",
     ],
-    features: [
-      {
-        title: "Inherited V1 analysis",
-        description:
-          "Reviewed the existing implementation, traced the main workflows, and identified tightly coupled responsibilities.",
-      },
-      {
-        title: "Architectural redesign",
-        description:
-          "Redesigned the application structure so new functionality could be added without increasing complexity inside the original codebase.",
-      },
-      {
-        title: "Module separation",
-        description:
-          "Separated user interface logic, processing logic, configuration, project state, reusable services, and utilities.",
-      },
-      {
-        title: "Workflow stabilization",
-        description:
-          "Stabilized existing functionality, refined workflows, resolved edge cases, and prepared the system for reliable real-world use.",
-      },
-    ],
+    features: [],
     image: "assets/projects/custom-translation-management-system.png",
     imageAlt: "Custom Translation Management System project thumbnail",
-    role: "Technical evolution of the application",
-    problem:
-      "The original version contained the foundation of the product, but the code required significant restructuring before the application could be safely extended and maintained.",
-    solution:
-      "I reorganized the application into separate modules with clearer responsibilities, reduced dependencies between components, improved error handling and recovery, and created a structure that could support future development.",
-    goals: [
-      "Understand the inherited codebase and identify its limitations.",
-      "Transform the existing V1 into a cleaner, more reliable, and maintainable application.",
-      "Prepare the system for safe extension and continued development.",
+    role: "Python Developer & Software Architect",
+    caseStudyIntro: [
+      "I refactored and extended a private desktop Translation Management System based on the client’s original product concept and business requirements.",
+      "The project already had a working V1 created by another developer. My role was to understand the existing codebase, identify its limitations, and transform it into a cleaner, more reliable, and maintainable application.",
     ],
-    technicalApproach: [
-      "Reviewed the existing implementation and traced the main workflows.",
-      "Separated user interface logic from processing logic.",
-      "Isolated configuration and project state.",
-      "Separated reusable services and utilities.",
-      "Reduced dependencies between components.",
-      "Improved error handling and recovery.",
-      "Made individual parts easier to test and modify.",
-    ],
-    workflow: [
-      "Analyze the existing V1.",
-      "Trace the main workflows.",
-      "Plan the architectural refactor.",
-      "Refactor the codebase into maintainable modules.",
-      "Implement and refine required workflows.",
-      "Test, debug, and deliver the final application.",
-    ],
-    architecture: [
+    caseStudySections: [
       {
-        title: "User interface logic",
-        description:
-          "Separated interface behavior from processing responsibilities.",
+        title: "Starting Point",
+        paragraphs: [
+          "The original version contained the foundation of the product, but the code required significant restructuring before the application could be safely extended and maintained.",
+          "I reviewed the existing implementation, traced the main workflows, identified tightly coupled responsibilities, and planned a complete architectural refactor.",
+        ],
       },
       {
-        title: "Processing logic",
-        description:
-          "Moved core processing behavior into clearer maintainable modules.",
+        title: "Complete Refactor",
+        paragraphs: [
+          "I reorganized the application into separate modules with clearer responsibilities.",
+          "The refactor focused on:",
+        ],
+        list: [
+          "separating user interface logic from processing logic;",
+          "isolating configuration and project state;",
+          "separating reusable services and utilities;",
+          "reducing dependencies between components;",
+          "improving error handling and recovery;",
+          "making individual parts easier to test and modify;",
+          "creating a structure that could support future development.",
+        ],
+        afterListParagraphs: [
+          "This was not a cosmetic cleanup. The application structure was redesigned so that new functionality could be added without continuing to increase complexity inside the original codebase.",
+        ],
       },
       {
-        title: "Configuration and project state",
-        description:
-          "Isolated configuration and project state from unrelated application concerns.",
+        title: "What I delivered",
+        paragraphs: ["My work included:"],
+        list: [
+          "full analysis of the existing V1;",
+          "architectural redesign;",
+          "complete codebase refactoring;",
+          "separation into maintainable modules;",
+          "stabilization of existing functionality;",
+          "implementation and refinement of workflows;",
+          "translation project organization;",
+          "company-specific configuration;",
+          "glossary-based terminology consistency;",
+          "controlled document processing;",
+          "review and approval of completed results;",
+          "testing, debugging, and final delivery.",
+        ],
       },
       {
-        title: "Reusable services and utilities",
-        description:
-          "Separated common services and utilities so individual parts could be tested and modified more easily.",
+        title: "My contribution",
+        paragraphs: [
+          "The client provided the original product idea and business direction.",
+          "I took responsibility for the technical evolution of the application: understanding the inherited code, redesigning its structure, implementing the required workflows, resolving edge cases, and preparing the system for reliable real-world use.",
+          "The result was a significantly cleaner and more maintainable desktop application with separated modules, clearer responsibilities, and a stronger foundation for continued development.",
+        ],
       },
     ],
-    qualityNotes: [
-      "Stabilized existing functionality.",
-      "Improved error handling and recovery.",
-      "Reduced dependencies between components.",
-      "Tested, debugged, and prepared the application for final delivery.",
-    ],
-    challenges: [
-      {
-        title: "Inherited implementation",
-        challenge:
-          "The application already had a working V1, but tightly coupled responsibilities made safe extension and maintenance difficult.",
-        resolution:
-          "I reviewed the implementation, traced the main workflows, identified limitations, and planned a complete architectural refactor.",
-      },
-      {
-        title: "Refactor beyond cleanup",
-        challenge:
-          "The work required more than cosmetic cleanup because new functionality needed a stronger application foundation.",
-        resolution:
-          "I redesigned the application structure into separate modules with clearer responsibilities.",
-      },
-    ],
-    decisions: [
-      {
-        title: "Separate responsibilities",
-        explanation:
-          "Separating user interface logic, processing logic, configuration, project state, services, and utilities made the application easier to maintain and extend.",
-      },
-      {
-        title: "Prepare for future development",
-        explanation:
-          "The refactor created a structure that could support future development without continuing to increase complexity inside the original codebase.",
-      },
-    ],
-    results: [
-      "Completed analysis of the existing V1.",
-      "Delivered an architectural redesign and complete codebase refactor.",
-      "Separated the application into maintainable modules.",
-      "Stabilized existing functionality.",
-      "Implemented and refined workflows.",
-      "Supported translation project organization, company-specific configuration, glossary-based terminology consistency, controlled document processing, and review and approval of completed results.",
-      "Delivered a cleaner and more maintainable desktop application with separated modules, clearer responsibilities, and a stronger foundation for continued development.",
-    ],
-    limitations:
-      "Client names, source materials, screenshots, prompts, internal business logic, proprietary workflows, and detailed architecture are not included in this case study.",
+    caseStudyNotice:
+      "This project is protected by NDA. Client names, source materials, screenshots, prompts, internal business logic, proprietary workflows, and detailed architecture are not included in this case study.",
+    sourceCodeNote: "Private project. Source code is not publicly available.",
     featured: false,
     status: "Private Project",
-    confidentialityNote:
-      "This project is protected by NDA. Client names, source materials, screenshots, prompts, internal business logic, proprietary workflows, and detailed architecture are not included in this case study.",
   },
   {
     slug: "excel-to-json-cli",

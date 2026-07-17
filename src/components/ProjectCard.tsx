@@ -40,7 +40,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       <div className="project-card__body">
         <div className="project-card__meta">
           <span>{project.category}</span>
-          <span>{project.status}</span>
+          {project.caseStudySections?.length ? null : (
+            <span>{project.status}</span>
+          )}
         </div>
         <h3>{project.title}</h3>
         <p>{project.summary}</p>

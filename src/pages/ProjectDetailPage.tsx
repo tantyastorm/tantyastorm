@@ -2,6 +2,7 @@ import { ExternalLink } from "../components/ExternalLink";
 import { SEO } from "../components/SEO";
 import type {
   ArchitectureItem,
+  ProjectCaseStudySection,
   ProjectChallenge,
   ProjectDecision,
   ProjectFeature,
@@ -41,6 +42,76 @@ function TextSection({ title, content }: { title: string; content?: string }) {
       <h2>{title}</h2>
       <p>{content}</p>
     </section>
+  );
+}
+
+function ApprovedCaseStudySection({ section }: { section: ProjectCaseStudySection }) {
+  return (
+    <section className="detail-section">
+      <h2>{section.title}</h2>
+      {section.paragraphs?.map((paragraph) => (
+        <p key={paragraph}>{paragraph}</p>
+      ))}
+      {section.list?.length ? (
+        <ul className="detail-list">
+          {section.list.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      ) : null}
+      {section.afterListParagraphs?.map((paragraph) => (
+        <p key={paragraph}>{paragraph}</p>
+      ))}
+    </section>
+  );
+}
+
+function ApprovedProjectInfo({
+  project,
+  t,
+}: {
+  project: NonNullable<ReturnType<typeof useI18n>["projects"][number]>;
+  t: ReturnType<typeof useI18n>["t"];
+}) {
+  return (
+    <aside
+      className="detail-sidebar"
+      aria-label={t.detail.detailsLabel(project.title)}
+    >
+      <section>
+        <h2>{t.detail.projectInformation}</h2>
+        <dl className="detail-facts">
+          <div>
+            <dt>{t.detail.status}</dt>
+            <dd>{project.status}</dd>
+          </div>
+          {project.role ? (
+            <div>
+              <dt>{t.detail.role}</dt>
+              <dd>{project.role}</dd>
+            </div>
+          ) : null}
+          <div>
+            <dt>{t.detail.category}</dt>
+            <dd>{project.category}</dd>
+          </div>
+          {project.sourceCodeNote ? (
+            <div>
+              <dt>{t.detail.sourceCode}</dt>
+              <dd>{project.sourceCodeNote}</dd>
+            </div>
+          ) : null}
+        </dl>
+      </section>
+      <section>
+        <h2>{t.detail.technologyStack}</h2>
+        <ul className="tag-list tag-list--loose">
+          {project.technologies.map((technology) => (
+            <li key={technology}>{technology}</li>
+          ))}
+        </ul>
+      </section>
+    </aside>
   );
 }
 
@@ -261,6 +332,7 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const projectPath = `projects/${project.slug}/`;
   const hasHeroMedia = Boolean(project.image && project.imageAlt);
+  const hasApprovedCaseStudy = Boolean(project.caseStudySections?.length);
 
   return (
     <main id="main" className="project-detail-main">
@@ -286,29 +358,31 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
               <h1>{project.title}</h1>
               <p className="hero__lead">{project.summary}</p>
               <div className="project-card__meta">
-                <span>{project.status}</span>
+                {!hasApprovedCaseStudy ? <span>{project.status}</span> : null}
                 {project.role ? <span>{project.role}</span> : null}
               </div>
-              <div className="detail-actions">
-                <ExternalLink
-                  className="button button--secondary"
-                  href={project.repositoryUrl}
-                >
-                  {t.detail.repository}
-                </ExternalLink>
-                <ExternalLink
-                  className="button button--secondary"
-                  href={project.liveDemoUrl}
-                >
-                  {t.detail.liveDemo}
-                </ExternalLink>
-                <ExternalLink
-                  className="button button--secondary"
-                  href={project.videoUrl}
-                >
-                  {t.detail.demoVideo}
-                </ExternalLink>
-              </div>
+              {!hasApprovedCaseStudy ? (
+                <div className="detail-actions">
+                  <ExternalLink
+                    className="button button--secondary"
+                    href={project.repositoryUrl}
+                  >
+                    {t.detail.repository}
+                  </ExternalLink>
+                  <ExternalLink
+                    className="button button--secondary"
+                    href={project.liveDemoUrl}
+                  >
+                    {t.detail.liveDemo}
+                  </ExternalLink>
+                  <ExternalLink
+                    className="button button--secondary"
+                    href={project.videoUrl}
+                  >
+                    {t.detail.demoVideo}
+                  </ExternalLink>
+                </div>
+              ) : null}
               {project.confidentialityNote ? (
                 <p className="project-card__note">
                   {project.confidentialityNote}
@@ -329,111 +403,139 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
         </header>
 
         <div className="container detail-grid">
-          <div className="detail-content">
-            <TextSection
-              title={t.detail.overview}
-              content={project.detailedDescription}
-            />
-            <SectionList title={t.detail.goals} items={project.goals} />
-            <TextSection title={t.detail.problem} content={project.problem} />
-            <TextSection
-              title={t.detail.solution}
-              content={project.solution ?? project.detailedDescription}
-            />
-            <SectionList title={t.detail.workflow} items={project.workflow} />
-            <FeatureGrid title={t.detail.features} items={project.features} />
-            <SectionList
-              title={t.detail.technicalApproach}
-              items={project.technicalApproach}
-            />
-            <ArchitectureGrid
-              title={t.detail.architecture}
-              items={project.architecture}
-            />
-            <SectionList
-              title={t.detail.quality}
-              items={project.qualityNotes}
-            />
-            <DecisionList
-              title={t.detail.decisions}
-              items={project.decisions}
-            />
-            <ChallengeList
-              title={t.detail.challenges}
-              challengeLabel={t.detail.challenge}
-              resolutionLabel={t.detail.resolution}
-              items={project.challenges}
-            />
-            <SectionList title={t.detail.results} items={project.results} />
-            <SectionList title={t.detail.lessons} items={project.lessons} />
-            <VideoSection
-              title={t.detail.demoVideo}
-              src={project.videoUrl}
-              caption={project.videoCaption}
-            />
-            <MediaCarousel
-              title={t.detail.gallery}
-              items={project.gallery}
-            />
-            <TextSection
-              title={t.detail.limitations}
-              content={project.limitations}
-            />
-            <TextSection
-              title={t.detail.privacy}
-              content={project.confidentialityNote}
-            />
-          </div>
-
-          <aside
-            className="detail-sidebar"
-            aria-label={t.detail.detailsLabel(project.title)}
-          >
-            <section>
-              <h2>{t.detail.snapshot}</h2>
-              <dl className="detail-facts">
-                <div>
-                  <dt>{t.detail.status}</dt>
-                  <dd>{project.status}</dd>
-                </div>
-                {project.role ? (
-                  <div>
-                    <dt>{t.detail.role}</dt>
-                    <dd>{project.role}</dd>
-                  </div>
-                ) : null}
-                <div>
-                  <dt>{t.detail.category}</dt>
-                  <dd>{project.category}</dd>
-                </div>
-              </dl>
-            </section>
-            <section>
-              <h2>{t.detail.technologyStack}</h2>
-              <ul className="tag-list tag-list--loose">
-                {project.technologies.map((technology) => (
-                  <li key={technology}>{technology}</li>
+          {hasApprovedCaseStudy ? (
+            <>
+              <div className="detail-content">
+                <section className="detail-section">
+                  <h2>{t.detail.overview}</h2>
+                  {project.caseStudyIntro?.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </section>
+                {project.caseStudySections?.map((section) => (
+                  <ApprovedCaseStudySection
+                    key={section.title}
+                    section={section}
+                  />
                 ))}
-              </ul>
-            </section>
-            <section>
-              <h2>{t.detail.projectLinks}</h2>
-              <div className="detail-link-list">
-                <ExternalLink href={project.repositoryUrl}>
-                  {t.detail.repositoryLink}
-                </ExternalLink>
-                <ExternalLink href={project.liveDemoUrl}>
-                  {t.detail.liveDemoLink}
-                </ExternalLink>
-                <ExternalLink href={project.videoUrl}>
-                  {t.detail.demoVideoLink}
-                </ExternalLink>
-                {!project.repositoryUrl && (
-                  <p>{t.common.unavailableProjectLinks}</p>
-                )}
+                {project.caseStudyNotice ? (
+                  <section className="detail-section">
+                    <h2>{t.detail.privacy}</h2>
+                    <p>{project.caseStudyNotice}</p>
+                  </section>
+                ) : null}
               </div>
-            </section>
-          </aside>
+              <ApprovedProjectInfo project={project} t={t} />
+            </>
+          ) : (
+            <>
+              <div className="detail-content">
+                <TextSection
+                  title={t.detail.overview}
+                  content={project.detailedDescription}
+                />
+                <SectionList title={t.detail.goals} items={project.goals} />
+                <TextSection title={t.detail.problem} content={project.problem} />
+                <TextSection
+                  title={t.detail.solution}
+                  content={project.solution ?? project.detailedDescription}
+                />
+                <SectionList title={t.detail.workflow} items={project.workflow} />
+                <FeatureGrid title={t.detail.features} items={project.features} />
+                <SectionList
+                  title={t.detail.technicalApproach}
+                  items={project.technicalApproach}
+                />
+                <ArchitectureGrid
+                  title={t.detail.architecture}
+                  items={project.architecture}
+                />
+                <SectionList
+                  title={t.detail.quality}
+                  items={project.qualityNotes}
+                />
+                <DecisionList
+                  title={t.detail.decisions}
+                  items={project.decisions}
+                />
+                <ChallengeList
+                  title={t.detail.challenges}
+                  challengeLabel={t.detail.challenge}
+                  resolutionLabel={t.detail.resolution}
+                  items={project.challenges}
+                />
+                <SectionList title={t.detail.results} items={project.results} />
+                <SectionList title={t.detail.lessons} items={project.lessons} />
+                <VideoSection
+                  title={t.detail.demoVideo}
+                  src={project.videoUrl}
+                  caption={project.videoCaption}
+                />
+                <MediaCarousel
+                  title={t.detail.gallery}
+                  items={project.gallery}
+                />
+                <TextSection
+                  title={t.detail.limitations}
+                  content={project.limitations}
+                />
+                <TextSection
+                  title={t.detail.privacy}
+                  content={project.confidentialityNote}
+                />
+              </div>
+
+              <aside
+                className="detail-sidebar"
+                aria-label={t.detail.detailsLabel(project.title)}
+              >
+                <section>
+                  <h2>{t.detail.snapshot}</h2>
+                  <dl className="detail-facts">
+                    <div>
+                      <dt>{t.detail.status}</dt>
+                      <dd>{project.status}</dd>
+                    </div>
+                    {project.role ? (
+                      <div>
+                        <dt>{t.detail.role}</dt>
+                        <dd>{project.role}</dd>
+                      </div>
+                    ) : null}
+                    <div>
+                      <dt>{t.detail.category}</dt>
+                      <dd>{project.category}</dd>
+                    </div>
+                  </dl>
+                </section>
+                <section>
+                  <h2>{t.detail.technologyStack}</h2>
+                  <ul className="tag-list tag-list--loose">
+                    {project.technologies.map((technology) => (
+                      <li key={technology}>{technology}</li>
+                    ))}
+                  </ul>
+                </section>
+                <section>
+                  <h2>{t.detail.projectLinks}</h2>
+                  <div className="detail-link-list">
+                    <ExternalLink href={project.repositoryUrl}>
+                      {t.detail.repositoryLink}
+                    </ExternalLink>
+                    <ExternalLink href={project.liveDemoUrl}>
+                      {t.detail.liveDemoLink}
+                    </ExternalLink>
+                    <ExternalLink href={project.videoUrl}>
+                      {t.detail.demoVideoLink}
+                    </ExternalLink>
+                    {!project.repositoryUrl && (
+                      <p>{t.common.unavailableProjectLinks}</p>
+                    )}
+                  </div>
+                </section>
+              </aside>
+            </>
+          )}
         </div>
 
         <nav

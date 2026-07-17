@@ -265,11 +265,13 @@ export const ro: Translation = {
     lessons: "Lecții",
     limitations: "Limitări",
     privacy: "Notă de confidențialitate sau NDA",
+    projectInformation: "Informații proiect",
     snapshot: "Rezumat proiect",
     status: "Status",
     role: "Rol",
     category: "Categorie",
     technologyStack: "Stack tehnologic",
+    sourceCode: "Cod sursă",
     projectLinks: "Linkuri proiect",
     repositoryLink: "Repository GitHub",
     liveDemoLink: "Demo live",
@@ -346,134 +348,72 @@ export const ro: Translation = {
       status: "Proiect de portofoliu",
     },
     "custom-translation-management-system": {
-      title: "Sistem personalizat de management al traducerilor",
-      shortTitle: "Sistem traduceri",
-      category: "Aplicație desktop / Python",
       summary:
-        "Am refactorizat și extins un sistem privat desktop de management al traducerilor, bazat pe conceptul original al clientului. Am preluat un V1 existent, am redesenat structura aplicației și am separat logica strâns cuplată în module mentenabile.",
+        "Am refactorizat și extins un sistem privat desktop de management al traducerilor, bazat pe conceptul original al clientului. Am preluat un V1 existent, am redesenat structura aplicației și am separat logica strâns cuplată în module mentenabile. Am gestionat arhitectura, dezvoltarea Python, testarea, depanarea, îmbunătățirile de workflow, consistența glosarului și livrarea finală. Rezultatul a fost o aplicație mai curată, mai stabilă și mai ușor de menținut, pregătită pentru dezvoltare continuă. Detaliile proiectului sunt limitate din cauza NDA.",
       detailedDescription:
-        "Am refactorizat și extins un sistem privat desktop de management al traducerilor, bazat pe conceptul original al produsului și pe cerințele de business ale clientului. Proiectul avea deja un V1 funcțional creat de alt dezvoltator. Rolul meu a fost să înțeleg codul existent, să identific limitările lui și să îl transform într-o aplicație mai curată, mai fiabilă și mai ușor de menținut.",
-      features: [
+        "Am refactorizat și extins un sistem privat desktop de management al traducerilor, bazat pe conceptul original al produsului și pe cerințele de business ale clientului.",
+      caseStudyIntro: [
+        "Am refactorizat și extins un sistem privat desktop de management al traducerilor, bazat pe conceptul original al produsului și pe cerințele de business ale clientului.",
+        "Proiectul avea deja un V1 funcțional creat de alt dezvoltator. Rolul meu a fost să înțeleg codul existent, să identific limitările lui și să îl transform într-o aplicație mai curată, mai fiabilă și mai ușor de menținut.",
+      ],
+      caseStudySections: [
         {
-          title: "Analiza V1 existent",
-          description:
-            "Am revizuit implementarea existentă, am urmărit fluxurile principale și am identificat responsabilități strâns cuplate.",
+          title: "Punct de pornire",
+          paragraphs: [
+            "Versiunea originală conținea fundația produsului, dar codul necesita restructurare semnificativă înainte ca aplicația să poată fi extinsă și menținută în siguranță.",
+            "Am revizuit implementarea existentă, am urmărit fluxurile principale, am identificat responsabilități strâns cuplate și am planificat un refactor arhitectural complet.",
+          ],
         },
         {
-          title: "Redesign arhitectural",
-          description:
-            "Am redesenat structura aplicației astfel încât funcționalități noi să poată fi adăugate fără creșterea complexității în codul inițial.",
+          title: "Refactor complet",
+          paragraphs: [
+            "Am reorganizat aplicația în module separate, cu responsabilități mai clare.",
+            "Refactorul s-a concentrat pe:",
+          ],
+          list: [
+            "separarea logicii de interfață de logica de procesare;",
+            "izolarea configurației și a stării proiectului;",
+            "separarea serviciilor reutilizabile și a utilitarelor;",
+            "reducerea dependențelor dintre componente;",
+            "îmbunătățirea tratării erorilor și a recuperării;",
+            "a face părțile individuale mai ușor de testat și modificat;",
+            "crearea unei structuri care putea susține dezvoltarea viitoare.",
+          ],
+          afterListParagraphs: [
+            "Aceasta nu a fost o curățare cosmetică. Structura aplicației a fost redesenată astfel încât funcționalități noi să poată fi adăugate fără a continua să crească complexitatea în codul inițial.",
+          ],
         },
         {
-          title: "Separare în module",
-          description:
-            "Am separat logica de interfață, logica de procesare, configurația, starea proiectului, serviciile reutilizabile și utilitarele.",
+          title: "Ce am livrat",
+          paragraphs: ["Munca mea a inclus:"],
+          list: [
+            "analiza completă a V1 existent;",
+            "redesign arhitectural;",
+            "refactorizare completă a codului;",
+            "separare în module mentenabile;",
+            "stabilizarea funcționalității existente;",
+            "implementarea și rafinarea workflow-urilor;",
+            "organizarea proiectelor de traducere;",
+            "configurație specifică unei companii;",
+            "consistență terminologică bazată pe glosar;",
+            "procesare controlată a documentelor;",
+            "verificarea și aprobarea rezultatelor finalizate;",
+            "testare, depanare și livrare finală.",
+          ],
         },
         {
-          title: "Stabilizarea fluxurilor",
-          description:
-            "Am stabilizat funcționalitatea existentă, am rafinat fluxurile, am rezolvat cazuri limită și am pregătit sistemul pentru utilizare reală fiabilă.",
+          title: "Contribuția mea",
+          paragraphs: [
+            "Clientul a furnizat ideea originală a produsului și direcția de business.",
+            "Mi-am asumat responsabilitatea pentru evoluția tehnică a aplicației: înțelegerea codului moștenit, redesenarea structurii lui, implementarea workflow-urilor necesare, rezolvarea cazurilor limită și pregătirea sistemului pentru utilizare reală fiabilă.",
+            "Rezultatul a fost o aplicație desktop semnificativ mai curată și mai ușor de menținut, cu module separate, responsabilități mai clare și o fundație mai solidă pentru dezvoltare continuă.",
+          ],
         },
       ],
-      imageAlt:
-        "Miniatura proiectului Sistem personalizat de management al traducerilor",
-      role: "Evoluția tehnică a aplicației",
-      problem:
-        "Versiunea originală conținea fundația produsului, dar codul necesita restructurare semnificativă înainte ca aplicația să poată fi extinsă și menținută în siguranță.",
-      solution:
-        "Am reorganizat aplicația în module separate, cu responsabilități mai clare, am redus dependențele dintre componente, am îmbunătățit tratarea erorilor și recuperarea și am creat o structură care poate susține dezvoltarea viitoare.",
-      goals: [
-        "Înțelegerea codului moștenit și identificarea limitărilor lui.",
-        "Transformarea V1 existent într-o aplicație mai curată, mai fiabilă și mai ușor de menținut.",
-        "Pregătirea sistemului pentru extindere sigură și dezvoltare continuă.",
-      ],
-      technicalApproach: [
-        "Am revizuit implementarea existentă și am urmărit fluxurile principale.",
-        "Am separat logica de interfață de logica de procesare.",
-        "Am izolat configurația și starea proiectului.",
-        "Am separat serviciile reutilizabile și utilitarele.",
-        "Am redus dependențele dintre componente.",
-        "Am îmbunătățit tratarea erorilor și recuperarea.",
-        "Am făcut părțile individuale mai ușor de testat și modificat.",
-      ],
-      workflow: [
-        "Analiza V1 existent.",
-        "Urmărirea fluxurilor principale.",
-        "Planificarea refactorului arhitectural.",
-        "Refactorizarea codului în module mentenabile.",
-        "Implementarea și rafinarea fluxurilor necesare.",
-        "Testarea, depanarea și livrarea finală a aplicației.",
-      ],
-      architecture: [
-        {
-          title: "Logica interfeței",
-          description:
-            "Am separat comportamentul interfeței de responsabilitățile de procesare.",
-        },
-        {
-          title: "Logica de procesare",
-          description:
-            "Am mutat comportamentul principal de procesare în module mai clare și mentenabile.",
-        },
-        {
-          title: "Configurație și stare proiect",
-          description:
-            "Am izolat configurația și starea proiectului de responsabilități fără legătură directă.",
-        },
-        {
-          title: "Servicii și utilitare reutilizabile",
-          description:
-            "Am separat serviciile comune și utilitarele pentru ca părțile individuale să poată fi testate și modificate mai ușor.",
-        },
-      ],
-      qualityNotes: [
-        "Am stabilizat funcționalitatea existentă.",
-        "Am îmbunătățit tratarea erorilor și recuperarea.",
-        "Am redus dependențele dintre componente.",
-        "Am testat, depanat și pregătit aplicația pentru livrarea finală.",
-      ],
-      challenges: [
-        {
-          title: "Implementare moștenită",
-          challenge:
-            "Aplicația avea deja un V1 funcțional, dar responsabilitățile strâns cuplate făceau dificile extinderea și mentenanța în siguranță.",
-          resolution:
-            "Am revizuit implementarea, am urmărit fluxurile principale, am identificat limitările și am planificat un refactor arhitectural complet.",
-        },
-        {
-          title: "Refactor dincolo de cleanup",
-          challenge:
-            "Lucrarea cerea mai mult decât curățare cosmetică, deoarece funcționalitățile noi aveau nevoie de o fundație mai solidă.",
-          resolution:
-            "Am redesenat structura aplicației în module separate, cu responsabilități mai clare.",
-        },
-      ],
-      decisions: [
-        {
-          title: "Separarea responsabilităților",
-          explanation:
-            "Separarea logicii de interfață, logicii de procesare, configurației, stării proiectului, serviciilor și utilitarelor a făcut aplicația mai ușor de menținut și extins.",
-        },
-        {
-          title: "Pregătire pentru dezvoltare viitoare",
-          explanation:
-            "Refactorul a creat o structură care poate susține dezvoltarea viitoare fără creșterea continuă a complexității în codul inițial.",
-        },
-      ],
-      results: [
-        "Am finalizat analiza V1 existent.",
-        "Am livrat redesign arhitectural și refactor complet al codului.",
-        "Am separat aplicația în module mentenabile.",
-        "Am stabilizat funcționalitatea existentă.",
-        "Am implementat și rafinat fluxuri.",
-        "Am susținut organizarea proiectelor de traducere, configurație specifică unei companii, consistența terminologiei pe bază de glosar, procesare controlată a documentelor și verificarea și aprobarea rezultatelor finalizate.",
-        "Am livrat o aplicație desktop mai curată și mai ușor de menținut, cu module separate, responsabilități mai clare și o fundație mai solidă pentru dezvoltare continuă.",
-      ],
-      limitations:
-        "Numele clientului, materialele sursă, capturile de ecran, prompturile, logica internă de business, fluxurile proprietare și arhitectura detaliată nu sunt incluse în acest studiu de caz.",
-      confidentialityNote:
-        "Acest proiect este protejat prin NDA. Numele clientului, materialele sursă, capturile de ecran, prompturile, logica internă de business, fluxurile proprietare și arhitectura detaliată nu sunt incluse în acest studiu de caz.",
-      status: "Proiect privat",
+      caseStudyNotice:
+        "Acest proiect este protejat prin NDA. Numele clientului, materialele sursă, capturile de ecran, prompturile, logica internă de business, workflow-urile proprietare și arhitectura detaliată nu sunt incluse în acest studiu de caz.",
+      sourceCodeNote:
+        "Proiect privat. Codul sursă nu este disponibil public.",
     },
     "excel-to-json-cli": {
       title: "CLI Excel în JSON",
