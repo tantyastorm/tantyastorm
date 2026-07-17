@@ -19,7 +19,7 @@ export const en: Translation = {
     viewCaseStudy: "View case study",
     stack: "Stack",
     unavailableProjectLinks:
-      "Source code available on request or private project.",
+      "Private project. Source code is not publicly available.",
     switchToLight: "Switch to light mode",
     switchToDark: "Switch to dark mode",
     languageSwitcher: "Select language",
