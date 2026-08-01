@@ -10,7 +10,16 @@ export type ProjectText = Partial<
     | "category"
     | "summary"
     | "detailedDescription"
+    | "seoTitle"
+    | "seoDescription"
+    | "heroSubtitle"
+    | "heroText"
+    | "requestAccessLabel"
+    | "exploreFeaturesLabel"
+    | "badges"
     | "features"
+    | "plannedCapabilities"
+    | "developmentStatus"
     | "imageAlt"
     | "role"
     | "problem"
@@ -31,6 +40,7 @@ export type ProjectText = Partial<
     | "caseStudySections"
     | "caseStudyNotice"
     | "sourceCodeNote"
+    | "repositoryAccess"
     | "confidentialityNote"
   >
 > & { status?: string };
@@ -75,6 +85,22 @@ export type Translation = {
     title: string;
     titleLines: string[];
     lead: string;
+    highlight: {
+      label: string;
+      text: string;
+      link: string;
+      badge: string;
+    };
+    workflow: {
+      ariaLabel: string;
+      status: string;
+      project: string;
+      description: string;
+      nodes: Array<{ label: string; status: string }>;
+      outputTitle: string;
+      outputDescription: string;
+      formats: string[];
+    };
     panelLabel: string;
     panelText: string;
     focusLabel: string;
@@ -152,6 +178,7 @@ export type Translation = {
   };
   detail: {
     architecture: string;
+    securityModel: string;
     challenges: string;
     challenge: string;
     resolution: string;
@@ -170,6 +197,7 @@ export type Translation = {
     solution: string;
     workflow: string;
     features: string;
+    plannedInProgress: string;
     technicalApproach: string;
     quality: string;
     results: string;
@@ -185,8 +213,13 @@ export type Translation = {
     sourceCode: string;
     projectLinks: string;
     repositoryLink: string;
+    architectureLink: string;
     liveDemoLink: string;
     demoVideoLink: string;
+    developmentStatus: string;
+    viewSource: string;
+    exploreArchitecture: string;
+    followDevelopment: string;
     previous: string;
     next: string;
     detailsLabel: (title: string) => string;

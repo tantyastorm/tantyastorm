@@ -50,6 +50,20 @@ export const publicContact = {
 };
 
 export const projectUrls = {
+  filegatekeeper: {},
+  workflowforge: {
+    repository:
+      optionalUrl(
+        env.VITE_WORKFLOWFORGE_GITHUB_URL ?? env.WORKFLOWFORGE_GITHUB_URL,
+      ) ?? "https://github.com/tantyastorm/WorkflowForge",
+    architecture: optionalUrl(
+      env.VITE_WORKFLOWFORGE_ARCHITECTURE_URL ??
+        env.WORKFLOWFORGE_ARCHITECTURE_URL ??
+        env.VITE_WORKFLOWFORGE_GITHUB_URL ??
+        env.WORKFLOWFORGE_GITHUB_URL ??
+        "https://github.com/tantyastorm/WorkflowForge",
+    ),
+  },
   kreacher: {
     repository:
       optionalUrl(env.VITE_PROJECT_KREACHER_REPOSITORY_URL) ??

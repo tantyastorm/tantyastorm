@@ -38,10 +38,32 @@ export const en: Translation = {
     skills: "Skills",
   },
   hero: {
-    eyebrow: "Python developer / automation and data tools",
+    eyebrow: "Python automation · data extraction · desktop tools",
     title: "I turn repetitive workflows into reliable Python tools.",
-    titleLines: ["I turn repetitive workflows into reliable Python tools."],
-    lead: "I build automation, scraping, file-processing, and desktop utilities for teams and operators who need structured outputs, safer review steps, and less copy-paste work.",
+    titleLines: ["I turn repetitive workflows", "into reliable Python tools."],
+    lead: "I build automation, scraping, file-processing, and desktop utilities for teams that need structured outputs, safer review steps, and less manual work.",
+    highlight: {
+      label: "Building in public",
+      text: "Open-source document workflow platform",
+      link: "View project",
+      badge: "Open source",
+    },
+    workflow: {
+      ariaLabel: "WorkflowForge pipeline preview",
+      status: "Live build",
+      project: "WorkflowForge",
+      description: "Document workflow platform",
+      nodes: [
+        { label: "Document received", status: "Complete" },
+        { label: "Validation", status: "Complete" },
+        { label: "AI extraction", status: "Processing" },
+        { label: "Human review", status: "Review" },
+        { label: "Approved output", status: "Ready" },
+      ],
+      outputTitle: "Output preview",
+      outputDescription: "Structured records ready for review and export.",
+      formats: ["CSV", "JSON", "XLSX"],
+    },
     panelLabel: "Tantyastorm",
     panelText:
       "Automation, extraction, transformation, and local-first tools shaped around the workflow before the code.",
@@ -51,6 +73,7 @@ export const en: Translation = {
     signal: "TS-47.01 / WORKFLOW SIGNAL",
     meta: [
       "Python developer",
+      "Building in public: WorkflowForge",
       "Automation / scraping / desktop tools",
       "Remote",
       "Available for freelance projects",
@@ -61,7 +84,7 @@ export const en: Translation = {
     title: "Evidence from the work already here.",
     items: [
       {
-        label: "7 case studies",
+        label: "9 case studies",
         description:
           "Automation, scraping, desktop utilities, file processing, and data transformation are documented as project pages.",
       },
@@ -96,7 +119,7 @@ export const en: Translation = {
     eyebrow: "Selected work",
     title: "Case studies from automation, extraction, and data workflows.",
     description:
-      "Seven projects, each focused on turning messy inputs or repetitive steps into structured, reviewable output.",
+      "Nine projects, each focused on turning messy inputs or repetitive steps into structured, reviewable output.",
   },
   servicesSection: {
     eyebrow: "Ways to work together",
@@ -263,6 +286,7 @@ export const en: Translation = {
   },
   detail: {
     architecture: "Architecture",
+    securityModel: "Security Model",
     challenges: "Challenges and Resolutions",
     challenge: "Challenge",
     resolution: "Resolution",
@@ -281,6 +305,7 @@ export const en: Translation = {
     solution: "Solution",
     workflow: "Workflow",
     features: "Main Features",
+    plannedInProgress: "Planned / In Progress",
     technicalApproach: "Technical Approach",
     quality: "Quality Safeguards",
     results: "Results",
@@ -296,8 +321,13 @@ export const en: Translation = {
     sourceCode: "Source Code",
     projectLinks: "Project Links",
     repositoryLink: "GitHub repository",
+    architectureLink: "Architecture documentation",
     liveDemoLink: "Live demo",
     demoVideoLink: "Demo video",
+    developmentStatus: "Development Status",
+    viewSource: "View Source on GitHub",
+    exploreArchitecture: "Explore Architecture",
+    followDevelopment: "Follow Development",
     previous: "Previous",
     next: "Next",
     detailsLabel: (title) => `${title} project details`,
@@ -321,6 +351,8 @@ export const en: Translation = {
     ariaProfile: (name, platform) => `${name} on ${platform}`,
   },
   projects: {
+    filegatekeeper: {},
+    workflowforge: {},
     kreacher: {},
     dobby: {},
     "email-archive-utility": {},

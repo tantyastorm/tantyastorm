@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "vite --host 127.0.0.1 --port 4173",
     "build": "tsc -b && vite build && npm run routes:generate && npm run routes:check",
     "routes:generate": "node scripts/generate-static-routes.mjs",
     "routes:check": "node scripts/check-sitemap-routes.mjs",

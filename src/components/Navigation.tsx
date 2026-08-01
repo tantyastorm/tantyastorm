@@ -32,6 +32,21 @@ export function Navigation() {
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen]);
+
+  useEffect(() => {
     if (!("IntersectionObserver" in window)) {
       return;
     }
@@ -103,6 +118,7 @@ export function Navigation() {
               key={item.href}
               className={activeSection === item.href ? "is-active" : ""}
               href={assetPath(item.href)}
+              aria-current={activeSection === item.href ? "true" : undefined}
               onClick={closeMenu}
             >
               {item.label}

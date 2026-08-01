@@ -1,38 +1,29 @@
-import type { PointerEvent } from "react";
+import type { CSSProperties } from "react";
 import { useI18n } from "../i18n";
 import { assetPath } from "../utils/assets";
 
 export function Hero() {
   const { t } = useI18n();
-  const updateSignal = (event: PointerEvent<HTMLDivElement>) => {
-    const panel = event.currentTarget;
-    const rect = panel.getBoundingClientRect();
-    panel.style.setProperty(
-      "--signal-x",
-      `${Math.round(event.clientX - rect.left)}px`,
-    );
-    panel.style.setProperty(
-      "--signal-y",
-      `${Math.round(event.clientY - rect.top)}px`,
-    );
-  };
 
   return (
     <section className="hero section" id="top" aria-labelledby="hero-title">
-      <div className="hero__glow" aria-hidden="true" />
-      <div className="hero__rule" aria-hidden="true" />
+      <div className="hero__glow hero__glow--blue" aria-hidden="true" />
+      <div className="hero__glow hero__glow--violet" aria-hidden="true" />
       <div className="container hero__inner">
         <div className="hero__content reveal">
-          <p className="eyebrow">{t.hero.eyebrow}</p>
-          <h1 id="hero-title" className="hero-title">
+          <p className="eyebrow hero-stage">{t.hero.eyebrow}</p>
+          <h1 id="hero-title" className="hero-title hero-stage">
             {t.hero.titleLines.map((line) => (
               <span className="hero-title__line" key={line}>
                 {line}
               </span>
             ))}
           </h1>
-          <p className="hero__lead">{t.hero.lead}</p>
-          <div className="hero__actions" aria-label={t.common.primaryActions}>
+          <p className="hero__lead hero-stage">{t.hero.lead}</p>
+          <div
+            className="hero__actions hero-stage"
+            aria-label={t.common.primaryActions}
+          >
             <a className="button button--primary" href={assetPath("#projects")}>
               {t.common.viewSelectedWork}
             </a>
@@ -43,35 +34,67 @@ export function Hero() {
               {t.common.bookCall}
             </a>
           </div>
-          <ul className="hero-meta" aria-label={t.common.professionalStatus}>
-            {t.hero.meta.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+          <aside
+            className="hero-status hero-stage"
+            aria-label={t.hero.highlight.label}
+          >
+            <span className="hero-status__dot" aria-hidden="true" />
+            <div className="hero-status__copy">
+              <span>{t.hero.highlight.label}</span>
+              <strong>WorkflowForge</strong>
+              <p>{t.hero.highlight.text}</p>
+            </div>
+            <span className="hero-status__badge">{t.hero.highlight.badge}</span>
+            <a
+              className="hero-status__link"
+              href={assetPath("projects/workflowforge/")}
+            >
+              {t.hero.highlight.link}
+              <span aria-hidden="true">-&gt;</span>
+            </a>
+          </aside>
         </div>
 
-        <div className="hero__aside reveal" aria-label={t.common.profilePanel}>
-          <div className="hero-panel" onPointerMove={updateSignal}>
-            <div className="hero-panel__label">{t.hero.panelLabel}</div>
-            <span className="hero-panel__signal" aria-hidden="true" />
-            <img
-              src={assetPath("assets/brand/app-icon.png")}
-              alt="Tantyastorm logo"
-            />
-            <p>{t.hero.panelText}</p>
-            <dl>
+        <div
+          className="hero__aside reveal"
+          aria-label={t.hero.workflow.ariaLabel}
+        >
+          <div className="workflow-panel">
+            <div className="workflow-panel__header">
               <div>
-                <dt>{t.hero.focusLabel}</dt>
-                <dd>{t.hero.focusValue}</dd>
+                <span>{t.hero.workflow.project}</span>
+                <strong>{t.hero.workflow.description}</strong>
               </div>
+              <span className="workflow-panel__live">
+                {t.hero.workflow.status}
+              </span>
+            </div>
+            <ol className="workflow-pipeline">
+              {t.hero.workflow.nodes.map((node, index) => (
+                <li
+                  className="workflow-node"
+                  key={node.label}
+                  style={{ "--node-index": index } as CSSProperties}
+                >
+                  <span className="workflow-node__marker" aria-hidden="true" />
+                  <div>
+                    <strong>{node.label}</strong>
+                    <span>{node.status}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <div className="workflow-output">
               <div>
-                <dt>{t.hero.outputsLabel}</dt>
-                <dd>CSV / JSON / TXT / Excel</dd>
+                <span>{t.hero.workflow.outputTitle}</span>
+                <p>{t.hero.workflow.outputDescription}</p>
               </div>
-            </dl>
-            <span className="hero-panel__coordinates" aria-hidden="true">
-              {t.hero.signal}
-            </span>
+              <ul>
+                {t.hero.workflow.formats.map((format) => (
+                  <li key={format}>{format}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

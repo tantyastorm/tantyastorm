@@ -3,6 +3,7 @@ import { projectUrls } from "./config";
 export type ProjectStatus =
   | "Portfolio Project"
   | "Private Project"
+  | "Ongoing Private Project"
   | "Repository Available on Request"
   | "Demo Available on Request";
 
@@ -40,6 +41,12 @@ export type ProjectCaseStudySection = {
   afterListParagraphs?: string[];
 };
 
+export type ProjectRepositoryAccess = {
+  title: string;
+  text: string;
+  buttonLabel: string;
+};
+
 export type Project = {
   slug: keyof typeof projectUrls;
   title: string;
@@ -47,11 +54,21 @@ export type Project = {
   category: string;
   summary: string;
   detailedDescription: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  heroSubtitle?: string;
+  heroText?: string;
+  requestAccessLabel?: string;
+  exploreFeaturesLabel?: string;
   technologies: string[];
+  badges?: string[];
   features: ProjectFeature[];
+  plannedCapabilities?: string[];
+  developmentStatus?: Array<{ label: string; value: string }>;
   image?: string;
   imageAlt?: string;
   repositoryUrl?: string;
+  architectureUrl?: string;
   liveDemoUrl?: string;
   videoUrl?: string;
   role?: string;
@@ -73,12 +90,244 @@ export type Project = {
   caseStudySections?: ProjectCaseStudySection[];
   caseStudyNotice?: string;
   sourceCodeNote?: string;
+  repositoryAccess?: ProjectRepositoryAccess;
   featured: boolean;
   status: string;
   confidentialityNote?: string;
 };
 
 export const projects: Project[] = [
+  {
+    slug: "workflowforge",
+    title: "WorkflowForge",
+    shortTitle: "WorkflowForge",
+    category: "Open-Source Document Workflow Automation",
+    summary:
+      "Open-source platform for reliable document ingestion, AI-assisted workflows, background execution, and human review.",
+    detailedDescription:
+      "WorkflowForge is an open-source document workflow automation platform designed for real operational use. It accepts documents, processes them through configurable workflow steps, supports AI-assisted extraction and validation, and allows human operators to review, compare, approve, retry, or reject results. The project focuses on reliability, traceability, extensibility, and clean system design rather than being a thin wrapper around an AI API.",
+    seoTitle: "WorkflowForge | Open-Source Document Workflow Automation",
+    seoDescription:
+      "WorkflowForge is an open-source document workflow automation platform built with FastAPI, PostgreSQL, Redis, Celery, React, and Docker.",
+    technologies: [
+      "Python",
+      "FastAPI",
+      "React",
+      "PostgreSQL",
+      "Redis",
+      "Celery",
+      "Docker",
+      "GitHub Actions",
+    ],
+    badges: [
+      "Active Development",
+      "Open Source",
+      "Built in Public",
+      "Production-Oriented Architecture",
+    ],
+    features: [
+      {
+        title: "Document ingestion",
+        description:
+          "Accepts documents, persists metadata, and tracks document state.",
+      },
+      {
+        title: "SHA-256 duplicate detection",
+        description:
+          "Hashes document content and supports duplicate-detection foundations.",
+      },
+      {
+        title: "Idempotent execution",
+        description:
+          "Keeps job execution repeatable with retry and failure-handling foundations.",
+      },
+      {
+        title: "State management",
+        description:
+          "Models workflow and document state so processing can be traced.",
+      },
+      {
+        title: "PostgreSQL persistence",
+        description:
+          "Uses PostgreSQL with SQLAlchemy mappings and Alembic migrations.",
+      },
+      {
+        title: "Redis and Celery",
+        description:
+          "Coordinates background workers, scheduled execution, and task state.",
+      },
+      {
+        title: "Dependency health checks",
+        description:
+          "Checks API, database, Redis, object storage, workers, and scheduler health.",
+      },
+      {
+        title: "S3-compatible storage",
+        description:
+          "Keeps document storage behind an object-storage infrastructure boundary.",
+      },
+      {
+        title: "React operator interface",
+        description:
+          "Provides the frontend foundation for operational document workflows.",
+      },
+      {
+        title: "Docker Compose environment",
+        description:
+          "Runs local API, frontend, database, Redis, object storage, workers, and scheduler services.",
+      },
+      {
+        title: "Automated tests",
+        description:
+          "Includes backend, frontend, integration, and architecture test coverage.",
+      },
+      {
+        title: "Public engineering record",
+        description:
+          "Uses GitHub Actions, ADRs, technical documentation, and incremental releases.",
+      },
+    ],
+    plannedCapabilities: [
+      "Configurable multi-step document workflows",
+      "AI provider abstraction",
+      "Per-step model selection",
+      "Structured AI outputs with schema validation",
+      "Human review and approval queues",
+      "Version comparison",
+      "Audit history",
+      "Dead-letter and recovery tooling",
+      "CSV and XLSX validation and highlighting",
+      "Telegram document intake",
+      "Sample workflows for invoices, resumes, and contracts",
+      "Metrics, observability, and production deployment guidance",
+    ],
+    image: "assets/projects/new/ai_proc_platform.png",
+    imageAlt:
+      "WorkflowForge platform architecture and operator workflow thumbnail",
+    repositoryUrl: projectUrls.workflowforge.repository,
+    architectureUrl: projectUrls.workflowforge.architecture,
+    role: "Full-stack platform developer",
+    problem:
+      "Document-heavy operations need repeatable ingestion, traceable state, review points, and resilient background processing instead of one-off AI scripts.",
+    solution:
+      "A modular monolith V1 combines a FastAPI backend, PostgreSQL persistence, Redis and Celery execution, S3-compatible storage, and a React operator interface with documented boundaries.",
+    goals: [
+      "Build a functional open-source platform for document ingestion and workflow execution.",
+      "Keep completed capabilities clearly separated from planned AI and review features.",
+      "Document architecture, decisions, tests, CI, and release phases in public.",
+    ],
+    technicalApproach: [
+      "Use FastAPI for the HTTP API and React for the operator interface.",
+      "Persist domain state in PostgreSQL through SQLAlchemy and Alembic.",
+      "Coordinate asynchronous work with Redis, Celery workers, and scheduled tasks.",
+      "Store document objects through S3-compatible infrastructure abstractions.",
+      "Cover backend, frontend, integration, and architecture behavior with automated tests.",
+    ],
+    workflow: [
+      "Ingest a document and persist its metadata.",
+      "Hash content with SHA-256 and detect duplicate content.",
+      "Create idempotent processing work and track state changes.",
+      "Execute background tasks through Redis-backed Celery workers.",
+      "Expose health and dependency status for local development and CI.",
+    ],
+    architecture: [
+      {
+        title: "Modular monolith V1",
+        description:
+          "The first version keeps deployment simple while maintaining clear domain boundaries and infrastructure abstractions.",
+      },
+      {
+        title: "FastAPI application layer",
+        description:
+          "Exposes REST endpoints and dependency health checks around application services.",
+      },
+      {
+        title: "PostgreSQL persistence",
+        description:
+          "Uses SQLAlchemy mappings and Alembic migrations for durable workflow state.",
+      },
+      {
+        title: "Redis and Celery execution",
+        description:
+          "Coordinates background workers, scheduled execution, retries, and operational health.",
+      },
+      {
+        title: "S3-compatible storage",
+        description:
+          "Keeps document storage behind an infrastructure boundary for local and production-compatible object storage.",
+      },
+      {
+        title: "React operator interface",
+        description:
+          "Provides the frontend foundation for document, case, batch, and system-status views.",
+      },
+      {
+        title: "Docker Compose environment",
+        description:
+          "Runs API, frontend, database, Redis, object storage, workers, and scheduler services locally.",
+      },
+      {
+        title: "Pytest and GitHub Actions",
+        description:
+          "Verifies domain, application, infrastructure, API, frontend, integration, and architecture behavior in CI.",
+      },
+    ],
+    qualityNotes: [
+      "Domain modelling around documents, batches, cases, identity, authorization, and audit concerns.",
+      "REST API design with typed schemas and explicit dependency boundaries.",
+      "Asynchronous processing through Celery workers and scheduler tasks.",
+      "Transactional consistency and idempotency for document-processing foundations.",
+      "Failure-recovery foundations through retries, health checks, and task contracts.",
+      "Testing strategy across unit, integration, frontend, architecture, and CI workflows.",
+      "Infrastructure integration with PostgreSQL, Redis, S3-compatible storage, Docker Compose, and GitHub Actions.",
+      "Maintainable Git history with incremental delivery through phases and pull requests.",
+    ],
+    decisions: [
+      {
+        title: "Modular monolith first",
+        explanation:
+          "V1 keeps operational complexity controlled while preserving clear boundaries for future extraction.",
+      },
+      {
+        title: "Infrastructure behind ports",
+        explanation:
+          "Database, Redis, storage, and health behavior are integrated without leaking infrastructure concerns into domain code.",
+      },
+      {
+        title: "Reliability before AI breadth",
+        explanation:
+          "The platform foundation prioritizes state, idempotency, tests, and execution reliability before adding broader AI workflow features.",
+      },
+    ],
+    results: [
+      "Functional document ingestion and metadata persistence foundations.",
+      "SHA-256 content hashing and duplicate-detection behavior.",
+      "Idempotent job execution foundations.",
+      "PostgreSQL, Redis, Celery, S3-compatible storage, and Docker Compose integration.",
+      "Backend, frontend, integration, and architecture tests running through GitHub Actions.",
+      "Architecture Decision Records and technical documentation maintained publicly.",
+    ],
+    lessons: [
+      "AI workflow products need durable state and review boundaries before model features become useful.",
+      "A public phase-based build makes architecture tradeoffs easier to audit and improve.",
+    ],
+    developmentStatus: [
+      { label: "Status", value: "Active Development" },
+      { label: "Licence", value: "Open Source" },
+      {
+        label: "Current stage",
+        value:
+          "Core platform foundation and document-processing infrastructure",
+      },
+      {
+        label: "Development model",
+        value:
+          "Public repository, incremental pull requests, automated tests, and documented architecture decisions",
+      },
+    ],
+    featured: true,
+    status: "Active Development",
+  },
   {
     slug: "kreacher",
     title: "Kreacher",
@@ -119,8 +368,7 @@ export const projects: Project[] = [
       },
       {
         title: "Keyword and numeric filtering",
-        description:
-          "Lets records be narrowed before review and export.",
+        description: "Lets records be narrowed before review and export.",
       },
       {
         title: "GUI and CLI workflows",
@@ -138,7 +386,7 @@ export const projects: Project[] = [
           "Documents the public parser with neutral example HTML and data.",
       },
     ],
-    image: "assets/projects/kreacher.png",
+    image: "assets/projects/new/kreacher.png",
     imageAlt: "Kreacher project thumbnail",
     repositoryUrl: projectUrls.kreacher.repository,
     liveDemoUrl: projectUrls.kreacher.demo,
@@ -170,7 +418,8 @@ export const projects: Project[] = [
     architecture: [
       {
         title: "HTML loading layer",
-        description: "Reads local saved HTML files into the processing workflow.",
+        description:
+          "Reads local saved HTML files into the processing workflow.",
       },
       {
         title: "Parser adapter layer",
@@ -289,8 +538,7 @@ export const projects: Project[] = [
       },
       {
         title: "Safe filename generation",
-        description:
-          "Creates filesystem-safe names for local snapshot files.",
+        description: "Creates filesystem-safe names for local snapshot files.",
       },
       {
         title: "Local queue state",
@@ -303,12 +551,11 @@ export const projects: Project[] = [
           "Avoids broad host permissions and keeps the extension scope narrow.",
       },
     ],
-    image: "assets/projects/dobby.png",
+    image: "assets/projects/new/dobby.png",
     imageAlt: "Dobby manual browser page queue and snapshot workflow",
     repositoryUrl: projectUrls.dobby.repository,
     liveDemoUrl: projectUrls.dobby.demo,
-    videoUrl:
-      projectUrls.dobby.video ?? "assets/projects/dobby/dobby-demo.mp4",
+    videoUrl: projectUrls.dobby.video ?? "assets/projects/dobby/dobby-demo.mp4",
     role: "JavaScript developer",
     problem:
       "Manual page review can become hard to track when a user needs to move through a structured list of URLs and save local page snapshots consistently.",
@@ -437,7 +684,7 @@ export const projects: Project[] = [
           "Creates searchable text copies while keeping the batch process visible.",
       },
     ],
-    image: "assets/projects/email-archive-utility.png",
+    image: "assets/projects/new/ChatGPT Image Aug 1, 2026, 12_23_05 AM (5).png",
     imageAlt: "Email Archive Utility desktop processing interface",
     repositoryUrl: projectUrls["email-archive-utility"].repository,
     liveDemoUrl: projectUrls["email-archive-utility"].demo,
@@ -546,7 +793,7 @@ export const projects: Project[] = [
       "Modular Architecture",
     ],
     features: [],
-    image: "assets/projects/custom-translation-management-system.png",
+    image: "assets/projects/new/translator.png",
     imageAlt: "Custom Translation Management System project thumbnail",
     role: "Python Developer & Software Architect",
     caseStudyIntro: [
@@ -650,7 +897,7 @@ export const projects: Project[] = [
           "Covers key conversion and validation workflows with pytest.",
       },
     ],
-    image: "assets/projects/excel-to-json-cli.png",
+    image: "assets/projects/new/excel_to_json.png",
     imageAlt: "Excel to JSON CLI project thumbnail",
     repositoryUrl: projectUrls["excel-to-json-cli"].repository,
     role: "Python developer",
@@ -769,7 +1016,7 @@ export const projects: Project[] = [
         description: "Keeps core scraping and parsing behavior testable.",
       },
     ],
-    image: "assets/projects/books-data-scraper.png",
+    image: "assets/projects/new/books_to_scrape.png",
     imageAlt: "Books Data Scraper project thumbnail",
     repositoryUrl: projectUrls["books-data-scraper"].repository,
     role: "Python developer",
@@ -888,7 +1135,7 @@ export const projects: Project[] = [
           "Demonstrates the workflow without exposing private source data.",
       },
     ],
-    image: "assets/projects/desktop-data-extraction-tool.png",
+    image: "assets/projects/new/data_extractor.png",
     imageAlt: "Desktop Data Extraction Tool project thumbnail",
     repositoryUrl: projectUrls["desktop-data-extraction-tool"].repository,
     liveDemoUrl: projectUrls["desktop-data-extraction-tool"].demo,
@@ -974,7 +1221,8 @@ export const projects: Project[] = [
       {
         src: "assets/projects/bnbscraper/main.png",
         alt: "Desktop data extraction tool main interface",
-        caption: "Main desktop interface for configuring and running extraction tasks.",
+        caption:
+          "Main desktop interface for configuring and running extraction tasks.",
       },
       {
         src: "assets/projects/bnbscraper/output_xlsx.png",
@@ -989,5 +1237,154 @@ export const projects: Project[] = [
     ],
     featured: false,
     status: "Portfolio Project",
+  },
+  {
+    slug: "filegatekeeper",
+    title: "FileGatekeeper",
+    shortTitle: "FileGatekeeper",
+    category: "Windows Security Utility",
+    summary:
+      "A local Windows security utility for inspecting, scanning, isolating, and safely releasing untrusted client files before use.",
+    detailedDescription:
+      "FileGatekeeper is an ongoing Windows desktop security utility designed for freelancers, developers, recruiters, and small teams who regularly receive files from clients or other external sources. It creates a controlled inspection workflow for PDFs, Microsoft Office documents, images, ZIP and 7z archives, nested archives, source-code folders, scripts, executables, virtual environments, dependency folders, Git hooks, and IDE configurations. The application combines real file-type detection, Microsoft Defender integration, static inspection, deterministic risk scoring, archive and project-folder analysis, and a secure local quarantine vault. Users receive clear, human-readable findings and can rescan, release, delete, or create sanitized copies of supported content. The application never automatically executes inspected files and never makes absolute safety guarantees. Repository access is available on request for qualified clients or technical review.",
+    seoTitle: "FileGatekeeper | Windows Security Utility | TantyaStorm",
+    seoDescription:
+      "FileGatekeeper is an ongoing Windows desktop utility for inspecting, scanning, isolating, and reviewing untrusted client files using Python, PySide6, Microsoft Defender, and explainable static analysis.",
+    heroSubtitle: "Inspect untrusted files before use",
+    heroText:
+      "A local Windows security utility for controlled file inspection, quarantine, explainable risk assessment, and explicit user decisions.",
+    requestAccessLabel: "Request Repository Access",
+    exploreFeaturesLabel: "Explore Features",
+    technologies: [
+      "Python",
+      "PySide6",
+      "SQLite",
+      "SQLAlchemy",
+      "Microsoft Defender",
+      "Cybersecurity",
+      "Desktop Application",
+      "Software Testing",
+      "pytest",
+      "Ruff",
+      "mypy",
+      "Bandit",
+    ],
+    badges: [
+      "Ongoing Project",
+      "Private Repository",
+      "Windows Desktop",
+      "Local Processing",
+    ],
+    features: [
+      {
+        title: "Real file-type detection",
+        description:
+          "Inspects file signatures and structure instead of treating file extensions as authoritative.",
+      },
+      {
+        title: "Microsoft Defender integration",
+        description:
+          "Runs local Defender CLI scans as part of the inspection workflow.",
+      },
+      {
+        title: "Archive and folder analysis",
+        description:
+          "Reviews ZIP, 7z, nested archives, source-code folders, scripts, hooks, IDE configuration, .venv, and node_modules indicators.",
+      },
+      {
+        title: "Document inspection",
+        description:
+          "Performs static checks for PDFs, OOXML Office documents, images, and supported sanitized-copy flows.",
+      },
+      {
+        title: "Explainable risk scoring",
+        description:
+          "Calculates deterministic risk levels from evidence-based findings and presents them in human-readable language.",
+      },
+      {
+        title: "Local quarantine vault",
+        description:
+          "Keeps untrusted files isolated until the user explicitly rescans, releases, sanitizes, or deletes them.",
+      },
+    ],
+    image: "assets/projects/new/filegatekeeper.png",
+    imageAlt:
+      "FileGatekeeper Windows security utility interface showing file quarantine, inspection stages, risk findings, and explicit file actions.",
+    role: "Python desktop application developer",
+    problem:
+      "Freelancers and technical teams frequently receive documents, archives, source-code folders, executables, scripts, dependencies, and hidden project configurations from external sources. Opening or running these files directly introduces unnecessary risk. Traditional antivirus output may detect known threats, but it often does not explain the complete file structure, risky indicators, embedded content, archive composition, or project-level configuration in a way that supports an informed decision.",
+    solution:
+      "FileGatekeeper creates a controlled local workflow: receive a file or folder, isolate it, detect its actual type, scan it with Microsoft Defender, perform static inspection, calculate an explainable risk level, present findings, and require an explicit user decision before rescan, release, sanitized copy creation, or deletion.",
+    workflow: [
+      "Intake",
+      "Isolation",
+      "Type Detection",
+      "Defender Scan",
+      "Static Inspection",
+      "Risk Assessment",
+      "User Review",
+      "Release, Sanitize, Rescan, or Delete",
+    ],
+    architecture: [
+      {
+        title: "No automatic execution",
+        description:
+          "Inspected files are never launched or run as part of the review workflow.",
+      },
+      {
+        title: "Local processing",
+        description:
+          "Inspection, scoring, quarantine, and user decisions remain on the local Windows machine.",
+      },
+      {
+        title: "Evidence-based findings",
+        description:
+          "Findings are human-readable and distinguish known scan results, file structure, static indicators, and project-level risks.",
+      },
+      {
+        title: "Deterministic scoring",
+        description:
+          "Risk levels are calculated from explainable rules and never presented as absolute safety guarantees.",
+      },
+      {
+        title: "Explicit final actions",
+        description:
+          "Users must confirm release, sanitized-copy creation, rescan, or deletion decisions.",
+      },
+      {
+        title: "Measured language",
+        description:
+          "The application can report no known threats detected, but it does not claim that files are free of risk.",
+      },
+    ],
+    qualityNotes: [
+      "343 automated tests passing",
+      "1 intentionally skipped test",
+      "Ruff clean",
+      "mypy clean",
+      "No high-severity Bandit findings",
+      "Hardened subprocess execution",
+      "Verified file-copy boundaries",
+      "Typed data-access interfaces",
+      "Defensive archive and document analysis",
+    ],
+    limitations:
+      "FileGatekeeper does not guarantee that inspected files are free of risk. It is designed to provide local isolation, scan results, static evidence, and explicit review decisions without automatically executing inspected content.",
+    repositoryAccess: {
+      title: "Private Repository Access",
+      text: "FileGatekeeper is currently developed in a private repository. Repository access can be provided on request to qualified clients for technical evaluation. Depending on the review requirements, access may include selected source code, architecture, tests, documentation, and implementation details.",
+      buttonLabel: "Request Repository Access",
+    },
+    developmentStatus: [
+      { label: "Status", value: "Ongoing Private Project" },
+      { label: "Automated tests", value: "343 passing" },
+      { label: "Skipped tests", value: "1 intentionally skipped" },
+      { label: "Static checks", value: "Ruff clean, mypy clean" },
+      { label: "Security checks", value: "No high-severity Bandit findings" },
+    ],
+    confidentialityNote:
+      "Repository access is available on request for qualified clients or technical review.",
+    featured: true,
+    status: "Ongoing Private Project",
   },
 ];

@@ -32,6 +32,30 @@ function SectionList({ title, items }: { title: string; items?: string[] }) {
   );
 }
 
+function WorkflowVisual({ title, items }: { title: string; items?: string[] }) {
+  if (!items?.length) {
+    return null;
+  }
+
+  return (
+    <section
+      className="detail-section"
+      id="filegatekeeper-workflow"
+      aria-labelledby="filegatekeeper-workflow-title"
+    >
+      <h2 id="filegatekeeper-workflow-title">{title}</h2>
+      <ol className="inspection-workflow">
+        {items.map((item, index) => (
+          <li className="inspection-workflow__step" key={item}>
+            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <strong>{item}</strong>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
 function TextSection({ title, content }: { title: string; content?: string }) {
   if (!content) {
     return null;
@@ -45,7 +69,11 @@ function TextSection({ title, content }: { title: string; content?: string }) {
   );
 }
 
-function ApprovedCaseStudySection({ section }: { section: ProjectCaseStudySection }) {
+function ApprovedCaseStudySection({
+  section,
+}: {
+  section: ProjectCaseStudySection;
+}) {
   return (
     <section className="detail-section">
       <h2>{section.title}</h2>
@@ -276,11 +304,7 @@ function MediaCarousel({
   return (
     <section className="detail-section detail-section--media">
       <h2>{title}</h2>
-      <div
-        className="case-study-carousel"
-        aria-label={title}
-        tabIndex={0}
-      >
+      <div className="case-study-carousel" aria-label={title} tabIndex={0}>
         {items.map((item) => (
           <figure
             className="case-study-figure case-study-carousel__item"
@@ -297,6 +321,26 @@ function MediaCarousel({
           </figure>
         ))}
       </div>
+    </section>
+  );
+}
+
+function RepositoryAccessSection({
+  title,
+  text,
+  buttonLabel,
+}: {
+  title: string;
+  text: string;
+  buttonLabel: string;
+}) {
+  return (
+    <section className="detail-section repository-access">
+      <h2>{title}</h2>
+      <p>{text}</p>
+      <a className="button button--primary" href={assetPath("#contact")}>
+        {buttonLabel}
+      </a>
     </section>
   );
 }
@@ -333,12 +377,13 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
   const projectPath = `projects/${project.slug}/`;
   const hasHeroMedia = Boolean(project.image && project.imageAlt);
   const hasApprovedCaseStudy = Boolean(project.caseStudySections?.length);
+  const isFileGatekeeper = project.slug === "filegatekeeper";
 
   return (
     <main id="main" className="project-detail-main">
       <SEO
-        title={`${project.title} ${t.seo.caseStudySuffix}`}
-        description={project.summary}
+        title={project.seoTitle ?? `${project.title} ${t.seo.caseStudySuffix}`}
+        description={project.seoDescription ?? project.summary}
         path={projectPath}
         image={project.image}
         type="article"
@@ -356,31 +401,94 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
               </a>
               <p className="eyebrow">{project.category}</p>
               <h1>{project.title}</h1>
-              <p className="hero__lead">{project.summary}</p>
+              <p className="hero__lead">
+                {project.heroSubtitle ?? project.summary}
+              </p>
+              {project.heroText ? (
+                <p className="detail-hero__support">{project.heroText}</p>
+              ) : null}
               <div className="project-card__meta">
                 {!hasApprovedCaseStudy ? <span>{project.status}</span> : null}
                 {project.role ? <span>{project.role}</span> : null}
               </div>
-              {!hasApprovedCaseStudy ? (
+              {project.badges?.length ? (
+                <ul className="status-badges status-badges--hero">
+                  {project.badges.map((badge) => (
+                    <li
+                      className={
+                        badge === "Active Development"
+                          ? "status-badge status-badge--active"
+                          : "status-badge"
+                      }
+                      key={badge}
+                    >
+                      {badge === "Active Development" ? (
+                        <span
+                          className="status-badge__dot"
+                          aria-hidden="true"
+                        />
+                      ) : null}
+                      {badge}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              {isFileGatekeeper ? (
+                <div className="detail-actions">
+                  <a
+                    className="button button--primary"
+                    href={assetPath("#contact")}
+                  >
+                    {project.requestAccessLabel}
+                  </a>
+                  <a
+                    className="button button--secondary"
+                    href="#filegatekeeper-workflow"
+                  >
+                    {project.exploreFeaturesLabel}
+                  </a>
+                </div>
+              ) : !hasApprovedCaseStudy ? (
                 <div className="detail-actions">
                   <ExternalLink
                     className="button button--secondary"
                     href={project.repositoryUrl}
                   >
-                    {t.detail.repository}
+                    {project.developmentStatus
+                      ? t.detail.viewSource
+                      : t.detail.repository}
                   </ExternalLink>
-                  <ExternalLink
-                    className="button button--secondary"
-                    href={project.liveDemoUrl}
-                  >
-                    {t.detail.liveDemo}
-                  </ExternalLink>
-                  <ExternalLink
-                    className="button button--secondary"
-                    href={project.videoUrl}
-                  >
-                    {t.detail.demoVideo}
-                  </ExternalLink>
+                  {project.developmentStatus ? (
+                    <>
+                      <ExternalLink
+                        className="button button--secondary"
+                        href={project.architectureUrl}
+                      >
+                        {t.detail.exploreArchitecture}
+                      </ExternalLink>
+                      <ExternalLink
+                        className="button button--secondary"
+                        href={project.repositoryUrl}
+                      >
+                        {t.detail.followDevelopment}
+                      </ExternalLink>
+                    </>
+                  ) : (
+                    <>
+                      <ExternalLink
+                        className="button button--secondary"
+                        href={project.liveDemoUrl}
+                      >
+                        {t.detail.liveDemo}
+                      </ExternalLink>
+                      <ExternalLink
+                        className="button button--secondary"
+                        href={project.videoUrl}
+                      >
+                        {t.detail.demoVideo}
+                      </ExternalLink>
+                    </>
+                  )}
                 </div>
               ) : null}
               {project.confidentialityNote ? (
@@ -394,8 +502,8 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                 <img
                   src={assetPath(project.image!)}
                   alt={project.imageAlt!}
-                  width="960"
-                  height="540"
+                  width="1448"
+                  height="1086"
                 />
               </div>
             ) : null}
@@ -435,25 +543,56 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                   content={project.detailedDescription}
                 />
                 <SectionList title={t.detail.goals} items={project.goals} />
-                <TextSection title={t.detail.problem} content={project.problem} />
+                <TextSection
+                  title={t.detail.problem}
+                  content={project.problem}
+                />
                 <TextSection
                   title={t.detail.solution}
                   content={project.solution ?? project.detailedDescription}
                 />
-                <SectionList title={t.detail.workflow} items={project.workflow} />
-                <FeatureGrid title={t.detail.features} items={project.features} />
+                {isFileGatekeeper ? (
+                  <WorkflowVisual
+                    title={t.detail.workflow}
+                    items={project.workflow}
+                  />
+                ) : (
+                  <SectionList
+                    title={t.detail.workflow}
+                    items={project.workflow}
+                  />
+                )}
+                <FeatureGrid
+                  title={t.detail.features}
+                  items={project.features}
+                />
+                <SectionList
+                  title={t.detail.plannedInProgress}
+                  items={project.plannedCapabilities}
+                />
                 <SectionList
                   title={t.detail.technicalApproach}
                   items={project.technicalApproach}
                 />
                 <ArchitectureGrid
-                  title={t.detail.architecture}
+                  title={
+                    isFileGatekeeper
+                      ? t.detail.securityModel
+                      : t.detail.architecture
+                  }
                   items={project.architecture}
                 />
                 <SectionList
                   title={t.detail.quality}
                   items={project.qualityNotes}
                 />
+                {project.repositoryAccess ? (
+                  <RepositoryAccessSection
+                    title={project.repositoryAccess.title}
+                    text={project.repositoryAccess.text}
+                    buttonLabel={project.repositoryAccess.buttonLabel}
+                  />
+                ) : null}
                 <DecisionList
                   title={t.detail.decisions}
                   items={project.decisions}
@@ -489,6 +628,19 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                 className="detail-sidebar"
                 aria-label={t.detail.detailsLabel(project.title)}
               >
+                {project.developmentStatus?.length ? (
+                  <section className="development-status-panel">
+                    <h2>{t.detail.developmentStatus}</h2>
+                    <dl className="detail-facts">
+                      {project.developmentStatus.map((item) => (
+                        <div key={item.label}>
+                          <dt>{item.label}</dt>
+                          <dd>{item.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </section>
+                ) : null}
                 <section>
                   <h2>{t.detail.snapshot}</h2>
                   <dl className="detail-facts">
@@ -522,12 +674,19 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                     <ExternalLink href={project.repositoryUrl}>
                       {t.detail.repositoryLink}
                     </ExternalLink>
+                    <ExternalLink href={project.architectureUrl}>
+                      {t.detail.architectureLink}
+                    </ExternalLink>
                     <ExternalLink href={project.liveDemoUrl}>
                       {t.detail.liveDemoLink}
                     </ExternalLink>
                     <ExternalLink href={project.videoUrl}>
                       {t.detail.demoVideoLink}
                     </ExternalLink>
+                    {project.slug === "workflowforge" &&
+                    !project.repositoryUrl ? (
+                      <p>GitHub: VITE_WORKFLOWFORGE_GITHUB_URL</p>
+                    ) : null}
                     {!project.repositoryUrl && (
                       <p>{t.common.unavailableProjectLinks}</p>
                     )}

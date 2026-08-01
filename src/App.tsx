@@ -34,7 +34,9 @@ export default function App() {
     }
 
     document.documentElement.classList.add("reveal-ready");
-    const revealItems = Array.from(document.querySelectorAll(".reveal"));
+    const revealItems = Array.from(
+      document.querySelectorAll<HTMLElement>(".reveal"),
+    );
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -47,7 +49,10 @@ export default function App() {
       { rootMargin: "0px 0px -10% 0px", threshold: 0.12 },
     );
 
-    revealItems.forEach((item) => observer.observe(item));
+    revealItems.forEach((item, index) => {
+      item.style.setProperty("--reveal-order", String(index % 4));
+      observer.observe(item);
+    });
 
     return () => {
       observer.disconnect();

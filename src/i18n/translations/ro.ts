@@ -47,6 +47,8 @@ export const ro: Translation = {
       "Transform fluxurile repetitive în instrumente Python fiabile.",
     ],
     lead: "Construiesc automatizări, scraping, procesare de fișiere și utilitare desktop pentru echipe care au nevoie de rezultate structurate, pași de verificare mai siguri și mai puțină muncă manuală.",
+    highlight: en.hero.highlight,
+    workflow: en.hero.workflow,
     panelLabel: "Tantyastorm",
     panelText:
       "Automatizare, extracție, transformare și instrumente locale gândite după fluxul de lucru, înainte de cod.",
@@ -56,6 +58,7 @@ export const ro: Translation = {
     signal: "TS-47.01 / SEMNAL WORKFLOW",
     meta: [
       "Dezvoltator Python",
+      "Building in public: WorkflowForge",
       "Automatizare / scraping / tool-uri desktop",
       "Remote",
       "Disponibilă pentru proiecte freelance",
@@ -66,7 +69,7 @@ export const ro: Translation = {
     title: "Rezultate susținute de proiectele existente.",
     items: [
       {
-        label: "7 studii de caz",
+        label: "9 studii de caz",
         description:
           "Automatizarea, scraping-ul, utilitarele desktop, procesarea fișierelor și transformarea datelor sunt documentate în pagini de proiect.",
       },
@@ -101,7 +104,7 @@ export const ro: Translation = {
     eyebrow: "Lucrări selectate",
     title: "Studii de caz din automatizare, extracție și fluxuri de date.",
     description:
-      "Șapte proiecte orientate spre transformarea inputurilor dezordonate sau a pașilor repetitivi în rezultate structurate și verificabile.",
+      "Noua proiecte orientate spre transformarea inputurilor dezordonate sau a pasilor repetitivi in rezultate structurate si verificabile.",
   },
   servicesSection: {
     ...en.servicesSection,
@@ -240,7 +243,9 @@ export const ro: Translation = {
     },
   },
   detail: {
+    ...en.detail,
     architecture: "Arhitectură",
+    securityModel: "Model de securitate",
     challenges: "Provocări și rezolvări",
     challenge: "Provocare",
     resolution: "Rezolvare",
@@ -300,6 +305,129 @@ export const ro: Translation = {
     ariaProfile: (name, platform) => `${name} pe ${platform}`,
   },
   projects: {
+    filegatekeeper: {
+      category: "Utilitar de securitate pentru Windows",
+      summary:
+        "Un utilitar local de securitate pentru Windows care inspecteaza, scaneaza, izoleaza si permite eliberarea controlata a fisierelor nesigure primite de la clienti.",
+      detailedDescription:
+        "FileGatekeeper este un utilitar desktop Windows aflat in dezvoltare, creat pentru freelanceri, dezvoltatori, recrutori si echipe mici care primesc frecvent fisiere din surse externe. Aplicatia creeaza un flux controlat de inspectie pentru PDF-uri, documente Microsoft Office, imagini, arhive ZIP si 7z, arhive imbricate, foldere de cod sursa, scripturi, executabile, medii virtuale, dependinte, hook-uri Git si configurari IDE. Combina detectie reala a tipului de fisier, integrare Microsoft Defender, inspectie statica, scor de risc determinist, analiza de arhive si foldere de proiect si un seif local de carantina. Utilizatorii primesc constatari clare si pot rescana, elibera, sterge sau crea copii sanitizate ale continutului suportat. Aplicatia nu executa automat fisierele inspectate si nu ofera garantii absolute de siguranta.",
+      seoTitle: "FileGatekeeper | Utilitar de securitate Windows | TantyaStorm",
+      seoDescription:
+        "FileGatekeeper este un utilitar desktop Windows aflat in dezvoltare pentru inspectarea, scanarea, izolarea si revizuirea fisierelor primite din surse externe folosind Python, PySide6, Microsoft Defender si analiza statica explicabila.",
+      heroSubtitle: "Inspecteaza fisierele nesigure inainte de utilizare",
+      heroText:
+        "Un utilitar local Windows pentru inspectie controlata, carantina, evaluare explicabila a riscului si decizii explicite ale utilizatorului.",
+      requestAccessLabel: "Solicita acces la repository",
+      exploreFeaturesLabel: "Exploreaza functionalitatile",
+      badges: [
+        "Proiect in dezvoltare",
+        "Repository privat",
+        "Windows Desktop",
+        "Procesare locala",
+      ],
+      imageAlt:
+        "Interfata FileGatekeeper pentru Windows aratand carantina fisierelor, etape de inspectie, constatari de risc si actiuni explicite asupra fisierelor.",
+      role: "Dezvoltator aplicatie desktop Python",
+      problem:
+        "Freelancerii si echipele tehnice primesc frecvent documente, arhive, foldere de cod sursa, executabile, scripturi, dependinte si configurari ascunse de proiect din surse externe. Deschiderea sau rularea lor directa introduce risc inutil. Antivirusul traditional poate detecta amenintari cunoscute, dar de multe ori nu explica structura completa a fisierului, indicatorii de risc, continutul incorporat, compozitia arhivelor sau configurarea la nivel de proiect intr-un mod util pentru decizie.",
+      solution:
+        "FileGatekeeper creeaza un flux local controlat: primeste un fisier sau folder, il izoleaza, detecteaza tipul real, il scaneaza cu Microsoft Defender, face inspectie statica, calculeaza un nivel de risc explicabil, prezinta constatarile si cere o decizie explicita pentru rescanare, eliberare, copie sanitizata sau stergere.",
+      workflow: [
+        "Primire",
+        "Izolare",
+        "Detectie tip",
+        "Scanare Defender",
+        "Inspectie statica",
+        "Evaluare risc",
+        "Revizuire utilizator",
+        "Eliberare, sanitizare, rescanare sau stergere",
+      ],
+      features: [
+        {
+          title: "Detectie reala a tipului de fisier",
+          description:
+            "Inspecteaza semnaturi si structura in loc sa trateze extensiile ca autoritate finala.",
+        },
+        {
+          title: "Integrare Microsoft Defender",
+          description:
+            "Ruleaza scanari locale Defender CLI ca parte din fluxul de inspectie.",
+        },
+        {
+          title: "Analiza arhivelor si folderelor",
+          description:
+            "Revizuieste ZIP, 7z, arhive imbricate, proiecte de cod, scripturi, hook-uri, configurari IDE, .venv si node_modules.",
+        },
+        {
+          title: "Inspectie documente",
+          description:
+            "Include verificari statice pentru PDF, documente OOXML Office, imagini si fluxuri suportate de copii sanitizate.",
+        },
+        {
+          title: "Scor de risc explicabil",
+          description:
+            "Calculeaza niveluri de risc deterministe din constatari bazate pe dovezi si le prezinta clar.",
+        },
+        {
+          title: "Seif local de carantina",
+          description:
+            "Pastreaza fisierele izolate pana cand utilizatorul confirma rescanarea, eliberarea, sanitizarea sau stergerea.",
+        },
+      ],
+      architecture: [
+        {
+          title: "Fara executie automata",
+          description:
+            "Fisierele inspectate nu sunt lansate sau rulate ca parte a revizuirii.",
+        },
+        {
+          title: "Procesare locala",
+          description:
+            "Inspectia, scorul, carantina si deciziile raman pe masina Windows locala.",
+        },
+        {
+          title: "Constatari bazate pe dovezi",
+          description:
+            "Constatarile sunt clare si separa rezultatele scanarii, structura fisierului, indicatorii statici si riscurile de proiect.",
+        },
+        {
+          title: "Scor determinist",
+          description:
+            "Nivelurile de risc sunt calculate prin reguli explicabile si nu sunt prezentate ca garantii absolute.",
+        },
+        {
+          title: "Actiuni finale explicite",
+          description:
+            "Utilizatorii trebuie sa confirme eliberarea, copia sanitizata, rescanarea sau stergerea.",
+        },
+        {
+          title: "Limbaj masurat",
+          description:
+            "Aplicatia poate raporta ca nu au fost detectate amenintari cunoscute, dar nu afirma ca fisierele sunt lipsite de risc.",
+        },
+      ],
+      limitations:
+        "FileGatekeeper nu garanteaza ca fisierele inspectate sunt lipsite de risc. Este conceput pentru izolare locala, rezultate de scanare, dovezi statice si decizii explicite, fara executarea automata a continutului inspectat.",
+      repositoryAccess: {
+        title: "Acces la repository privat",
+        text: "FileGatekeeper este dezvoltat momentan intr-un repository privat. Accesul poate fi oferit la cerere clientilor calificati pentru evaluare tehnica. In functie de cerintele de review, accesul poate include cod sursa selectat, arhitectura, teste, documentatie si detalii de implementare.",
+        buttonLabel: "Solicita acces la repository",
+      },
+      developmentStatus: [
+        { label: "Status", value: "Proiect privat in dezvoltare" },
+        { label: "Teste automate", value: "343 trecute" },
+        { label: "Teste sarite", value: "1 sarit intentionat" },
+        { label: "Verificari statice", value: "Ruff clean, mypy clean" },
+        {
+          label: "Verificari securitate",
+          value: "Fara constatari Bandit de severitate inalta",
+        },
+      ],
+      confidentialityNote:
+        "Accesul la repository este disponibil la cerere pentru clienti calificati sau review tehnic.",
+      status: "Proiect privat in dezvoltare",
+    },
+    workflowforge: {},
     kreacher: {
       category: "Procesare HTML si normalizare de date",
       summary:
@@ -412,8 +540,7 @@ export const ro: Translation = {
       ],
       caseStudyNotice:
         "Acest proiect este protejat prin NDA. Numele clientului, materialele sursă, capturile de ecran, prompturile, logica internă de business, workflow-urile proprietare și arhitectura detaliată nu sunt incluse în acest studiu de caz.",
-      sourceCodeNote:
-        "Proiect privat. Codul sursă nu este disponibil public.",
+      sourceCodeNote: "Proiect privat. Codul sursă nu este disponibil public.",
     },
     "excel-to-json-cli": {
       title: "CLI Excel în JSON",
