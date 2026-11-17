@@ -416,13 +416,15 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                   {project.badges.map((badge) => (
                     <li
                       className={
-                        badge === "Active Development"
+                        project.slug === "workflowforge" &&
+                        badge === project.badges?.[0]
                           ? "status-badge status-badge--active"
                           : "status-badge"
                       }
                       key={badge}
                     >
-                      {badge === "Active Development" ? (
+                      {project.slug === "workflowforge" &&
+                      badge === project.badges?.[0] ? (
                         <span
                           className="status-badge__dot"
                           aria-hidden="true"
@@ -685,7 +687,7 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                     </ExternalLink>
                     {project.slug === "workflowforge" &&
                     !project.repositoryUrl ? (
-                      <p>GitHub: VITE_WORKFLOWFORGE_GITHUB_URL</p>
+                      <p>{t.common.unavailableRepository}</p>
                     ) : null}
                     {!project.repositoryUrl && (
                       <p>{t.common.unavailableProjectLinks}</p>

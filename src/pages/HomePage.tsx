@@ -14,8 +14,8 @@ export function HomePage() {
     <main id="main">
       <SEO title={t.seo.homeTitle} description={t.seo.homeDescription} />
       <Hero />
-      <ProofStrip />
       <Projects />
+      <ProofStrip />
       <Services />
       <Skills />
       <Approach />

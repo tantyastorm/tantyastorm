@@ -17,6 +17,9 @@ export const en: Translation = {
     viewSelectedWork: "View selected work",
     bookCall: "Book a call",
     viewCaseStudy: "View case study",
+    viewProject: "View project",
+    viewProjectAria: (title) => `View ${title} project`,
+    unavailableRepository: "Repository link is not configured.",
     stack: "Stack",
     unavailableProjectLinks:
       "Private project. Source code is not publicly available.",
@@ -78,6 +81,11 @@ export const en: Translation = {
       "Remote",
       "Available for freelance projects",
     ],
+    specialties: ["Python", "AI Integrations", "Web Development"],
+    cinematicRole: "Software Developer & Automation Engineer",
+    cinematicLead:
+      "Building intelligent automation, reliable applications, and thoughtful digital experiences.",
+    cinematicPrimaryAction: "View my work",
   },
   proof: {
     eyebrow: "Proof, not adjectives",

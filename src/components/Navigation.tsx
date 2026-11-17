@@ -93,7 +93,7 @@ export function Navigation() {
             alt=""
             className="brand__wordmark"
           />
-          <span className="brand__text">Tantyastorm</span>
+          <span className="brand__text">TantyaStorm</span>
         </a>
 
         <button

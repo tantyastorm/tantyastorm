@@ -1,0 +1,48 @@
+/* Reusable V2 primitives. The rejected dashboard composition was removed;
+ * components opt in through this deliberately small, namespaced layer. */
+:root {
+  --v2-surface: rgba(12, 22, 51, 0.68);
+  --v2-text: #f4f7ff;
+  --v2-text-muted: #aeb9d4;
+  --v2-border: rgba(151, 176, 255, 0.17);
+  --v2-border-luminous: rgba(99, 210, 255, 0.42);
+  --v2-accent-primary: #8b5cf6;
+  --v2-accent-secondary: #38c9ff;
+  --v2-glass-fill: linear-gradient(135deg, rgba(21, 34, 73, 0.78), rgba(8, 16, 39, 0.58));
+  --v2-glass-blur: 18px;
+  --v2-glow-primary: 0 0 44px rgba(139, 92, 246, 0.2);
+  --v2-glow-secondary: 0 0 40px rgba(56, 201, 255, 0.14);
+  --v2-shadow-panel: 0 22px 65px rgba(0, 4, 20, 0.34);
+  --v2-shadow-panel-hover: 0 28px 80px rgba(0, 4, 20, 0.42);
+  --v2-focus-ring: #64d5ff;
+  --v2-radius-panel: 18px;
+  --v2-transition: 180ms ease;
+  --v2-content-width: 1280px;
+}
+
+:root[data-theme="light"] {
+  --v2-surface: rgba(255, 255, 255, 0.72);
+  --v2-text: #151a31;
+  --v2-text-muted: #59637d;
+  --v2-border: rgba(63, 77, 137, 0.17);
+  --v2-border-luminous: rgba(53, 105, 204, 0.38);
+  --v2-accent-primary: #7150d5;
+  --v2-accent-secondary: #167eac;
+  --v2-glass-fill: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(241, 243, 255, 0.64));
+  --v2-glow-primary: 0 0 42px rgba(113, 80, 213, 0.13);
+  --v2-glow-secondary: 0 0 36px rgba(22, 126, 172, 0.1);
+  --v2-shadow-panel: 0 18px 48px rgba(52, 64, 117, 0.13);
+  --v2-shadow-panel-hover: 0 22px 60px rgba(52, 64, 117, 0.18);
+  --v2-focus-ring: #176dca;
+}
+
+.v2-glass-panel { position: relative; border: 1px solid var(--v2-border); border-radius: var(--v2-radius-panel); background: var(--v2-glass-fill); box-shadow: var(--v2-shadow-panel), var(--v2-glow-primary); backdrop-filter: blur(var(--v2-glass-blur)); -webkit-backdrop-filter: blur(var(--v2-glass-blur)); color: var(--v2-text); transition: border-color var(--v2-transition), box-shadow var(--v2-transition), transform var(--v2-transition); }
+.v2-glass-panel--interactive:hover, .v2-glass-panel--interactive:focus-within { border-color: var(--v2-border-luminous); box-shadow: var(--v2-shadow-panel-hover), var(--v2-glow-primary), var(--v2-glow-secondary); transform: translateY(-2px); }
+.v2-section-container { position: relative; z-index: 1; width: min(100% - 2rem, var(--v2-content-width)); margin-inline: auto; }
+.v2-section-heading { display: grid; gap: .9rem; max-width: 48rem; color: var(--v2-text); }
+.v2-section-heading__eyebrow { margin: 0; color: var(--v2-accent-secondary); font-size: .75rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.v2-section-heading__title { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -.04em; line-height: 1.04; }
+.v2-section-heading__description { margin: 0; color: var(--v2-text-muted); font-size: clamp(1rem, 1.4vw, 1.125rem); line-height: 1.65; }
+.v2-glass-panel :is(a, button, input, select, textarea):focus-visible, .v2-section-container :is(a, button, input, select, textarea):focus-visible { outline: 3px solid var(--v2-focus-ring); outline-offset: 3px; }
+@media (max-width: 760px) { .v2-section-container { width: min(100% - 1.5rem, var(--v2-content-width)); } }
+@media (prefers-reduced-motion: reduce) { .v2-glass-panel { transition: none; }.v2-glass-panel--interactive:hover, .v2-glass-panel--interactive:focus-within { transform: none; } }

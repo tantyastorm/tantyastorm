@@ -1,4 +1,5 @@
 import { en } from "./en";
+import { roProjectTranslations } from "./projects-ro";
 import type { Translation } from "../types";
 
 export const ro: Translation = {
@@ -20,6 +21,9 @@ export const ro: Translation = {
     viewSelectedWork: "Vezi proiectele selectate",
     bookCall: "Programează un apel",
     viewCaseStudy: "Vezi studiul de caz",
+    viewProject: "Vezi proiectul",
+    viewProjectAria: (title) => `Vezi proiectul ${title}`,
+    unavailableRepository: "Linkul către repository nu este configurat.",
     stack: "Stack",
     unavailableProjectLinks:
       "Codul sursă este disponibil la cerere sau proiectul este privat.",
@@ -63,6 +67,11 @@ export const ro: Translation = {
       "Remote",
       "Disponibilă pentru proiecte freelance",
     ],
+    specialties: ["Python", "Integrări AI", "Dezvoltare web"],
+    cinematicRole: "Dezvoltator software și inginer de automatizare",
+    cinematicLead:
+      "Construiesc automatizări inteligente, aplicații fiabile și experiențe digitale atent concepute.",
+    cinematicPrimaryAction: "Vezi proiectele mele",
   },
   proof: {
     eyebrow: "Dovezi, nu adjective",
@@ -305,6 +314,7 @@ export const ro: Translation = {
     ariaProfile: (name, platform) => `${name} pe ${platform}`,
   },
   projects: {
+    ...roProjectTranslations,
     filegatekeeper: {
       category: "Utilitar de securitate pentru Windows",
       summary:
@@ -427,7 +437,6 @@ export const ro: Translation = {
         "Accesul la repository este disponibil la cerere pentru clienti calificati sau review tehnic.",
       status: "Proiect privat in dezvoltare",
     },
-    workflowforge: {},
     kreacher: {
       category: "Procesare HTML si normalizare de date",
       summary:
@@ -440,7 +449,7 @@ export const ro: Translation = {
         "Fisierele HTML salvate sunt greu de revizuit si reutilizat cand parsarea, validarea, deduplicarea si exportul sunt amestecate.",
       solution:
         "Un flux local cu adaptoare de parser converteste HTML compatibil in inregistrari normalizate, le valideaza, le deduplica, le filtreaza si exporta JSON determinist.",
-      status: "Portfolio Project",
+      status: "Proiect de portofoliu",
     },
     dobby: {
       category: "Utilitar de workflow in browser",
@@ -457,7 +466,7 @@ export const ro: Translation = {
         "O extensie Manifest V3 importa coada, valideaza inregistrarile, permite navigare manuala si salveaza snapshoturi doar la comanda explicita.",
       videoCaption:
         "Video demo local cu navigarea prin coada si workflow-ul de snapshot Dobby.",
-      status: "Portfolio Project",
+      status: "Proiect de portofoliu",
     },
     "email-archive-utility": {
       title: "Utilitar arhivă email",
@@ -556,7 +565,7 @@ export const ro: Translation = {
         "Coloanele selectate din Excel trebuie deseori convertite în JSON predictibil fără curățare manuală.",
       solution:
         "Un utilitar CLI validează antetele selectate, tratează cazurile limită și scrie JSON curat.",
-      status: "Portfolio Project",
+      status: "Proiect de portofoliu",
     },
     "books-data-scraper": {
       title: "Scraper date cărți",
@@ -572,7 +581,7 @@ export const ro: Translation = {
         "Datele despre cărți trebuie colectate într-un format structurat care poate fi filtrat și reutilizat.",
       solution:
         "Un scraper testat colectează înregistrări structurate, aplică filtre, validează date și exportă rezultate reutilizabile.",
-      status: "Portfolio Project",
+      status: "Proiect de portofoliu",
     },
     "desktop-data-extraction-tool": {
       title: "Tool desktop de extracție date",
@@ -588,7 +597,7 @@ export const ro: Translation = {
         "Fluxurile reutilizabile de extracție web au nevoie de o interfață simplă și opțiuni fiabile de export.",
       solution:
         "O aplicație desktop Python oferă extracție configurabilă, validare, loguri și export CSV sau Excel.",
-      status: "Portfolio Project",
+      status: "Proiect de portofoliu",
     },
   },
 };

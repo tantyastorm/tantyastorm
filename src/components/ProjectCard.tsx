@@ -3,6 +3,7 @@ import { useI18n } from "../i18n";
 import { assetPath } from "../utils/assets";
 import { ExternalLink } from "./ExternalLink";
 import type { PointerEvent } from "react";
+import { GlassPanel } from "./v2/GlassPanel";
 
 type ProjectCardProps = {
   project: Project;
@@ -15,9 +16,8 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   const stack = project.technologies.slice(0, 5).join(" / ");
   const visibleBadges = project.badges?.slice(0, 2);
   const ctaLabel =
-    project.slug === "workflowforge" ? "View Project" : t.common.viewCaseStudy;
+    project.slug === "workflowforge" ? t.common.viewProject : t.common.viewCaseStudy;
   const isWorkflowForge = project.slug === "workflowforge";
-  const isFeatured = isWorkflowForge;
   const updateCardSignal = (event: PointerEvent<HTMLElement>) => {
     if (event.pointerType !== "mouse") {
       return;
@@ -65,13 +65,13 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {visibleBadges.map((badge) => (
             <li
               className={
-                badge === "Active Development"
+                isWorkflowForge && badge === project.badges?.[0]
                   ? "status-badge status-badge--active"
                   : "status-badge"
               }
               key={badge}
             >
-              {badge === "Active Development" ? (
+              {isWorkflowForge && badge === project.badges?.[0] ? (
                 <span className="status-badge__dot" aria-hidden="true" />
               ) : null}
               {badge}
@@ -89,19 +89,15 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         <p className="project-card__note">{project.confidentialityNote}</p>
       ) : null}
       <div className="project-card__actions">
-        <a
-          className="project-card__cta"
-          href={projectRoute}
-          aria-label={`View ${project.title} project`}
-        >
+        <span className="project-card__cta">
           {ctaLabel} <span aria-hidden="true">-&gt;</span>
-        </a>
+        </span>
         <ExternalLink href={project.repositoryUrl}>
           {t.detail.repositoryLink}
         </ExternalLink>
         {isWorkflowForge && !project.repositoryUrl ? (
           <span className="project-card__placeholder">
-            GitHub: VITE_WORKFLOWFORGE_GITHUB_URL
+              {t.common.unavailableRepository}
           </span>
         ) : null}
       </div>
@@ -109,25 +105,22 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   );
 
   return (
-    <article
-      className={`project-card reveal ${isFeatured ? "project-card--featured" : ""}`}
+    <GlassPanel
+      role="article"
+      className="project-card reveal"
       data-project={project.slug}
       onPointerMove={updateCardSignal}
     >
+      <a
+        className="project-card__surface-link"
+        href={projectRoute}
+        aria-label={t.common.viewProjectAria(project.title)}
+      />
       <div className="project-card__index" aria-hidden="true">
         {String(index + 1).padStart(2, "0")}
       </div>
-      {isWorkflowForge ? (
-        <>
-          {body}
-          {media}
-        </>
-      ) : (
-        <>
-          {media}
-          {body}
-        </>
-      )}
-    </article>
+      {media}
+      {body}
+    </GlassPanel>
   );
 }

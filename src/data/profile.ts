@@ -2,7 +2,7 @@ import { externalUrls, publicContact } from "./config";
 
 export const profile = {
   name: "Tatiana Furtuna",
-  brandName: "Tantyastorm",
+  brandName: "TantyaStorm",
   role: "Python Developer",
   email: publicContact.email,
   githubUrl: externalUrls.github,

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 4173",
-    "build": "tsc -b && vite build && npm run routes:generate && npm run routes:check",
+    "build": "npm run translations:check && tsc -b && vite build && npm run routes:generate && npm run routes:check",
+    "translations:check": "node scripts/check-project-translations.mjs",
     "routes:generate": "node scripts/generate-static-routes.mjs",
     "routes:check": "node scripts/check-sitemap-routes.mjs",
     "preview": "vite preview --host 0.0.0.0",

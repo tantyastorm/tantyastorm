@@ -61,6 +61,9 @@ export type Translation = {
     viewSelectedWork: string;
     bookCall: string;
     viewCaseStudy: string;
+    viewProject: string;
+    viewProjectAria: (title: string) => string;
+    unavailableRepository: string;
     stack: string;
     unavailableProjectLinks: string;
     switchToLight: string;
@@ -108,6 +111,10 @@ export type Translation = {
     outputsLabel: string;
     signal: string;
     meta: string[];
+    specialties: string[];
+    cinematicRole: string;
+    cinematicLead: string;
+    cinematicPrimaryAction: string;
   };
   proof: {
     eyebrow: string;

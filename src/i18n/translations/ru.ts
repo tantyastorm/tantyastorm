@@ -1,4 +1,5 @@
 import { en } from "./en";
+import { ruProjectTranslations } from "./projects-ru";
 import type { Translation } from "../types";
 
 export const ru: Translation = {
@@ -19,6 +20,9 @@ export const ru: Translation = {
     viewSelectedWork: "Смотреть работы",
     bookCall: "Назначить звонок",
     viewCaseStudy: "Открыть кейс",
+    viewProject: "Открыть проект",
+    viewProjectAria: (title) => `Открыть проект ${title}`,
+    unavailableRepository: "Ссылка на репозиторий не настроена.",
     stack: "Стек",
     unavailableProjectLinks:
       "Исходный код доступен по запросу или проект является приватным.",
@@ -60,6 +64,11 @@ export const ru: Translation = {
       "Удаленно",
       "Доступна для freelance-проектов",
     ],
+    specialties: ["Python", "AI-интеграции", "Веб-разработка"],
+    cinematicRole: "Разработчик программного обеспечения и инженер по автоматизации",
+    cinematicLead:
+      "Создаю интеллектуальную автоматизацию, надежные приложения и продуманные цифровые решения.",
+    cinematicPrimaryAction: "Посмотреть работы",
   },
   proof: {
     eyebrow: "Факты вместо эпитетов",
@@ -290,6 +299,7 @@ export const ru: Translation = {
     ariaProfile: (name, platform) => `${name} на ${platform}`,
   },
   projects: {
+    ...ruProjectTranslations,
     filegatekeeper: {
       category: "Утилита безопасности для Windows",
       summary:
@@ -348,7 +358,6 @@ export const ru: Translation = {
         "Доступ к репозиторию доступен по запросу для квалифицированных клиентов или технического ревью.",
       status: "Приватный проект в разработке",
     },
-    workflowforge: {},
     kreacher: {
       category: "HTML Processing and Data Normalization",
       summary:
@@ -361,7 +370,7 @@ export const ru: Translation = {
         "Сохраненный HTML трудно проверять и повторно использовать, когда парсинг, валидация, дедупликация и экспорт смешаны вместе.",
       solution:
         "Локальный workflow с parser adapters преобразует поддерживаемый HTML в нормализованные записи, валидирует и дедуплицирует их, поддерживает фильтрацию и экспортирует детерминированный JSON.",
-      status: "Portfolio Project",
+      status: "Портфолио-проект",
     },
     dobby: {
       category: "Browser Workflow Utility",
@@ -378,7 +387,7 @@ export const ru: Translation = {
         "Manifest V3 extension импортирует очередь, валидирует записи, дает ручную навигацию и сохраняет snapshots только по явной команде.",
       videoCaption:
         "Локальное demo video навигации по очереди и snapshot workflow в Dobby.",
-      status: "Portfolio Project",
+      status: "Портфолио-проект",
     },
     "email-archive-utility": {
       title: "Утилита email-архива",
@@ -477,7 +486,7 @@ export const ru: Translation = {
         "Выбранные колонки Excel часто нужно превратить в предсказуемый JSON без ручной очистки.",
       solution:
         "CLI валидирует выбранные заголовки, обрабатывает крайние случаи и записывает чистый JSON.",
-      status: "Portfolio Project",
+      status: "Портфолио-проект",
     },
     "books-data-scraper": {
       title: "Scraper данных о книгах",
@@ -493,7 +502,7 @@ export const ru: Translation = {
         "Данные о книгах нужно собирать в структуре, которую можно фильтровать и повторно использовать.",
       solution:
         "Тестируемый scraper собирает записи, применяет фильтры, валидирует данные и экспортирует результат.",
-      status: "Portfolio Project",
+      status: "Портфолио-проект",
     },
     "desktop-data-extraction-tool": {
       title: "Desktop-инструмент извлечения данных",
@@ -509,7 +518,7 @@ export const ru: Translation = {
         "Переиспользуемым процессам извлечения web-данных нужна простая операторская панель и надежный экспорт.",
       solution:
         "Python desktop-приложение дает настраиваемое извлечение, валидацию, логи и экспорт CSV или Excel.",
-      status: "Portfolio Project",
+      status: "Портфолио-проект",
     },
   },
 };
