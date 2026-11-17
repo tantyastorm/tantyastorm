@@ -1055,5 +1055,94 @@ export const roProjectTranslations = {
     ],
     "confidentialityNote": "Accesul la depozit este disponibil la cerere pentru clienții calificați sau pentru recenzii tehnice.",
     "status": "Proiect privat în derulare"
+  },
+  "web-development": {
+    "title": "Dezvoltare web",
+    "shortTitle": "Dezvoltare web",
+    "category": "Livrare web frontend și full-stack",
+    "summary": "Două site-uri de producție care demonstrează inginerie frontend responsivă, design de interacțiune, SEO tehnic și integrări de producție.",
+    "detailedDescription": "Acest studiu de caz reunește două proiecte web live cu cerințe diferite: un portofoliu pentru dezvoltator axat pe prezentarea proiectelor și indexare statică, precum și un site comercial de transport cu un flux securizat pentru cereri de ofertă și integrări de producție.",
+    "seoTitle": "Dezvoltare web | Portofoliul TantyaStorm",
+    "seoDescription": "Un studiu de caz de dezvoltare web cu portofoliul TantyaStorm și IMD Transportation: inginerie frontend responsivă, SEO, integrări de producție și implementare.",
+    "heroSubtitle": "Două site-uri live, proiectate și livrate pentru nevoi reale diferite.",
+    "heroText": "De la un portofoliu de dezvoltator rafinat la un flux comercial pentru oferte, munca îmbină direcția vizuală, implementarea responsivă, structura de conținut și integrările pregătite pentru producție.",
+    "badges": ["Site-uri live", "Design responsiv", "Integrări de producție"],
+    "features": [
+      {
+        "title": "Experiențe web responsive",
+        "description": "Layouturile și interacțiunile sunt proiectate să funcționeze pe desktop și mobil, fără a trata mobilul ca pe un aspect secundar."
+      },
+      {
+        "title": "Prezentare structurată a proiectelor",
+        "description": "O ierarhie clară de conținut, componente reutilizabile, structură de studiu de caz și navigare accesibilă susțin atât vizitatorii, cât și motoarele de căutare."
+      },
+      {
+        "title": "Fluxuri de formulare pentru producție",
+        "description": "Site-ul de transport combină formularul de ofertă cu validare pe server, protecție anti-spam, persistență, livrare de e-mail și implementare atentă la analiză."
+      }
+    ],
+    "imageAlt": "Vedere desktop a paginii principale a portofoliului pentru dezvoltator TantyaStorm, cu eroul său întunecat violet și cyan.",
+    "role": "Dezvoltator web frontend și full-stack",
+    "goals": [
+      "Prezentarea muncii tehnice prin experiențe web clare, responsive și intenționate vizual.",
+      "Construirea fluxurilor destinate utilizatorilor care conectează frontend-ul rafinat la servicii de producție de încredere.",
+      "Păstrarea arhitecturii informației, accesibilității și vizibilității în căutare ca parte a implementării, nu ca adăugiri de după lansare."
+    ],
+    "technicalApproach": [
+      "Pornirea de la ierarhia conținutului și comportamentul responsiv, apoi construirea componentelor reutilizabile în jurul deciziilor care se repetă.",
+      "Păstrarea intenționată a interacțiunilor site-ului live: navigarea, formularele, mișcarea și media trebuie să susțină sarcina vizitatorului.",
+      "Tratarea metadatelor, validării, implementării și protecției împotriva abuzului ca parte a suprafeței produsului."
+    ],
+    "architecture": [
+      {
+        "title": "Sisteme frontend",
+        "description": "React, TypeScript, Vite, compoziția componentelor, CSS responsiv și modele de interacțiune deliberate furnizează stratul de prezentare."
+      },
+      {
+        "title": "Servicii de producție",
+        "description": "Cloudflare Pages și Functions susțin livrarea comercială, iar Turnstile, D1, Resend și GA4 acoperă cerințele de producție furnizate."
+      }
+    ],
+    "results": [
+      "Două site-uri live sunt disponibile pentru examinare directă.",
+      "Munca demonstrează atât prezentare frontend, cât și livrarea unui flux de formulare securizat, orientat spre producție."
+    ],
+    "websiteShowcases": [
+      {
+        "title": "Portofoliul pentru dezvoltator TantyaStorm",
+        "url": "https://tantyastorm.dev/",
+        "desktopImage": "assets/projects/web-development/tantyastorm-desktop.png",
+        "desktopImageAlt": "Captură desktop a paginii principale a portofoliului pentru dezvoltator TantyaStorm.",
+        "mobileImage": "assets/projects/web-development/tantyastorm-mobile.png",
+        "mobileImageAlt": "Captură mobilă a paginii principale a portofoliului pentru dezvoltator TantyaStorm.",
+        "summary": "Un portofoliu pentru dezvoltator construit pentru prezentarea proiectelor tehnice printr-un sistem vizual personalizat, layouturi responsive, componente interactive, conținut multilingv, rute statice de proiect și metadate specifice proiectelor.",
+        "technologies": ["React", "TypeScript", "Vite", "CSS", "GitHub Pages", "SEO"],
+        "highlights": [
+          "Experiență de portofoliu responsivă cu teme întunecată și luminoasă, mișcare care respectă preferințele pentru mișcare redusă și navigare accesibilă de la tastatură.",
+          "Structură de componente reutilizabile pentru carduri de proiect, studii de caz detaliate, navigare, controale de temă și localizare.",
+          "Generarea rutelor statice oferă metadate specifice proiectelor, date structurate și HTML inițial relevant pentru paginile de proiect."
+        ],
+        "implementation": ["Inginerie frontend și experiență vizuală", "Arhitectură de componente și comportament responsiv", "Prezentarea proiectelor, conținut multilingv, SEO și implementare"],
+        "liveLabel": "Vizitează TantyaStorm"
+      },
+      {
+        "title": "IMD Transportation",
+        "url": "https://imdtrans.com/",
+        "desktopImage": "assets/projects/web-development/imd-transportation-desktop.png",
+        "desktopImageAlt": "Captură desktop a site-ului comercial IMD Transportation.",
+        "mobileImage": "assets/projects/web-development/imd-transportation-mobile.png",
+        "mobileImageAlt": "Captură mobilă a site-ului comercial IMD Transportation.",
+        "summary": "Un site comercial de transport care combină o interfață premium responsivă cu un flux de cerere de ofertă și integrări de producție pentru validare, protecție anti-spam, persistență, e-mail, analiză și implementare.",
+        "technologies": ["Cloudflare Pages", "Cloudflare Functions", "Turnstile", "Cloudflare D1", "Resend", "GA4", "SEO"],
+        "highlights": [
+          "Design vizual premium cu layouturi responsive, navigare interactivă și secțiuni de site adaptate unui serviciu comercial de transport.",
+          "Formular de ofertă protejat prin validare pe server și verificare anti-spam Turnstile.",
+          "Livrare prin Cloudflare Pages și Functions cu persistență D1, integrare de e-mail Resend, integrare GA4 și implementare SEO."
+        ],
+        "implementation": ["Design frontend comercial și implementare responsivă", "Capturare securizată a ofertelor și integrări backend", "Implementare de producție, analiză și metadate pentru căutare"],
+        "liveLabel": "Vizitează IMD Transportation"
+      }
+    ],
+    "status": "Proiect de portofoliu"
   }
 } satisfies Translation["projects"];

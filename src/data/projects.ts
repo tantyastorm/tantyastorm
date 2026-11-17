@@ -41,6 +41,20 @@ export type ProjectCaseStudySection = {
   afterListParagraphs?: string[];
 };
 
+export type WebsiteShowcase = {
+  title: string;
+  url: string;
+  desktopImage: string;
+  desktopImageAlt: string;
+  mobileImage?: string;
+  mobileImageAlt?: string;
+  summary: string;
+  technologies: string[];
+  highlights: string[];
+  implementation: string[];
+  liveLabel: string;
+};
+
 export type ProjectRepositoryAccess = {
   title: string;
   text: string;
@@ -88,6 +102,7 @@ export type Project = {
   limitations?: string;
   caseStudyIntro?: string[];
   caseStudySections?: ProjectCaseStudySection[];
+  websiteShowcases?: WebsiteShowcase[];
   caseStudyNotice?: string;
   sourceCodeNote?: string;
   repositoryAccess?: ProjectRepositoryAccess;
@@ -1386,5 +1401,141 @@ export const projects: Project[] = [
       "Repository access is available on request for qualified clients or technical review.",
     featured: true,
     status: "Ongoing Private Project",
+  },
+  {
+    slug: "web-development",
+    title: "Web Development",
+    shortTitle: "Web Development",
+    category: "Frontend & Full-Stack Web Delivery",
+    summary:
+      "Two production websites demonstrating responsive frontend engineering, interaction design, technical SEO, and production integrations.",
+    detailedDescription:
+      "This case study brings together two live web projects with different delivery requirements: a developer portfolio focused on project presentation and static indexability, and a commercial transportation website with a secure quote workflow and production integrations.",
+    seoTitle: "Web Development | TantyaStorm Portfolio",
+    seoDescription:
+      "A web development case study featuring the TantyaStorm developer portfolio and IMD Transportation: responsive frontend engineering, SEO, production integrations, and deployment.",
+    heroSubtitle: "Two live websites, designed and delivered for different real-world needs.",
+    heroText:
+      "From a polished developer portfolio to a commercial quote workflow, the work combines visual direction, responsive implementation, content structure, and production-ready integrations.",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Cloudflare Pages",
+      "Cloudflare Functions",
+      "Cloudflare D1",
+      "Turnstile",
+      "Resend",
+      "GA4",
+      "SEO",
+    ],
+    badges: ["Live Websites", "Responsive Design", "Production Integrations"],
+    features: [
+      {
+        title: "Responsive web experiences",
+        description:
+          "Layouts and interactions are designed to work across desktop and mobile viewports without treating mobile as an afterthought.",
+      },
+      {
+        title: "Structured project presentation",
+        description:
+          "Clear content hierarchy, reusable components, case-study structure, and accessible navigation support both visitors and search engines.",
+      },
+      {
+        title: "Production form workflows",
+        description:
+          "The transportation site pairs its quote form with server-side validation, anti-spam protection, persistence, email delivery, and analytics-aware deployment.",
+      },
+    ],
+    image: "assets/projects/web-development/tantyastorm-desktop.png",
+    imageAlt:
+      "Desktop view of the TantyaStorm developer portfolio homepage with its dark purple and cyan hero.",
+    role: "Frontend and full-stack web developer",
+    goals: [
+      "Present technical work through clear, responsive, visually intentional web experiences.",
+      "Build user-facing flows that connect polished frontend work to dependable production services.",
+      "Keep information architecture, accessibility, and search visibility part of the implementation rather than post-launch additions.",
+    ],
+    technicalApproach: [
+      "Start with content hierarchy and responsive behavior, then build reusable components around the decisions that repeat.",
+      "Keep live-site interactions purposeful: navigation, forms, motion, and media should support the visitor task.",
+      "Treat metadata, validation, deployment, and abuse protection as part of the product surface.",
+    ],
+    architecture: [
+      {
+        title: "Frontend systems",
+        description:
+          "React, TypeScript, Vite, component composition, responsive CSS, and deliberate interaction patterns provide the presentation layer.",
+      },
+      {
+        title: "Production services",
+        description:
+          "Cloudflare Pages and Functions support the commercial delivery, with Turnstile, D1, Resend, and GA4 handling the supplied production requirements.",
+      },
+    ],
+    results: [
+      "Two live websites are available to review directly.",
+      "The work demonstrates both frontend presentation and the delivery of a secure, production-facing form workflow.",
+    ],
+    websiteShowcases: [
+      {
+        title: "TantyaStorm Developer Portfolio",
+        url: "https://tantyastorm.dev/",
+        desktopImage: "assets/projects/web-development/tantyastorm-desktop.png",
+        desktopImageAlt:
+          "Desktop screenshot of the TantyaStorm developer portfolio homepage.",
+        mobileImage: "assets/projects/web-development/tantyastorm-mobile.png",
+        mobileImageAlt:
+          "Mobile screenshot of the TantyaStorm developer portfolio homepage.",
+        summary:
+          "A developer portfolio built to present technical projects with a custom visual system, responsive layouts, interactive components, multilingual content, static project routes, and project-specific metadata.",
+        technologies: ["React", "TypeScript", "Vite", "CSS", "GitHub Pages", "SEO"],
+        highlights: [
+          "Responsive portfolio experience with dark and light themes, motion that respects reduced-motion preferences, and keyboard-accessible navigation.",
+          "Reusable component structure for project cards, detailed case studies, navigation, theme controls, and localization.",
+          "Static route generation supplies project-specific metadata, structured data, and meaningful initial HTML for project pages.",
+        ],
+        implementation: [
+          "Frontend engineering and visual experience",
+          "Component architecture and responsive behavior",
+          "Project presentation, multilingual content, SEO, and deployment",
+        ],
+        liveLabel: "Visit TantyaStorm",
+      },
+      {
+        title: "IMD Transportation",
+        url: "https://imdtrans.com/",
+        desktopImage: "assets/projects/web-development/imd-transportation-desktop.png",
+        desktopImageAlt:
+          "Desktop screenshot of the IMD Transportation commercial website.",
+        mobileImage: "assets/projects/web-development/imd-transportation-mobile.png",
+        mobileImageAlt:
+          "Mobile screenshot of the IMD Transportation commercial website.",
+        summary:
+          "A commercial transportation website that combines a premium responsive interface with a quote request flow and production integrations for validation, anti-spam protection, persistence, email, analytics, and deployment.",
+        technologies: [
+          "Cloudflare Pages",
+          "Cloudflare Functions",
+          "Turnstile",
+          "Cloudflare D1",
+          "Resend",
+          "GA4",
+          "SEO",
+        ],
+        highlights: [
+          "Premium visual design with responsive layouts, interactive navigation, and website sections tailored to a commercial transportation service.",
+          "Quote form protected by server-side validation and Turnstile anti-spam verification.",
+          "Cloudflare Pages and Functions delivery with D1 persistence, Resend email integration, GA4 integration, and SEO implementation.",
+        ],
+        implementation: [
+          "Commercial frontend design and responsive implementation",
+          "Secure quote capture and backend integrations",
+          "Production deployment, analytics, and search-facing metadata",
+        ],
+        liveLabel: "Visit IMD Transportation",
+      },
+    ],
+    featured: false,
+    status: "Portfolio Project",
   },
 ];

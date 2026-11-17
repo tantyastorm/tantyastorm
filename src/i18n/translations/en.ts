@@ -359,6 +359,7 @@ export const en: Translation = {
     ariaProfile: (name, platform) => `${name} on ${platform}`,
   },
   projects: {
+    "web-development": {},
     filegatekeeper: {},
     workflowforge: {},
     kreacher: {},

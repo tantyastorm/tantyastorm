@@ -79,6 +79,7 @@ function localizeProjects(language: Language): Project[] {
         videoCaption: localized.videoCaption ?? project.videoCaption,
         limitations: localized.limitations ?? project.limitations,
         gallery: localized.gallery ?? project.gallery,
+        websiteShowcases: localized.websiteShowcases ?? project.websiteShowcases,
       };
     });
   }

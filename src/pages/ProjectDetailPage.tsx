@@ -7,6 +7,7 @@ import type {
   ProjectDecision,
   ProjectFeature,
   ProjectGalleryItem,
+  WebsiteShowcase,
 } from "../data/projects";
 import { useI18n } from "../i18n";
 import { assetPath } from "../utils/assets";
@@ -140,6 +141,63 @@ function ApprovedProjectInfo({
         </ul>
       </section>
     </aside>
+  );
+}
+
+function WebsiteShowcaseList({
+  items,
+  t,
+}: {
+  items?: WebsiteShowcase[];
+  t: ReturnType<typeof useI18n>["t"];
+}) {
+  if (!items?.length) return null;
+
+  return (
+    <section className="website-showcase-list" aria-label={t.detail.liveDemo}>
+      {items.map((item) => (
+        <article className="detail-section website-showcase" key={item.url}>
+          <div className="website-showcase__header">
+            <p className="eyebrow">{t.detail.liveDemo}</p>
+            <h2>{item.title}</h2>
+            <p>{item.summary}</p>
+          </div>
+          <div className="website-showcase__media">
+            <figure>
+              <img src={assetPath(item.desktopImage)} alt={item.desktopImageAlt} loading="lazy" width="1440" height="1100" />
+            </figure>
+            {item.mobileImage && item.mobileImageAlt ? (
+              <figure className="website-showcase__mobile-preview">
+                <img src={assetPath(item.mobileImage)} alt={item.mobileImageAlt} loading="lazy" width="430" height="932" />
+              </figure>
+            ) : null}
+          </div>
+          <div className="website-showcase__details">
+            <section>
+              <h3>{t.detail.technologyStack}</h3>
+              <ul className="tag-list">
+                {item.technologies.map((technology) => <li key={technology}>{technology}</li>)}
+              </ul>
+            </section>
+            <section>
+              <h3>{t.detail.features}</h3>
+              <ul className="detail-list">
+                {item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+              </ul>
+            </section>
+            <section>
+              <h3>{t.detail.technicalApproach}</h3>
+              <ul className="detail-list">
+                {item.implementation.map((detail) => <li key={detail}>{detail}</li>)}
+              </ul>
+            </section>
+          </div>
+          <ExternalLink className="button button--primary" href={item.url}>
+            {item.liveLabel}
+          </ExternalLink>
+        </article>
+      ))}
+    </section>
   );
 }
 
@@ -377,6 +435,7 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
   const projectPath = `projects/${project.slug}/`;
   const hasHeroMedia = Boolean(project.image && project.imageAlt);
   const hasApprovedCaseStudy = Boolean(project.caseStudySections?.length);
+  const hasWebsiteShowcases = Boolean(project.websiteShowcases?.length);
   const isFileGatekeeper = project.slug === "filegatekeeper";
 
   return (
@@ -435,7 +494,23 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                   ))}
                 </ul>
               ) : null}
-              {isFileGatekeeper ? (
+              {hasWebsiteShowcases ? (
+                <div className="detail-actions">
+                  {project.websiteShowcases?.map((showcase, index) => (
+                    <ExternalLink
+                      className={
+                        index === 0
+                          ? "button button--primary"
+                          : "button button--secondary"
+                      }
+                      href={showcase.url}
+                      key={showcase.url}
+                    >
+                      {showcase.liveLabel}
+                    </ExternalLink>
+                  ))}
+                </div>
+              ) : isFileGatekeeper ? (
                 <div className="detail-actions">
                   <a
                     className="button button--primary"
@@ -536,6 +611,67 @@ export function ProjectDetailPage({ slug }: ProjectDetailPageProps) {
                 ) : null}
               </div>
               <ApprovedProjectInfo project={project} t={t} />
+            </>
+          ) : hasWebsiteShowcases ? (
+            <>
+              <div className="detail-content">
+                <TextSection
+                  title={t.detail.overview}
+                  content={project.detailedDescription}
+                />
+                <WebsiteShowcaseList items={project.websiteShowcases} t={t} />
+                <SectionList
+                  title={t.detail.technicalApproach}
+                  items={project.technicalApproach}
+                />
+                <ArchitectureGrid
+                  title={t.detail.architecture}
+                  items={project.architecture}
+                />
+                <SectionList title={t.detail.results} items={project.results} />
+              </div>
+              <aside
+                className="detail-sidebar"
+                aria-label={t.detail.detailsLabel(project.title)}
+              >
+                <section>
+                  <h2>{t.detail.projectInformation}</h2>
+                  <dl className="detail-facts">
+                    <div>
+                      <dt>{t.detail.status}</dt>
+                      <dd>{project.status}</dd>
+                    </div>
+                    {project.role ? (
+                      <div>
+                        <dt>{t.detail.role}</dt>
+                        <dd>{project.role}</dd>
+                      </div>
+                    ) : null}
+                    <div>
+                      <dt>{t.detail.category}</dt>
+                      <dd>{project.category}</dd>
+                    </div>
+                  </dl>
+                </section>
+                <section>
+                  <h2>{t.detail.technologyStack}</h2>
+                  <ul className="tag-list tag-list--loose">
+                    {project.technologies.map((technology) => (
+                      <li key={technology}>{technology}</li>
+                    ))}
+                  </ul>
+                </section>
+                <section>
+                  <h2>{t.detail.projectLinks}</h2>
+                  <div className="detail-link-list">
+                    {project.websiteShowcases?.map((showcase) => (
+                      <ExternalLink href={showcase.url} key={showcase.url}>
+                        {showcase.liveLabel}
+                      </ExternalLink>
+                    ))}
+                  </div>
+                </section>
+              </aside>
             </>
           ) : (
             <>

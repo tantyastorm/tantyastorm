@@ -83,4 +83,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log("Verified complete Romanian and Russian project translation structures for 9 projects.");
+console.log(`Verified complete Romanian and Russian project translation structures for ${base.length} projects.`);

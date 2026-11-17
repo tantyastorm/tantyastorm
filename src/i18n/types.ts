@@ -38,6 +38,7 @@ export type ProjectText = Partial<
     | "limitations"
     | "caseStudyIntro"
     | "caseStudySections"
+    | "websiteShowcases"
     | "caseStudyNotice"
     | "sourceCodeNote"
     | "repositoryAccess"

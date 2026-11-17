@@ -33,8 +33,13 @@ function staticProjectContent(project) {
   const goals = project.goals?.length
     ? `<section><h2>Goals</h2><ul>${project.goals.map((goal) => `<li>${escapeHtml(goal)}</li>`).join("")}</ul></section>`
     : "";
+  const websiteShowcases = project.websiteShowcases?.length
+    ? `<section><h2>Live website showcases</h2>${project.websiteShowcases
+      .map((showcase) => `<article><h3>${escapeHtml(showcase.title)}</h3><p>${escapeHtml(showcase.summary)}</p><p><a href="${escapeHtml(showcase.url)}">${escapeHtml(showcase.liveLabel)}</a></p><h4>Technical highlights</h4><ul>${showcase.highlights.map((highlight) => `<li>${escapeHtml(highlight)}</li>`).join("")}</ul></article>`)
+      .join("")}</section>`
+    : "";
 
-  return `<main id="main" data-static-project="${escapeHtml(project.slug)}"><article><header><p>${escapeHtml(project.category)}</p><h1>${escapeHtml(project.title)}</h1><p>${escapeHtml(project.summary)}</p></header><section><h2>Overview</h2><p>${escapeHtml(project.detailedDescription)}</p></section>${goals}${features}</article></main>`;
+  return `<main id="main" data-static-project="${escapeHtml(project.slug)}"><article><header><p>${escapeHtml(project.category)}</p><h1>${escapeHtml(project.title)}</h1><p>${escapeHtml(project.summary)}</p></header><section><h2>Overview</h2><p>${escapeHtml(project.detailedDescription)}</p></section>${websiteShowcases}${goals}${features}</article></main>`;
 }
 
 function projectSchema(project, route) {

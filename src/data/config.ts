@@ -50,6 +50,9 @@ export const publicContact = {
 };
 
 export const projectUrls = {
+  "web-development": {
+    demo: "https://tantyastorm.dev/",
+  },
   filegatekeeper: {},
   workflowforge: {
     repository:
